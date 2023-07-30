@@ -28,14 +28,12 @@ public class IndexController {
     private LocalSessionFactoryBean factory;
     
     @Autowired
-    private ThesisService thesisService;
+    private ThesisService thesis;
     
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String,String> params){
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("FROM Thesis");
-        model.addAttribute("thesis", this.thesisService.getThesis(params));
+        model.addAttribute("thesis", this.thesis.getThesis(params));
         model.addAttribute("msg", "Hello");
         return "index";
     }

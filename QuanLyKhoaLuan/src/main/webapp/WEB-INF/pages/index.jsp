@@ -24,8 +24,7 @@
         <tbody>
             <c:forEach items="${thesis}" var="t">
                 <tr>
-                    <td>
-                    </td>
+                    <td></td>
                     <td>${t.id}</td>
                     <td>${t.name}</td>
                     <td>${t.date}</td>

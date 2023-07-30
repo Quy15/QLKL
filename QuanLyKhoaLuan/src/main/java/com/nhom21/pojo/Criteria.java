@@ -18,7 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,27 +41,20 @@ public class Criteria implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @JoinTable(name = "thesis_evaluation_criteria", joinColumns = {
+    @JoinTable(name = "criteria_has_thesis_score", joinColumns = {
         @JoinColumn(name = "criteria_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "thesis_evaluation_id", referencedColumnName = "id")})
+        @JoinColumn(name = "thesis_score_id", referencedColumnName = "id")})
     @ManyToMany
-    private Set<ThesisEvaluation> thesisEvaluationSet;
+    private Set<ThesisScore> thesisScoreSet;
 
     public Criteria() {
     }
 
     public Criteria(Integer id) {
         this.id = id;
-    }
-
-    public Criteria(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -82,12 +74,12 @@ public class Criteria implements Serializable {
     }
 
     @XmlTransient
-    public Set<ThesisEvaluation> getThesisEvaluationSet() {
-        return thesisEvaluationSet;
+    public Set<ThesisScore> getThesisScoreSet() {
+        return thesisScoreSet;
     }
 
-    public void setThesisEvaluationSet(Set<ThesisEvaluation> thesisEvaluationSet) {
-        this.thesisEvaluationSet = thesisEvaluationSet;
+    public void setThesisScoreSet(Set<ThesisScore> thesisScoreSet) {
+        this.thesisScoreSet = thesisScoreSet;
     }
 
     @Override

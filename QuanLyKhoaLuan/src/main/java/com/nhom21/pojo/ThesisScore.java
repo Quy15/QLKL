@@ -5,18 +5,22 @@
 package com.nhom21.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,61 +31,45 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ThesisScore.findAll", query = "SELECT t FROM ThesisScore t"),
-    @NamedQuery(name = "ThesisScore.findById", query = "SELECT t FROM ThesisScore t WHERE t.thesisScorePK.id = :id"),
+    @NamedQuery(name = "ThesisScore.findById", query = "SELECT t FROM ThesisScore t WHERE t.id = :id"),
     @NamedQuery(name = "ThesisScore.findByName", query = "SELECT t FROM ThesisScore t WHERE t.name = :name"),
-    @NamedQuery(name = "ThesisScore.findByEvaluationId", query = "SELECT t FROM ThesisScore t WHERE t.evaluationId = :evaluationId"),
-    @NamedQuery(name = "ThesisScore.findByCriteriaId", query = "SELECT t FROM ThesisScore t WHERE t.criteriaId = :criteriaId"),
-    @NamedQuery(name = "ThesisScore.findByScore", query = "SELECT t FROM ThesisScore t WHERE t.score = :score"),
-    @NamedQuery(name = "ThesisScore.findByThesisEvaluationId", query = "SELECT t FROM ThesisScore t WHERE t.thesisScorePK.thesisEvaluationId = :thesisEvaluationId")})
+    @NamedQuery(name = "ThesisScore.findByScore", query = "SELECT t FROM ThesisScore t WHERE t.score = :score")})
 public class ThesisScore implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ThesisScorePK thesisScorePK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Column(name = "id")
+    private Integer id;
+    @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "evaluation_id")
-    private int evaluationId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "criteria_id")
-    private int criteriaId;
     @Size(max = 45)
     @Column(name = "score")
     private String score;
-    @JoinColumn(name = "thesis_evaluation_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToMany(mappedBy = "thesisScoreSet")
+    private Set<Criteria> criteriaSet;
+    @JoinColumn(name = "thesis_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ThesisEvaluation thesisEvaluation;
+    private Thesis thesisId;
+    @JoinColumn(name = "user_defense_committee_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private UserDefenseCommittee userDefenseCommitteeId;
 
     public ThesisScore() {
     }
 
-    public ThesisScore(ThesisScorePK thesisScorePK) {
-        this.thesisScorePK = thesisScorePK;
+    public ThesisScore(Integer id) {
+        this.id = id;
     }
 
-    public ThesisScore(ThesisScorePK thesisScorePK, String name, int evaluationId, int criteriaId) {
-        this.thesisScorePK = thesisScorePK;
-        this.name = name;
-        this.evaluationId = evaluationId;
-        this.criteriaId = criteriaId;
+    public Integer getId() {
+        return id;
     }
 
-    public ThesisScore(int id, int thesisEvaluationId) {
-        this.thesisScorePK = new ThesisScorePK(id, thesisEvaluationId);
-    }
-
-    public ThesisScorePK getThesisScorePK() {
-        return thesisScorePK;
-    }
-
-    public void setThesisScorePK(ThesisScorePK thesisScorePK) {
-        this.thesisScorePK = thesisScorePK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -92,22 +80,6 @@ public class ThesisScore implements Serializable {
         this.name = name;
     }
 
-    public int getEvaluationId() {
-        return evaluationId;
-    }
-
-    public void setEvaluationId(int evaluationId) {
-        this.evaluationId = evaluationId;
-    }
-
-    public int getCriteriaId() {
-        return criteriaId;
-    }
-
-    public void setCriteriaId(int criteriaId) {
-        this.criteriaId = criteriaId;
-    }
-
     public String getScore() {
         return score;
     }
@@ -116,18 +88,35 @@ public class ThesisScore implements Serializable {
         this.score = score;
     }
 
-    public ThesisEvaluation getThesisEvaluation() {
-        return thesisEvaluation;
+    @XmlTransient
+    public Set<Criteria> getCriteriaSet() {
+        return criteriaSet;
     }
 
-    public void setThesisEvaluation(ThesisEvaluation thesisEvaluation) {
-        this.thesisEvaluation = thesisEvaluation;
+    public void setCriteriaSet(Set<Criteria> criteriaSet) {
+        this.criteriaSet = criteriaSet;
+    }
+
+    public Thesis getThesisId() {
+        return thesisId;
+    }
+
+    public void setThesisId(Thesis thesisId) {
+        this.thesisId = thesisId;
+    }
+
+    public UserDefenseCommittee getUserDefenseCommitteeId() {
+        return userDefenseCommitteeId;
+    }
+
+    public void setUserDefenseCommitteeId(UserDefenseCommittee userDefenseCommitteeId) {
+        this.userDefenseCommitteeId = userDefenseCommitteeId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (thesisScorePK != null ? thesisScorePK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -138,7 +127,7 @@ public class ThesisScore implements Serializable {
             return false;
         }
         ThesisScore other = (ThesisScore) object;
-        if ((this.thesisScorePK == null && other.thesisScorePK != null) || (this.thesisScorePK != null && !this.thesisScorePK.equals(other.thesisScorePK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -146,7 +135,7 @@ public class ThesisScore implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nhom21.pojo.ThesisScore[ thesisScorePK=" + thesisScorePK + " ]";
+        return "com.nhom21.pojo.ThesisScore[ id=" + id + " ]";
     }
     
 }

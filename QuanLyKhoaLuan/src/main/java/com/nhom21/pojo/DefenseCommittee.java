@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -41,12 +40,10 @@ public class DefenseCommittee implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommittee")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommitteeId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
 
     public DefenseCommittee() {
@@ -54,11 +51,6 @@ public class DefenseCommittee implements Serializable {
 
     public DefenseCommittee(Integer id) {
         this.id = id;
-    }
-
-    public DefenseCommittee(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {

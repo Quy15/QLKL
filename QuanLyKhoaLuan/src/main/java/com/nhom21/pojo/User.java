@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -50,24 +49,16 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "first_name")
     private String firstName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "last_name")
     private String lastName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "password")
     private String password;
     @Size(max = 255)
@@ -83,7 +74,7 @@ public class User implements Serializable {
     private Set<Thesis> thesisSet;
     @ManyToMany(mappedBy = "userSet1")
     private Set<Thesis> thesisSet1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -97,14 +88,6 @@ public class User implements Serializable {
 
     public User(Integer id) {
         this.id = id;
-    }
-
-    public User(Integer id, String firstName, String lastName, String username, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
     }
 
     public Integer getId() {

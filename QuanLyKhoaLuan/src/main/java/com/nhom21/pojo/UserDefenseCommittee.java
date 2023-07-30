@@ -5,14 +5,22 @@
 package com.nhom21.pojo;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
+import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,48 +31,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserDefenseCommittee.findAll", query = "SELECT u FROM UserDefenseCommittee u"),
-    @NamedQuery(name = "UserDefenseCommittee.findByUserId", query = "SELECT u FROM UserDefenseCommittee u WHERE u.userDefenseCommitteePK.userId = :userId"),
-    @NamedQuery(name = "UserDefenseCommittee.findByDefenseCommitteeId", query = "SELECT u FROM UserDefenseCommittee u WHERE u.userDefenseCommitteePK.defenseCommitteeId = :defenseCommitteeId")})
+    @NamedQuery(name = "UserDefenseCommittee.findById", query = "SELECT u FROM UserDefenseCommittee u WHERE u.id = :id")})
 public class UserDefenseCommittee implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UserDefenseCommitteePK userDefenseCommitteePK;
-    @JoinColumn(name = "defense_committee_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private DefenseCommittee defenseCommittee;
+    private DefenseCommittee defenseCommitteeId;
     @JoinColumn(name = "defense_committee_role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private DefenseCommitteeRole defenseCommitteeRoleId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User user;
+    private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDefenseCommitteeId")
+    private Set<ThesisScore> thesisScoreSet;
 
     public UserDefenseCommittee() {
     }
 
-    public UserDefenseCommittee(UserDefenseCommitteePK userDefenseCommitteePK) {
-        this.userDefenseCommitteePK = userDefenseCommitteePK;
+    public UserDefenseCommittee(Integer id) {
+        this.id = id;
     }
 
-    public UserDefenseCommittee(int userId, int defenseCommitteeId) {
-        this.userDefenseCommitteePK = new UserDefenseCommitteePK(userId, defenseCommitteeId);
+    public Integer getId() {
+        return id;
     }
 
-    public UserDefenseCommitteePK getUserDefenseCommitteePK() {
-        return userDefenseCommitteePK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setUserDefenseCommitteePK(UserDefenseCommitteePK userDefenseCommitteePK) {
-        this.userDefenseCommitteePK = userDefenseCommitteePK;
+    public DefenseCommittee getDefenseCommitteeId() {
+        return defenseCommitteeId;
     }
 
-    public DefenseCommittee getDefenseCommittee() {
-        return defenseCommittee;
-    }
-
-    public void setDefenseCommittee(DefenseCommittee defenseCommittee) {
-        this.defenseCommittee = defenseCommittee;
+    public void setDefenseCommitteeId(DefenseCommittee defenseCommitteeId) {
+        this.defenseCommitteeId = defenseCommitteeId;
     }
 
     public DefenseCommitteeRole getDefenseCommitteeRoleId() {
@@ -75,18 +83,27 @@ public class UserDefenseCommittee implements Serializable {
         this.defenseCommitteeRoleId = defenseCommitteeRoleId;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    @XmlTransient
+    public Set<ThesisScore> getThesisScoreSet() {
+        return thesisScoreSet;
+    }
+
+    public void setThesisScoreSet(Set<ThesisScore> thesisScoreSet) {
+        this.thesisScoreSet = thesisScoreSet;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (userDefenseCommitteePK != null ? userDefenseCommitteePK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +114,7 @@ public class UserDefenseCommittee implements Serializable {
             return false;
         }
         UserDefenseCommittee other = (UserDefenseCommittee) object;
-        if ((this.userDefenseCommitteePK == null && other.userDefenseCommitteePK != null) || (this.userDefenseCommitteePK != null && !this.userDefenseCommitteePK.equals(other.userDefenseCommitteePK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -105,7 +122,7 @@ public class UserDefenseCommittee implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nhom21.pojo.UserDefenseCommittee[ userDefenseCommitteePK=" + userDefenseCommitteePK + " ]";
+        return "com.nhom21.pojo.UserDefenseCommittee[ id=" + id + " ]";
     }
     
 }

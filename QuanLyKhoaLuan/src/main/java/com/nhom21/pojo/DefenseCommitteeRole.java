@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -41,9 +40,7 @@ public class DefenseCommitteeRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommitteeRoleId")
@@ -54,11 +51,6 @@ public class DefenseCommitteeRole implements Serializable {
 
     public DefenseCommitteeRole(Integer id) {
         this.id = id;
-    }
-
-    public DefenseCommitteeRole(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
