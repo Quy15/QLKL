@@ -5,10 +5,14 @@
 package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.User;
 import com.nhom21.repository.ThesisRepository;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -36,11 +40,15 @@ public class ThesisrepositoryImpl implements ThesisRepository {
     private LocalSessionFactoryBean factory;
     @Autowired
     private Environment env;
-   
-    
-     @Override
+
+    @Override
     public List<Thesis> getThesis(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
+        Thesis t = new Thesis();
+        Set<User> users = new HashSet<User>();
+        users.add(s.get(User.class, 1));
+        t.setUserSet1(users);
+        s.save(t);
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Thesis> q = b.createQuery(Thesis.class);
         Root root = q.from(Thesis.class);
@@ -55,10 +63,9 @@ public class ThesisrepositoryImpl implements ThesisRepository {
             }
             q.where(predicates.toArray(Predicate[]::new));
 
-           
         }
 
-        q.orderBy(b.desc(root.get("id")));
+        q.orderBy(b.asc(root.get("id")));
 
         Query query = s.createQuery(q);
 
@@ -78,7 +85,7 @@ public class ThesisrepositoryImpl implements ThesisRepository {
     @Override
     public int countThesis() {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT COUNT(*) From Product");
+        Query q = s.createQuery("SELECT COUNT(*) From Thesis");
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
@@ -101,5 +108,23 @@ public class ThesisrepositoryImpl implements ThesisRepository {
 
     }
 
- 
+    @Override
+    public Thesis getThesisById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(Thesis.class, id);
+    }
+
+    @Override
+    public boolean deleteThesis(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            Thesis t = this.getThesisById(id);
+            s.delete(t);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -10,16 +10,19 @@ import com.nhom21.service.ThesisService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author WIN10
  */
+@Service
 public class ThesisServiceImpl implements ThesisService{
     
     @Autowired
     private ThesisRepository thesisRepository;
-
+    
     @Override
     public List<Thesis> getThesis(Map<String, String> params) {
         return this.thesisRepository.getThesis(params);
@@ -27,12 +30,23 @@ public class ThesisServiceImpl implements ThesisService{
 
     @Override
     public int countThesis() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.thesisRepository.countThesis();
     }
 
     @Override
     public boolean addOrUpdateThesis(Thesis s) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+        return this.thesisRepository.addOrUpdateThesis(s);
+    }
+
+    @Override
+    public Thesis getThesisById(int id) {
+        return this.thesisRepository.getThesisById(id);
+    }
+
+    @Override
+    public boolean deleteThesis(int id) {
+        return this.thesisRepository.deleteThesis(id);
     }
 
     

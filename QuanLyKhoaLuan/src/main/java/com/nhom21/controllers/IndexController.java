@@ -4,12 +4,14 @@
  */
 package com.nhom21.controllers;
 
-
 import com.nhom21.service.ThesisService;
+import com.nhom21.service.UserService;
 import java.util.Map;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -24,17 +26,28 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class IndexController {
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
+    @Autowired
+    private Environment env;
+
     @Autowired
     private ThesisService thesis;
-    
+
+    @Autowired
+    private UserService user;
+
     @RequestMapping("/")
     @Transactional
-    public String index(Model model, @RequestParam Map<String,String> params){
+    public String index(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("thesis", this.thesis.getThesis(params));
-        model.addAttribute("msg", "Hello");
+        
+        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        int count = this.thesis.countThesis();
+        model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
+        model.addAttribute("msg", "Chào mừng đến trang quản trị hệ thống");
         return "index";
     }
 }

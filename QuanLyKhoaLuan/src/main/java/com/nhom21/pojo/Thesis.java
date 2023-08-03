@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -54,19 +55,26 @@ public class Thesis implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    
     @Size(max = 45)
     @Column(name = "status")
     private String status;
+    
     @JoinTable(name = "instructor_thesis", joinColumns = {
         @JoinColumn(name = "thesis_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @JsonIgnore
     @ManyToMany
     private Set<User> userSet;
+    
     @JoinTable(name = "thesis_participant", joinColumns = {
         @JoinColumn(name = "thesis_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @JsonIgnore
     @ManyToMany
     private Set<User> userSet1;
+    
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")
     private Set<ThesisScore> thesisScoreSet;
 

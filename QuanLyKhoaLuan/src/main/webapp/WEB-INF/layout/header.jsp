@@ -4,11 +4,13 @@
     Author     : WIN10
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:url value="/" var="action" />
+<c:url value="/" var="action"/>
+<c:url value="/thesisManager" var="thesis"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Quản trị hệ thống</a>
+        <a class="navbar-brand" href="#">ThesisManager</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,10 +20,10 @@
                     <a class="nav-link" href="${action}">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${action}">Quản lý khóa luận</a>
+                    <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${action}">Quản lý người dùng</a>
+                    <a class="nav-link" href="#">Quản lý người dùng</a>
                 </li>
             </ul>
             <form class="d-flex" action="${action}">

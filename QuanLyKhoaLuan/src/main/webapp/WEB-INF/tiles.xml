@@ -10,11 +10,17 @@
         <put-attribute name="content" value="" />
         <put-attribute name="footer"
                        value="/WEB-INF/layout/footer.jsp" />
+ 
     </definition>
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/index.jsp" />
+    </definition>
+    <definition name="thesisManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý khóa luận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thesisManager.jsp" />
     </definition>
 </tiles-definitions>
 
