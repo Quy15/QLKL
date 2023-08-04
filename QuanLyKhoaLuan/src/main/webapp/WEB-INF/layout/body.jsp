@@ -1,6 +1,6 @@
 <%-- 
-    Document   : base
-    Created on : Aug 3, 2023, 2:42:16 PM
+    Document   : body
+    Created on : Aug 3, 2023, 8:05:14 PM
     Author     : WIN10
 --%>
 
@@ -24,4 +24,3 @@
         <tiles:insertAttribute name="footer" />
     </body>
 </html>
-

@@ -22,7 +22,7 @@
         </ul>
     </c:if>
 
-    <table class="table table-hover" style="border: 1px 1px solid; border-collapse: collapse">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th> </th>
@@ -30,8 +30,6 @@
                 <th>Tên khóa luận</th>
                 <th>Ngày tạo</th>
                 <th>Trạng thái</th>
-                <th>Sinh viên tham gia</th>
-                <th>GV hướng dẫn</th>
                 <th></th>
             </tr>
         </thead>
@@ -43,17 +41,16 @@
                     <td>${t.name}</td>
                     <td>${t.date}</td>
                     <td>${t.status}</td>
-                    <td>${t.userSet1}</td>
                     <td></td>
                     <td>
                         <c:url value="/thesisManager/${t.id}" var="api"/>
                         <a href="${api}" class="btn btn-info">Cập nhật</a>
-                        <button class="btn btn-danger">Xóa</button>
+                        <button class="btn btn-danger" onclick="deleteThesis('${api}')">Xóa</button>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
 </section>
-
+<script src="<c:url value="/js/main.js"/>"></script>
 

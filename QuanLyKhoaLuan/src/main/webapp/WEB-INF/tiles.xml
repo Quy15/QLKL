@@ -3,7 +3,7 @@
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="baseLayout"
-                template="/WEB-INF/layout/base.jsp">
+                template="/WEB-INF/layout/body.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header"
                        value="/WEB-INF/layout/header.jsp" />

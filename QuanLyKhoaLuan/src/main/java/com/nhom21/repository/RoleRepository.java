@@ -4,14 +4,13 @@
  */
 package com.nhom21.repository;
 
-import com.nhom21.pojo.User;
+import com.nhom21.pojo.Role;
 import java.util.List;
 
 /**
  *
  * @author WIN10
  */
-public interface UserRepository {
-    List<User> getUserById();
-    User getUserByUserName(String username);
+public interface RoleRepository {
+    List<Role> getRole();
 }

@@ -7,7 +7,9 @@ package com.nhom21.controllers;
 import com.cloudinary.Cloudinary;
 import com.nhom21.pojo.Thesis;
 import com.nhom21.service.ThesisService;
+import java.text.ParseException;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -46,9 +48,9 @@ public class ThesisController {
     }
     
     @PostMapping("/thesisManager")
-    public String addThesis(@ModelAttribute(value="thesis")Thesis t, BindingResult rs){
+    public String addThesis(String date, @ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs) throws ParseException{
         if(!rs.hasErrors()){
-            if (this.thesis.addOrUpdateThesis(t) == true)
+            if (this.thesis.addOrUpdateThesis(t, date) == true)
                 return "redirect:/";
         }
         return "thesisManager";

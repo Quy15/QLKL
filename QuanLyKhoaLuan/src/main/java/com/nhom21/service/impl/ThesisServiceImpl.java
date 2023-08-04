@@ -7,8 +7,11 @@ package com.nhom21.service.impl;
 import com.nhom21.pojo.Thesis;
 import com.nhom21.repository.ThesisRepository;
 import com.nhom21.service.ThesisService;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,9 +37,13 @@ public class ThesisServiceImpl implements ThesisService{
     }
 
     @Override
-    public boolean addOrUpdateThesis(Thesis s) {
-    
-        return this.thesisRepository.addOrUpdateThesis(s);
+    public boolean addOrUpdateThesis(Thesis s, String date) {
+        try {
+            s.setDate(s.convertDate(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(ThesisServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.thesisRepository.addOrUpdateThesis(s,date);
     }
 
     @Override

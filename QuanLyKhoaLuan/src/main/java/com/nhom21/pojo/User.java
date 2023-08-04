@@ -100,7 +100,7 @@ public class User implements Serializable {
     private Role roleId;
     @Transient
     private MultipartFile file;
-
+   
     public User() {
     }
 

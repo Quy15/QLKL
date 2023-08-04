@@ -6,6 +6,8 @@ package com.nhom21.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -24,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -49,15 +52,24 @@ public class Thesis implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
+    
+    @Size(min = 10, max = 255,  message = "{thesis.name.length}")
     @Column(name = "name")
+    @NotNull(message = "{thesis.name.notNullMsg}")
     private String name;
+    
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     
+    public Date convertDate(String d) throws ParseException{
+        date = new SimpleDateFormat("yyyy-MM-dd").parse(d);
+        return date;
+    }
+    
     @Size(max = 45)
     @Column(name = "status")
+    @NotNull(message = "{thesis.status.notNullMsg}")
     private String status;
     
     @JoinTable(name = "instructor_thesis", joinColumns = {
