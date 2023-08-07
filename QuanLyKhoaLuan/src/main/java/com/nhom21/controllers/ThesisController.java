@@ -48,9 +48,9 @@ public class ThesisController {
     }
     
     @PostMapping("/thesisManager")
-    public String addThesis(String date, @ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs) throws ParseException{
+    public String addThesis(@ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs) throws ParseException{
         if(!rs.hasErrors()){
-            if (this.thesis.addOrUpdateThesis(t, date) == true)
+            if (this.thesis.addOrUpdateThesis(t) == true)
                 return "redirect:/";
         }
         return "thesisManager";
@@ -61,4 +61,6 @@ public class ThesisController {
         model.addAttribute("thesis", this.thesis.getThesisById(id));
         return  "thesisManager";
     }
+    
+    
 }

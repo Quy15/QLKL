@@ -4,14 +4,13 @@
  */
 package com.nhom21.service;
 
-import com.nhom21.pojo.User;
+import com.nhom21.pojo.ThesisParticipant;
 import java.util.List;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
  * @author WIN10
  */
-public interface UserService extends UserDetailsService{
-    List<User> getUser();
+public interface ThesisParticipantsService {
+    List<ThesisParticipant> getParti();
 }

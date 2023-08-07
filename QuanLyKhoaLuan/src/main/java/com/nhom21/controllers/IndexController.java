@@ -4,6 +4,7 @@
  */
 package com.nhom21.controllers;
 
+import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserService;
 import java.util.Map;
@@ -38,16 +39,19 @@ public class IndexController {
 
     @Autowired
     private UserService user;
+    
+    @Autowired
+    private ThesisParticipantsService thesisP;
 
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("thesis", this.thesis.getThesis(params));
-        
+        model.addAttribute("user", this.user.getUser());
+        model.addAttribute("thesisP", this.thesisP.getParti());
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
         int count = this.thesis.countThesis();
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
-        model.addAttribute("msg", "Chào mừng đến trang quản trị hệ thống");
         return "index";
     }
 }

@@ -12,6 +12,6 @@ import java.util.List;
  * @author WIN10
  */
 public interface UserRepository {
-    List<User> getUserById();
+    List<User> getUser();
     User getUserByUserName(String username);
 }

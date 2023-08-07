@@ -52,8 +52,8 @@ public class ThesisApi {
     }
     
     @PostMapping("/api")
-    public ResponseEntity<Void> addThesis(String date, @ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs){
-        boolean add = this.thesisSer.addOrUpdateThesis(t, date);
+    public ResponseEntity<Void> addThesis(@ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs){
+        boolean add = this.thesisSer.addOrUpdateThesis(t);
         if(!rs.hasErrors()){
             if (add == true)
                 return new ResponseEntity<>(HttpStatus.CREATED);
@@ -61,7 +61,7 @@ public class ThesisApi {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
     
-    @DeleteMapping("/api/{id}")
+    @DeleteMapping("/thesisManager/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete (@PathVariable("id") int id){
         this.thesisSer.deleteThesis(id);

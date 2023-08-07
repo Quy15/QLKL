@@ -30,19 +30,20 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepo;
 
     @Override
-    public List<User> getUserById() {
-        return this.userRepo.getUserById();
+    public List<User> getUser() {
+        return this.userRepo.getUser();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User u = this.userRepo.getUserByUserName(username);
+        Role r = new Role();
         if (u == null) {
             throw new UsernameNotFoundException("Người dùng không hợp lệ");
         }
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("SinhVien"));
+        authorities.add(new SimpleGrantedAuthority(u.getRoleId().getName()));
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
     }

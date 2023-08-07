@@ -22,30 +22,33 @@
         </ul>
     </c:if>
 
-    <table class="table table-hover">
+    <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
             <tr>
-                <th> </th>
-                <th>Id</th>
-                <th>Tên khóa luận</th>
-                <th>Ngày tạo</th>
-                <th>Trạng thái</th>
+                <th style="border: 1px solid; border-collapse: collapse;">ID</th>
+                <th style="border: 1px solid; border-collapse: collapse;">Tên khóa luận</th>
+                <th style="border: 1px solid; border-collapse: collapse;">Ngày tạo</th>
+                <th style="border: 1px solid; border-collapse: collapse;">Trạng thái</th>
+                <th style="border: 1px solid; border-collapse: collapse;">Sinh viên tham gia</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${thesis}" var="t">
                 <tr>
-                    <td></td>
-                    <td>${t.id}</td>
-                    <td>${t.name}</td>
-                    <td>${t.date}</td>
-                    <td>${t.status}</td>
-                    <td></td>
-                    <td>
+                    <td style="border: 1px solid; border-collapse: collapse;">${t.id}</td>
+                    <td style="border: 1px solid; border-collapse: collapse;">${t.name}</td>
+                    <td style="border: 1px solid; border-collapse: collapse;">${t.date}</td>
+                    <td style="border: 1px solid; border-collapse: collapse;">${t.status}</td>
+
+                    <c:forEach items="${user}" var="u">
+                        <td style="border: 1px solid; border-collapse: collapse;">${u.firstName} ${u.lastName}</td>
+                    </c:forEach>
+
+                    <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
                         <c:url value="/thesisManager/${t.id}" var="api"/>
-                        <a href="${api}" class="btn btn-info">Cập nhật</a>
-                        <button class="btn btn-danger" onclick="deleteThesis('${api}')">Xóa</button>
+                        <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
+                        <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteThesis('${api}')">Xóa</button>
                     </td>
                 </tr>
             </c:forEach>

@@ -5,34 +5,30 @@
 package com.nhom21.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author WIN10
  */
 @Entity
-@Table(name = "criteria")
+@Table(name = "criteria_has_thesis_score")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Criteria.findAll", query = "SELECT c FROM Criteria c"),
-    @NamedQuery(name = "Criteria.findById", query = "SELECT c FROM Criteria c WHERE c.id = :id"),
-    @NamedQuery(name = "Criteria.findByName", query = "SELECT c FROM Criteria c WHERE c.name = :name")})
-public class Criteria implements Serializable {
+    @NamedQuery(name = "CriteriaHasThesisScore.findAll", query = "SELECT c FROM CriteriaHasThesisScore c"),
+    @NamedQuery(name = "CriteriaHasThesisScore.findById", query = "SELECT c FROM CriteriaHasThesisScore c WHERE c.id = :id")})
+public class CriteriaHasThesisScore implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,16 +36,17 @@ public class Criteria implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "criteriaId")
-    private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
+    @JoinColumn(name = "criteria_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Criteria criteriaId;
+    @JoinColumn(name = "thesis_score_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ThesisScore thesisScoreId;
 
-    public Criteria() {
+    public CriteriaHasThesisScore() {
     }
 
-    public Criteria(Integer id) {
+    public CriteriaHasThesisScore(Integer id) {
         this.id = id;
     }
 
@@ -61,21 +58,20 @@ public class Criteria implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Criteria getCriteriaId() {
+        return criteriaId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCriteriaId(Criteria criteriaId) {
+        this.criteriaId = criteriaId;
     }
 
-    @XmlTransient
-    public Set<CriteriaHasThesisScore> getCriteriaHasThesisScoreSet() {
-        return criteriaHasThesisScoreSet;
+    public ThesisScore getThesisScoreId() {
+        return thesisScoreId;
     }
 
-    public void setCriteriaHasThesisScoreSet(Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet) {
-        this.criteriaHasThesisScoreSet = criteriaHasThesisScoreSet;
+    public void setThesisScoreId(ThesisScore thesisScoreId) {
+        this.thesisScoreId = thesisScoreId;
     }
 
     @Override
@@ -88,10 +84,10 @@ public class Criteria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Criteria)) {
+        if (!(object instanceof CriteriaHasThesisScore)) {
             return false;
         }
-        Criteria other = (Criteria) object;
+        CriteriaHasThesisScore other = (CriteriaHasThesisScore) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -100,7 +96,7 @@ public class Criteria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nhom21.pojo.Criteria[ id=" + id + " ]";
+        return "com.nhom21.pojo.CriteriaHasThesisScore[ id=" + id + " ]";
     }
     
 }

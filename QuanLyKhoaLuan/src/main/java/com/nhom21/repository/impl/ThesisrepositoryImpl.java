@@ -51,11 +51,6 @@ public class ThesisrepositoryImpl implements ThesisRepository {
     @Override
     public List<Thesis> getThesis(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
-//        Thesis t = new Thesis();
-//        Set<User> users = new HashSet<User>();
-//        users.add(s.get(User.class, 1));
-//        t.setUserSet1(users);
-//        s.save(t);
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Thesis> q = b.createQuery(Thesis.class);
         Root root = q.from(Thesis.class);
@@ -98,7 +93,7 @@ public class ThesisrepositoryImpl implements ThesisRepository {
     }
 
     @Override
-    public boolean addOrUpdateThesis(Thesis t, String date) {
+    public boolean addOrUpdateThesis(Thesis t) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
             if (t.getId() == null) {

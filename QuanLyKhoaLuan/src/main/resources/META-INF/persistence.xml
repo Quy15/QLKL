@@ -11,6 +11,9 @@
     <class>com.nhom21.pojo.DefenseCommitteeRole</class>
     <class>com.nhom21.pojo.User</class>
     <class>com.nhom21.pojo.Criteria</class>
+    <class>com.nhom21.pojo.CriteriaHasThesisScore</class>
+    <class>com.nhom21.pojo.InstructorThesis</class>
+    <class>com.nhom21.pojo.ThesisParticipant</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/thesisdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

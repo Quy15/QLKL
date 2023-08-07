@@ -37,13 +37,8 @@ public class ThesisServiceImpl implements ThesisService{
     }
 
     @Override
-    public boolean addOrUpdateThesis(Thesis s, String date) {
-        try {
-            s.setDate(s.convertDate(date));
-        } catch (ParseException ex) {
-            Logger.getLogger(ThesisServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return this.thesisRepository.addOrUpdateThesis(s,date);
+    public boolean addOrUpdateThesis(Thesis s) {
+        return this.thesisRepository.addOrUpdateThesis(s);
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.Map;
 public interface ThesisService {
     List<Thesis> getThesis(Map<String, String> params);
     int countThesis();
-    boolean addOrUpdateThesis(Thesis s, String date);
+    boolean addOrUpdateThesis(Thesis s);
     Thesis getThesisById(int id);
     boolean deleteThesis(int id);
 }

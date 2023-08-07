@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,7 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
 public class User implements Serializable {
-
+    
     /**
      * @return the file
      */
@@ -58,7 +57,7 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +73,7 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "username")
     private String username;
-    @Size(max = 45)
+    @Size(max = 1000)
     @Column(name = "password")
     private String password;
     @Size(max = 10000)
@@ -86,21 +85,22 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "email")
     private String email;
-    @ManyToMany(mappedBy = "userSet")
-    private Set<Thesis> thesisSet;
-    @ManyToMany(mappedBy = "userSet1")
-    private Set<Thesis> thesisSet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<InstructorThesis> instructorThesisSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<ThesisParticipant> thesisParticipantSet;
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Major majorId;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role roleId;
+    
     @Transient
     private MultipartFile file;
-   
+
     public User() {
     }
 
@@ -173,30 +173,30 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<Thesis> getThesisSet() {
-        return thesisSet;
-    }
-
-    public void setThesisSet(Set<Thesis> thesisSet) {
-        this.thesisSet = thesisSet;
-    }
-
-    @XmlTransient
-    public Set<Thesis> getThesisSet1() {
-        return thesisSet1;
-    }
-
-    public void setThesisSet1(Set<Thesis> thesisSet1) {
-        this.thesisSet1 = thesisSet1;
-    }
-
-    @XmlTransient
     public Set<UserDefenseCommittee> getUserDefenseCommitteeSet() {
         return userDefenseCommitteeSet;
     }
 
     public void setUserDefenseCommitteeSet(Set<UserDefenseCommittee> userDefenseCommitteeSet) {
         this.userDefenseCommitteeSet = userDefenseCommitteeSet;
+    }
+
+    @XmlTransient
+    public Set<InstructorThesis> getInstructorThesisSet() {
+        return instructorThesisSet;
+    }
+
+    public void setInstructorThesisSet(Set<InstructorThesis> instructorThesisSet) {
+        this.instructorThesisSet = instructorThesisSet;
+    }
+
+    @XmlTransient
+    public Set<ThesisParticipant> getThesisParticipantSet() {
+        return thesisParticipantSet;
+    }
+
+    public void setThesisParticipantSet(Set<ThesisParticipant> thesisParticipantSet) {
+        this.thesisParticipantSet = thesisParticipantSet;
     }
 
     public Major getMajorId() {

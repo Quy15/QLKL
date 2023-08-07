@@ -25,24 +25,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @PropertySource("classpath:config.properties")
 @Transactional
-public class UserrepositoryImpl implements UserRepository{
+public class UserrepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
-    
-    @Override
-    public List<User> getUserById() {
-         Session s = this.factory.getObject().getCurrentSession();
-         Query q = s.createQuery("SELECT lastName FROM User");
-         return q.getResultList();
-    }
 
     @Override
     public User getUserByUserName(String username) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From User Where firstname=:un");
+        Query q = s.createQuery("From User Where username=:un");
         q.setParameter("un", username);
         return (User) q.getSingleResult();
     }
-    
+
+    @Override
+    public List<User> getUser() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM User");
+        return q.getResultList();
+    }
+
 }

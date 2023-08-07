@@ -25,6 +25,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Quản lý người dùng</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto menu" style="position: absolute; right: 50px">
+                <li>
+                    <form class="d-flex" action="${action}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+                        <button class="btn btn-primary" type="submit">Tìm</button>
+                    </form>
+                </li>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
@@ -41,10 +49,6 @@
                     </c:otherwise>
                 </c:choose>
             </ul>
-            <form class="d-flex" action="${action}">
-                <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
-                <button class="btn btn-primary" type="submit">Tìm</button>
-            </form>
         </div>
     </div>
 </nav>

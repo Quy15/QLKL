@@ -4,8 +4,8 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.Role;
-import com.nhom21.repository.RoleRepository;
+import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.repository.ThesisParticipantsRepository;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -20,14 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class RolerepositoryImpl implements RoleRepository{
+public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
     
     @Override
-    public List<Role> getRole() {
+    public List<ThesisParticipant> getParti() {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("FROM Role");
+        Query q = s.createQuery("Select userId From ThesisParticipant");
+        
         return q.getResultList();
     }
     

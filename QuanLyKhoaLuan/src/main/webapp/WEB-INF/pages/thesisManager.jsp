@@ -12,7 +12,7 @@
             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                 <h1 class="text-center mb-10">Thêm khóa luận</h1>
                 <c:url value="/thesisManager" var="action"/>
-                <form:form method="post" action="${action}" modelAttribute="thesis">
+                <form:form method="post" action="${action}" modelAttribute="thesis" enctype="accept-charset: utf-8">
                     <form:errors path="*" element="div" cssClass="alert alert-danger"/>
                     <form:hidden path="id" />
                     <div class="d-flex flex-row align-items-center mb-4">
@@ -49,8 +49,8 @@
                                         </div>-->
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button type="submit" class="btn btn-primary btn-success" style="width: 100%">
-                            <c:choose>
-                                <c:when test="${thesis.id != null}">Cập nhật khóa luận</button></c:when>
+                         <c:choose>
+                            <c:when test="${thesis.id != null}">Cập nhật khóa luận</button></c:when>
                             <c:otherwise>Thêm</c:otherwise>
                         </c:choose>
                         </button>

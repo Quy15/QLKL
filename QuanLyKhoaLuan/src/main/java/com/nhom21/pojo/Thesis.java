@@ -4,10 +4,7 @@
  */
 package com.nhom21.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -17,9 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -30,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -53,40 +48,28 @@ public class Thesis implements Serializable {
     @Column(name = "id")
     private Integer id;
     
+    
     @Size(min = 10, max = 255,  message = "{thesis.name.length}")
     @Column(name = "name")
     @NotNull(message = "{thesis.name.notNullMsg}")
     private String name;
     
+    
     @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     
-    public Date convertDate(String d) throws ParseException{
-        date = new SimpleDateFormat("yyyy-MM-dd").parse(d);
-        return date;
-    }
     
     @Size(max = 45)
     @Column(name = "status")
     @NotNull(message = "{thesis.status.notNullMsg}")
     private String status;
     
-    @JoinTable(name = "instructor_thesis", joinColumns = {
-        @JoinColumn(name = "thesis_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "id")})
-    @JsonIgnore
-    @ManyToMany
-    private Set<User> userSet;
-    
-    @JoinTable(name = "thesis_participant", joinColumns = {
-        @JoinColumn(name = "thesis_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "id")})
-    @JsonIgnore
-    @ManyToMany
-    private Set<User> userSet1;
-    
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")
+    private Set<InstructorThesis> instructorThesisSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")
+    private Set<ThesisParticipant> thesisParticipantSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")
     private Set<ThesisScore> thesisScoreSet;
 
@@ -130,21 +113,21 @@ public class Thesis implements Serializable {
     }
 
     @XmlTransient
-    public Set<User> getUserSet() {
-        return userSet;
+    public Set<InstructorThesis> getInstructorThesisSet() {
+        return instructorThesisSet;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setInstructorThesisSet(Set<InstructorThesis> instructorThesisSet) {
+        this.instructorThesisSet = instructorThesisSet;
     }
 
     @XmlTransient
-    public Set<User> getUserSet1() {
-        return userSet1;
+    public Set<ThesisParticipant> getThesisParticipantSet() {
+        return thesisParticipantSet;
     }
 
-    public void setUserSet1(Set<User> userSet1) {
-        this.userSet1 = userSet1;
+    public void setThesisParticipantSet(Set<ThesisParticipant> thesisParticipantSet) {
+        this.thesisParticipantSet = thesisParticipantSet;
     }
 
     @XmlTransient

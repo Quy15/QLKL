@@ -7,16 +7,17 @@ package com.nhom21.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,14 +49,14 @@ public class ThesisScore implements Serializable {
     @Size(max = 45)
     @Column(name = "score")
     private String score;
-    @ManyToMany(mappedBy = "thesisScoreSet")
-    private Set<Criteria> criteriaSet;
     @JoinColumn(name = "thesis_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Thesis thesisId;
     @JoinColumn(name = "user_defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserDefenseCommittee userDefenseCommitteeId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisScoreId")
+    private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
 
     public ThesisScore() {
     }
@@ -88,15 +89,6 @@ public class ThesisScore implements Serializable {
         this.score = score;
     }
 
-    @XmlTransient
-    public Set<Criteria> getCriteriaSet() {
-        return criteriaSet;
-    }
-
-    public void setCriteriaSet(Set<Criteria> criteriaSet) {
-        this.criteriaSet = criteriaSet;
-    }
-
     public Thesis getThesisId() {
         return thesisId;
     }
@@ -111,6 +103,15 @@ public class ThesisScore implements Serializable {
 
     public void setUserDefenseCommitteeId(UserDefenseCommittee userDefenseCommitteeId) {
         this.userDefenseCommitteeId = userDefenseCommitteeId;
+    }
+
+    @XmlTransient
+    public Set<CriteriaHasThesisScore> getCriteriaHasThesisScoreSet() {
+        return criteriaHasThesisScoreSet;
+    }
+
+    public void setCriteriaHasThesisScoreSet(Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet) {
+        this.criteriaHasThesisScoreSet = criteriaHasThesisScoreSet;
     }
 
     @Override
