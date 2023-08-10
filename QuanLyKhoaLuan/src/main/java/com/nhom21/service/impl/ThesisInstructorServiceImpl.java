@@ -4,9 +4,10 @@
  */
 package com.nhom21.service.impl;
 
-import com.nhom21.pojo.Role;
-import com.nhom21.repository.RoleRepository;
-import com.nhom21.service.RoleService;
+import com.nhom21.pojo.InstructorThesis;
+import com.nhom21.repository.ThesisInstructionRepository;
+import com.nhom21.repository.impl.ThesisInstructorRepoImpl;
+import com.nhom21.service.ThesisInstructorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,14 @@ import org.springframework.stereotype.Service;
  * @author WIN10
  */
 @Service
-public class RoleServiceImpl implements RoleService{
+public class ThesisInstructorServiceImpl implements ThesisInstructorService{
     @Autowired
-    RoleRepository roleRepo;
+    private ThesisInstructionRepository thesisI;
     
     @Override
-    public List<Role> getRole() {
-        return this.roleRepo.getRole();
+    public List<InstructorThesis> getInstructor() {
+        return this.thesisI.getInstructor();
     }
+    
     
 }

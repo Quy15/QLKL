@@ -4,17 +4,13 @@
  */
 package com.nhom21.repository;
 
-import com.nhom21.pojo.User;
+import com.nhom21.pojo.InstructorThesis;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  * @author WIN10
  */
-public interface UserRepository {
-    List<User> getUser(Map<String, String> params);
-    User getUserByUserName(String username);
-    public boolean register(User u);
-    int countUser();
+public interface ThesisInstructionRepository {
+    List<InstructorThesis> getInstructor();
 }

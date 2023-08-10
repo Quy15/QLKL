@@ -22,6 +22,26 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/thesisManager.jsp" />
     </definition>
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/login.jsp" />
+    </definition>
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Đăng kí" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/register.jsp" />
+    </definition>
+    <definition name="usermanager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/usermanager.jsp" />
+    </definition>
+    <definition name="thesisdefense" extends="baseLayout">
+        <put-attribute name="title" value="Lập hội đồng khóa luận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thesisdefense.jsp" />
+    </definition>
 </tiles-definitions>
 
 

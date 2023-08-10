@@ -4,9 +4,9 @@
  */
 package com.nhom21.service.impl;
 
-import com.nhom21.pojo.Role;
-import com.nhom21.repository.RoleRepository;
-import com.nhom21.service.RoleService;
+import com.nhom21.pojo.Major;
+import com.nhom21.repository.MajorRepository;
+import com.nhom21.service.MajorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Service;
  * @author WIN10
  */
 @Service
-public class RoleServiceImpl implements RoleService{
+public class MajorServiceImpl implements MajorService{
     @Autowired
-    RoleRepository roleRepo;
+    private MajorRepository major;
     
     @Override
-    public List<Role> getRole() {
-        return this.roleRepo.getRole();
+    public List<Major> getMajor() {
+        return this.major.getMajor();
     }
     
 }

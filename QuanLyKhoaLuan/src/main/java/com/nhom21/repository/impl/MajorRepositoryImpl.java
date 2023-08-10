@@ -4,8 +4,8 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.ThesisParticipant;
-import com.nhom21.repository.ThesisParticipantsRepository;
+import com.nhom21.pojo.Major;
+import com.nhom21.repository.MajorRepository;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -20,15 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
+public class MajorRepositoryImpl implements MajorRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
     
     @Override
-    public List<ThesisParticipant> getParti() {
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From ThesisParticipant");
-        
+    public List<Major> getMajor() {
+         Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM Major");
         return q.getResultList();
     }
     

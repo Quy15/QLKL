@@ -6,7 +6,10 @@ package com.nhom21.controllers;
 
 import com.cloudinary.Cloudinary;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.service.ThesisInstructorService;
+import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
+import com.nhom21.service.UserService;
 import java.text.ParseException;
 import java.util.Map;
 import javax.validation.Valid;
@@ -30,37 +33,45 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ThesisController {
-    @Autowired
-    private LocalSessionFactoryBean factory;
-    
-    @Autowired
-    private Environment env;
-    
+
     @Autowired
     private ThesisService thesis;
- 
-    
+
+    @Autowired
+    private UserService user;
+
+    @Autowired
+    private ThesisParticipantsService thesisP;
+
+    @Autowired
+    private ThesisInstructorService thesisI;
+
     @GetMapping("/thesisManager")
     @Transactional
-    public String list(Model model){
+    public String list(Model model) {
         model.addAttribute("thesis", new Thesis());
         return "thesisManager";
     }
-    
+
     @PostMapping("/thesisManager")
-    public String addThesis(@ModelAttribute(value="thesis")@Valid Thesis t, BindingResult rs) throws ParseException{
-        if(!rs.hasErrors()){
-            if (this.thesis.addOrUpdateThesis(t) == true)
+    public String addThesis(Model model,@ModelAttribute(value = "thesis") @Valid Thesis t, BindingResult rs) throws ParseException {
+        if (!rs.hasErrors()) {
+            if (this.thesis.addOrUpdateThesis(t) == true) {
                 return "redirect:/";
+            }
         }
         return "thesisManager";
     }
-    
+
     @GetMapping("/thesisManager/{id}")
-    public String updateThesis(Model model, @PathVariable(value = "id") int id){
+    public String updateThesis(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("thesis", this.thesis.getThesisById(id));
-        return  "thesisManager";
+        return "thesisManager";
     }
     
-    
+    @GetMapping("/thesisdefense")
+    public String thesisDefense(){
+        return "thesisdefense";
+    }
+
 }

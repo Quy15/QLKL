@@ -6,6 +6,7 @@ package com.nhom21.service;
 
 import com.nhom21.pojo.User;
 import java.util.List;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -13,5 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author WIN10
  */
 public interface UserService extends UserDetailsService{
-    List<User> getUser();
+    List<User> getUser(Map<String, String> params);
+    public boolean register(User u);
+    int countUser();
 }

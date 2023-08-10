@@ -4,11 +4,12 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.ThesisParticipant;
-import com.nhom21.repository.ThesisParticipantsRepository;
+import com.nhom21.pojo.InstructorThesis;
+import com.nhom21.repository.ThesisInstructionRepository;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -20,14 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
+public class ThesisInstructorRepoImpl implements ThesisInstructionRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
     
     @Override
-    public List<ThesisParticipant> getParti() {
+    public List<InstructorThesis> getInstructor() {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From ThesisParticipant");
+        Query q = s.createQuery("From InstructorThesis");
         
         return q.getResultList();
     }

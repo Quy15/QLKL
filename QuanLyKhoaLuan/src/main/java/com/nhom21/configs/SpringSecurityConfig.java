@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,8 +29,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.nhom21.controllers", "com.nhom21.repository", "com.nhom21.service"})
+@PropertySource("classpath:config.properties")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-                                                                                                                                                                                                                                                                              @Autowired
+                                                                                                                                                                                                                                                                            @Autowired
     private UserDetailsService userDetailsService;
     
     @Autowired
@@ -53,7 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * @throws Exception
      */
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        http.formLogin().loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password");
 
@@ -73,16 +75,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
     }
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", this.env.getProperty("cloudinary.cloud_name"),
-                        "api_key", this.env.getProperty("cloudinary.api_key"),
-                        "api_secret", this.env.getProperty("cloudinary.api_secret"),
-                        "secure", true));
-        return cloudinary;
-    }
+//    @Bean
+//    public Cloudinary cloudinary() {
+//        Cloudinary cloudinary
+//                = new Cloudinary(ObjectUtils.asMap(
+//                        "cloud_name", "dt3oasocf",
+//                        "api_key", this.env.getProperty("cloudinary.api_key"),
+//                        "api_secret", this.env.getProperty("cloudinary.api_secret"),
+//                        "secure", true));
+//        return cloudinary;
+//    }
 
     @Bean
     public SimpleDateFormat simpleDateFormat() {

@@ -30,6 +30,7 @@
                 <th style="border: 1px solid; border-collapse: collapse;">Ngày tạo</th>
                 <th style="border: 1px solid; border-collapse: collapse;">Trạng thái</th>
                 <th style="border: 1px solid; border-collapse: collapse;">Sinh viên tham gia</th>
+                <th style="border: 1px solid; border-collapse: collapse;">GVHD</th>
                 <th></th>
             </tr>
         </thead>
@@ -40,11 +41,32 @@
                     <td style="border: 1px solid; border-collapse: collapse;">${t.name}</td>
                     <td style="border: 1px solid; border-collapse: collapse;">${t.date}</td>
                     <td style="border: 1px solid; border-collapse: collapse;">${t.status}</td>
-
-                    <c:forEach items="${user}" var="u">
-                        <td style="border: 1px solid; border-collapse: collapse;">${u.firstName} ${u.lastName}</td>
-                    </c:forEach>
-
+                    <td style="border: 1px solid; border-collapse: collapse">
+                        <select>
+                            <c:forEach items="${user}" var="u">
+                                <c:forEach items="${thesisP}" var="p">
+                                    <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">
+                                        <option value="${u.id}">
+                                            ${u.firstName} ${u.lastName}
+                                        </option>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </select>
+                    </td>
+                    <td style="border: 1px solid; border-collapse: collapse">
+                        <select>
+                            <c:forEach items="${user}" var="u">
+                                <c:forEach items="${thesisI}" var="i">
+                                    <c:if test="${u.id == i.userId.id && t.id == i.thesisId.id}">
+                                        <option value="${u.id}">
+                                            ${u.firstName} ${u.lastName}
+                                        </option>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </select>
+                    </td>
                     <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
                         <c:url value="/thesisManager/${t.id}" var="api"/>
                         <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>

@@ -4,14 +4,20 @@
  */
 package com.nhom21.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.nhom21.pojo.Role;
 import com.nhom21.pojo.User;
 import com.nhom21.repository.RoleRepository;
 import com.nhom21.repository.UserRepository;
 import com.nhom21.service.UserService;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,9 +35,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepo;
 
+//    @Autowired
+//    private Cloudinary cloudinary;
     @Override
-    public List<User> getUser() {
-        return this.userRepo.getUser();
+    public List<User> getUser(Map<String, String> params) {
+        return this.userRepo.getUser(params);
     }
 
     @Override
@@ -43,9 +51,29 @@ public class UserServiceImpl implements UserService {
         }
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(u.getRoleId().getName()));
+        if (u.getRoleId().getId() == r.getId()) {
+            authorities.add(new SimpleGrantedAuthority(u.getRoleId().getName()));
+        }
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
     }
 
+    @Override
+    public boolean register(User u) {
+//        if (!u.getFile().isEmpty()) {
+//            try {
+//                Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+//                u.setAvatar(res.get("secure_url").toString());
+//            } catch (IOException ex) {
+//                Logger.getLogger(AuthServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+
+        return this.userRepo.register(u);
+    }
+
+    @Override
+    public int countUser() {
+        return this.userRepo.countUser();
+    }
 }

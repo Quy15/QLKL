@@ -10,9 +10,9 @@
     <div class="card-body p-md-5">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <h1 class="text-center mb-10">Thêm khóa luận</h1>
+                <h1 class="text-center mb-10">Quản lý khóa luận</h1>
                 <c:url value="/thesisManager" var="action"/>
-                <form:form method="post" action="${action}" modelAttribute="thesis" enctype="accept-charset: utf-8">
+                <form:form method="post" action="${action}" modelAttribute="thesis" enctype="multipart/form-data">
                     <form:errors path="*" element="div" cssClass="alert alert-danger"/>
                     <form:hidden path="id" />
                     <div class="d-flex flex-row align-items-center mb-4">
@@ -33,24 +33,50 @@
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
-
                         <div class="form-outline flex-fill mb-0">
                             <form:input type="text" class="form-control" path="status" id="status" placeholder="Trạng thái" name="status"/>
                             <label class="form-label" for="form3Example3c">Trạng thái</label>
                             <form:errors path="status" element="div" cssClass="text-danger"/>
                         </div>
                     </div>
-                    <!--                    <div class="d-flex flex-row align-items-center mb-4">
-                    
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input type="text" id="form3Example3c" class="form-control" name="" />
-                                                <label class="form-label" for="form3Example3c">Sinh viên thực hiện</label>
-                                            </div>
-                                        </div>-->
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <select class="form-select" id="thesisP" name="thesisP" path="thesisParticipantSet">
+                                <c:forEach items="${user}" var="u">
+                                    <c:forEach items="${role}" var = "r">
+                                        <c:if test="${r.id == u.roleId.id && r.name == 'Sinh viên'}">
+                                            <option value="${u.id}">
+                                                ${u.firstName} ${u.lastName}
+                                            </option>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </select>
+                            <label class="form-label" for="form3Example3c">Sinh viên thực hiện</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <select class="form-select" id="thesisI" name="thesisI" path="instructorThesisSet">
+                                <c:forEach items="${user}" var="u">
+                                    <c:forEach items="${role}" var = "r">
+                                        <c:if test="${r.id == u.roleId.id && r.name == 'Giáo viên'}">
+                                            <option value="${u.id}">
+                                                ${u.firstName} ${u.lastName}
+                                            </option>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                            </select>
+                            <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button type="submit" class="btn btn-primary btn-success" style="width: 100%">
-                         <c:choose>
-                            <c:when test="${thesis.id != null}">Cập nhật khóa luận</button></c:when>
+                            <c:choose>
+                                <c:when test="${thesis.id != null}">Cập nhật khóa luận</button></c:when>
                             <c:otherwise>Thêm</c:otherwise>
                         </c:choose>
                         </button>
