@@ -4,7 +4,9 @@
  */
 package com.nhom21.service.impl;
 
+import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
 import com.nhom21.repository.ThesisRepository;
 import com.nhom21.service.ThesisService;
 import java.text.ParseException;
@@ -21,11 +23,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author WIN10
  */
 @Service
-public class ThesisServiceImpl implements ThesisService{
-    
+public class ThesisServiceImpl implements ThesisService {
+
     @Autowired
     private ThesisRepository thesisRepository;
-    
+
     @Override
     public List<Thesis> getThesis(Map<String, String> params) {
         return this.thesisRepository.getThesis(params);
@@ -51,6 +53,4 @@ public class ThesisServiceImpl implements ThesisService{
         return this.thesisRepository.deleteThesis(id);
     }
 
-    
-    
 }

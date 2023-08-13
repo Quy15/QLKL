@@ -4,18 +4,14 @@
  */
 package com.nhom21.service;
 
-import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.pojo.DefenseCommittee;
 import java.util.List;
 
 /**
  *
  * @author WIN10
  */
-public interface ThesisParticipantsService {
-
-    List<ThesisParticipant> getParti();
-
-    boolean addOrUpdateThesisParticipants(ThesisParticipant tp);
-
-    ThesisParticipant getIDP(int id);
+public interface DefenseCommitteeService {
+    boolean addDefense(DefenseCommittee d);
+    List<DefenseCommittee> getList();
 }

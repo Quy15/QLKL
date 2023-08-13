@@ -21,6 +21,8 @@
                 </c:forEach>
         </ul>
     </c:if>
+    <c:url value="/addUser" var="add"/>
+    <a href="${add}" class="btn btn-success" style="font-size: 12.5px" >Thêm người dùng</a>
 
     <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
@@ -85,10 +87,10 @@
                                     </c:if>
                                 </c:forEach>
                             </td>
-                            <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
+                            <td style="border: 1px solid; border-collapse: collapse;">
                                 <c:url value="/usermanager/${u.id}" var="api"/>
                                 <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
-                                <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteThesis('${api}')">Xóa</button>
+                                <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteUser('${api}')">Xóa</button>
                             </td>
                         </c:otherwise>
                     </c:choose>

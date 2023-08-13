@@ -5,12 +5,12 @@
 package com.nhom21.service.impl;
 
 import com.nhom21.pojo.InstructorThesis;
-import com.nhom21.repository.ThesisInstructionRepository;
 import com.nhom21.repository.impl.ThesisInstructorRepoImpl;
 import com.nhom21.service.ThesisInstructorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.nhom21.repository.ThesisInstructorRepository;
 
 /**
  *
@@ -19,11 +19,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThesisInstructorServiceImpl implements ThesisInstructorService{
     @Autowired
-    private ThesisInstructionRepository thesisI;
+    private ThesisInstructorRepository thesisI;
     
     @Override
     public List<InstructorThesis> getInstructor() {
         return this.thesisI.getInstructor();
+    }
+
+    @Override
+    public boolean addOrUpdateThesisInstructor(InstructorThesis ti) {
+        return this.thesisI.addOrUpdateThesisInstructor(ti);
+    }
+
+    @Override
+    public InstructorThesis getIDI(int id) {
+        return this.thesisI.getIDI(id);
     }
     
     

@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     List<User> getUser(Map<String, String> params);
+    List<User> getListUser();
     public boolean register(User u);
+    boolean deleteUser(int id);
+    User getUserById(int id);
     int countUser();
 }

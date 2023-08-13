@@ -97,7 +97,6 @@ public class UserrepositoryImpl implements UserRepository {
             } else {
                 s.update(u);
             }
-
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -111,6 +110,33 @@ public class UserrepositoryImpl implements UserRepository {
         Query q = s.createQuery("SELECT COUNT(*) From User");
 
         return Integer.parseInt(q.getSingleResult().toString());
+    }
+
+    @Override
+    public List<User> getListUser() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM User");
+        
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            User u = this.getUserById(id);
+            s.delete(u);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public User getUserById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(User.class, id);
     }
 
 }

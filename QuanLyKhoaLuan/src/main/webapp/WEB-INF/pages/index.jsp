@@ -42,30 +42,22 @@
                     <td style="border: 1px solid; border-collapse: collapse;">${t.date}</td>
                     <td style="border: 1px solid; border-collapse: collapse;">${t.status}</td>
                     <td style="border: 1px solid; border-collapse: collapse">
-                        <select>
                             <c:forEach items="${user}" var="u">
                                 <c:forEach items="${thesisP}" var="p">
-                                    <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">
-                                        <option value="${u.id}">
+                                    <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">                                       
                                             ${u.firstName} ${u.lastName}
-                                        </option>
                                     </c:if>
                                 </c:forEach>
                             </c:forEach>
-                        </select>
                     </td>
                     <td style="border: 1px solid; border-collapse: collapse">
-                        <select>
                             <c:forEach items="${user}" var="u">
                                 <c:forEach items="${thesisI}" var="i">
                                     <c:if test="${u.id == i.userId.id && t.id == i.thesisId.id}">
-                                        <option value="${u.id}">
                                             ${u.firstName} ${u.lastName}
-                                        </option>
                                     </c:if>
                                 </c:forEach>
                             </c:forEach>
-                        </select>
                     </td>
                     <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
                         <c:url value="/thesisManager/${t.id}" var="api"/>

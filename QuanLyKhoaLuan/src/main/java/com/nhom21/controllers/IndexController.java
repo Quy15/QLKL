@@ -4,6 +4,7 @@
  */
 package com.nhom21.controllers;
 
+import com.nhom21.service.DefenseCommitteeRoleService;
 import com.nhom21.service.MajorService;
 import com.nhom21.service.RoleService;
 import com.nhom21.service.ThesisInstructorService;
@@ -59,6 +60,9 @@ public class IndexController {
     
     @Autowired
     private MajorService major;
+    
+    @Autowired
+    private DefenseCommitteeRoleService drole;
 
     @RequestMapping("/")
     @Transactional
@@ -73,10 +77,11 @@ public class IndexController {
     @ModelAttribute
     public void commonAttri(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("thesisP", this.thesisP.getParti());
-        model.addAttribute("user", this.user.getUser(params));
+        model.addAttribute("user", this.user.getListUser());
         model.addAttribute("thesisI", this.thesisI.getInstructor());
         model.addAttribute("role", this.role.getRole());
         model.addAttribute("major", this.major.getMajor());
+        model.addAttribute("drole", this.drole.getRole());
     }
 
 }

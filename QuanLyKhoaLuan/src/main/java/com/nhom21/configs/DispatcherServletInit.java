@@ -35,9 +35,12 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
             "/",
             "/thesisManager",
             "/login",
-            "/register",
+            "/addUser",
             "/usermanager",
-            "/thesisdefense"
+            "/thesisdefense",
+            "/thesisParticipant",
+            "/instructorThesis",
+            "/defenseuser"
         };
     }
     

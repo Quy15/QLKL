@@ -5,7 +5,6 @@
 package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.InstructorThesis;
-import com.nhom21.repository.ThesisInstructionRepository;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -14,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import com.nhom21.repository.ThesisInstructorRepository;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisInstructorRepoImpl implements ThesisInstructionRepository{
+public class ThesisInstructorRepoImpl implements ThesisInstructorRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
     
@@ -31,6 +32,30 @@ public class ThesisInstructorRepoImpl implements ThesisInstructionRepository{
         Query q = s.createQuery("From InstructorThesis");
         
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addOrUpdateThesisInstructor(InstructorThesis ti) {
+         Session s = this.factory.getObject().getCurrentSession();
+        try {
+            if (ti.getId() == null) {
+                
+                s.save(ti);
+            } else {
+                s.update(ti);
+            }
+
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public InstructorThesis getIDI(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(InstructorThesis.class, id);
     }
     
 }

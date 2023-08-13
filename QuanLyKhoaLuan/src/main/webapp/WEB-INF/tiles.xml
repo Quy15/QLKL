@@ -21,16 +21,19 @@
         <put-attribute name="title" value="Quản lý khóa luận" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/thesisManager.jsp" />
+        <put-attribute name="footer"
+                       value="" />
     </definition>
     <definition name="login" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/login.jsp" />
     </definition>
-    <definition name="register" extends="baseLayout">
+    <definition name="addUser" extends="baseLayout">
         <put-attribute name="title" value="Đăng kí" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/register.jsp" />
+                       value="/WEB-INF/pages/addUser.jsp" />
+        <put-attribute name="footer" value="" />
     </definition>
     <definition name="usermanager" extends="baseLayout">
         <put-attribute name="title" value="Quản lý người dùng" />
@@ -41,6 +44,23 @@
         <put-attribute name="title" value="Lập hội đồng khóa luận" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/thesisdefense.jsp" />
+    </definition>
+   <definition name="thesisParticipant" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý khóa luận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thesisParticipant.jsp" />
+    </definition>
+    
+    <definition name="instructorThesis" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý khóa luận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/instructorThesis.jsp" />
+    </definition>
+    
+    <definition name="defenseuser" extends="baseLayout">
+        <put-attribute name="title" value="Hội đồng bảo vệ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/defenseuser.jsp" />
     </definition>
 </tiles-definitions>
 

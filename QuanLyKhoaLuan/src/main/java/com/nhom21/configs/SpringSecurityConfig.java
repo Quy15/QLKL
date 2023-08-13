@@ -75,16 +75,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
     }
 
-//    @Bean
-//    public Cloudinary cloudinary() {
-//        Cloudinary cloudinary
-//                = new Cloudinary(ObjectUtils.asMap(
-//                        "cloud_name", "dt3oasocf",
-//                        "api_key", this.env.getProperty("cloudinary.api_key"),
-//                        "api_secret", this.env.getProperty("cloudinary.api_secret"),
-//                        "secure", true));
-//        return cloudinary;
-//    }
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "dt3oasocf",
+                        "api_key", "898347928579756",
+                        "api_secret", "NIsp6r_RHAC9a8hUa02dDMUp4rc",
+                        "secure", true));
+        return cloudinary;
+    }
 
     @Bean
     public SimpleDateFormat simpleDateFormat() {

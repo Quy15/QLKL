@@ -47,10 +47,7 @@
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">
                             Đăng nhập
                         </button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">
-                            Chưa có tài khoản? <a href="<c:url value="/register"/>"
-                                                  class="link-danger">Đăng ký ngay</a>
-                        </p>
+                        
                     </div>
 
                 </form>

@@ -11,6 +11,8 @@ import java.util.List;
  *
  * @author WIN10
  */
-public interface ThesisInstructionRepository {
+public interface ThesisInstructorRepository {
     List<InstructorThesis> getInstructor();
+     boolean addOrUpdateThesisInstructor(InstructorThesis ti);
+     InstructorThesis getIDI(int id);
 }

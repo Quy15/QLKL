@@ -5,7 +5,12 @@
 package com.nhom21.controllers;
 
 import com.cloudinary.Cloudinary;
+import com.nhom21.pojo.DefenseCommittee;
+import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.pojo.User;
+import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.service.ThesisInstructorService;
 import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
@@ -54,10 +59,10 @@ public class ThesisController {
     }
 
     @PostMapping("/thesisManager")
-    public String addThesis(Model model,@ModelAttribute(value = "thesis") @Valid Thesis t, BindingResult rs) throws ParseException {
+    public String addThesis(Model model, @ModelAttribute(value = "thesis") @Valid Thesis t, BindingResult rs) throws ParseException {
         if (!rs.hasErrors()) {
             if (this.thesis.addOrUpdateThesis(t) == true) {
-                return "redirect:/";
+                return "thesisParticipant";
             }
         }
         return "thesisManager";
@@ -68,10 +73,6 @@ public class ThesisController {
         model.addAttribute("thesis", this.thesis.getThesisById(id));
         return "thesisManager";
     }
-    
-    @GetMapping("/thesisdefense")
-    public String thesisDefense(){
-        return "thesisdefense";
-    }
+
 
 }

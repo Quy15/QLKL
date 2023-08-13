@@ -24,5 +24,15 @@ public class ThesisParticipantsServiceImpl implements ThesisParticipantsService{
     public List<ThesisParticipant> getParti() {
         return this.thesispRepo.getParti();
     }
+
+    @Override
+    public boolean addOrUpdateThesisParticipants(ThesisParticipant tp) {
+        return this.thesispRepo.addOrUpdateThesisParticipants(tp);
+    }
+
+    @Override
+    public ThesisParticipant getIDP(int id) {
+        return this.thesispRepo.getIDP(id);
+    }
     
 }

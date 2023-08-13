@@ -4,7 +4,9 @@
  */
 package com.nhom21.repository.impl;
 
+import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
 import com.nhom21.pojo.User;
 import com.nhom21.repository.ThesisRepository;
 import java.text.DateFormat;
@@ -45,8 +47,6 @@ public class ThesisrepositoryImpl implements ThesisRepository {
     private LocalSessionFactoryBean factory;
     @Autowired
     private Environment env;
-    
-   
 
     @Override
     public List<Thesis> getThesis(Map<String, String> params) {
@@ -128,5 +128,6 @@ public class ThesisrepositoryImpl implements ThesisRepository {
             return false;
         }
     }
+
 
 }

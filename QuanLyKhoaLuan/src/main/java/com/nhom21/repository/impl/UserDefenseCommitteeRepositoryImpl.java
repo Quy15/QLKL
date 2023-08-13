@@ -4,9 +4,8 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.ThesisParticipant;
-import com.nhom21.repository.ThesisParticipantsRepository;
-import java.util.List;
+import com.nhom21.pojo.UserDefenseCommittee;
+import com.nhom21.repository.UserDefenseCommitteeRepository;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -21,26 +20,18 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
-    @Autowired
+public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeRepository{
+     @Autowired
     private LocalSessionFactoryBean factory;
     
     @Override
-    public List<ThesisParticipant> getParti() {
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From ThesisParticipant");
-        
-        return q.getResultList();
-    }
-
-    @Override
-    public boolean addOrUpdateThesisParticipants(ThesisParticipant tp) {
+    public boolean addUserCommit(UserDefenseCommittee ud) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            if (tp.getId() == null) {
-                s.save(tp);
+            if (ud.getId() == null) {
+                s.save(ud);
             } else {
-                s.update(tp);
+                s.update(ud);
             }
 
             return true;
@@ -48,12 +39,6 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
             ex.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public ThesisParticipant getIDP(int id) {
-        Session s = this.factory.getObject().getCurrentSession();
-        return s.get(ThesisParticipant.class, id);
     }
     
 }

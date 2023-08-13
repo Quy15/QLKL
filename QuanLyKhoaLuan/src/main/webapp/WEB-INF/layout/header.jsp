@@ -47,14 +47,8 @@
 
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-
                         <li class="nav-item">
-                            <c:forEach items="${user}" var="u">
-                                <c:if test="${u.username == pageContext.request.userPrincipal.name}">
-                                    <img src="${u.avatar}" width="40" class="rounded-circle"
-                                         alt="Sample Picture"/>
-                                </c:if>
-                            </c:forEach>
+                            
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
                         <li class="nav-item">
@@ -64,10 +58,6 @@
                     <c:otherwise>
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/login"/>">Đăng nhập</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/register"/>">Đăng kí</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

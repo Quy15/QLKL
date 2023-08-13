@@ -4,7 +4,9 @@
  */
 package com.nhom21.service;
 
+import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +15,14 @@ import java.util.Map;
  * @author WIN10
  */
 public interface ThesisService {
+
     List<Thesis> getThesis(Map<String, String> params);
+
     int countThesis();
+
     boolean addOrUpdateThesis(Thesis s);
+
     Thesis getThesisById(int id);
+
     boolean deleteThesis(int id);
 }

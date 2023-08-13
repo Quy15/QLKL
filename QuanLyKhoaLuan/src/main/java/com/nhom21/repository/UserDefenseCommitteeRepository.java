@@ -4,15 +4,12 @@
  */
 package com.nhom21.repository;
 
-import com.nhom21.pojo.ThesisParticipant;
-import java.util.List;
+import com.nhom21.pojo.UserDefenseCommittee;
 
 /**
  *
  * @author WIN10
  */
-public interface ThesisParticipantsRepository {
-    List<ThesisParticipant> getParti();
-    boolean addOrUpdateThesisParticipants(ThesisParticipant tp);
-    ThesisParticipant getIDP(int id);
+public interface UserDefenseCommitteeRepository {
+    boolean addUserCommit(UserDefenseCommittee ud);
 }
