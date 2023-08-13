@@ -47,25 +47,18 @@ public class Thesis implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
-    
     @Size(min = 10, max = 255,  message = "{thesis.name.length}")
     @Column(name = "name")
     @NotNull(message = "{thesis.name.notNullMsg}")
     private String name;
-    
-    
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    
-    
     @Size(max = 45)
     @Column(name = "status")
     @NotNull(message = "{thesis.status.notNullMsg}")
     private String status;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")
     private Set<InstructorThesis> instructorThesisSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisId")

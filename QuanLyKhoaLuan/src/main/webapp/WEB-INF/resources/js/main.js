@@ -60,7 +60,7 @@ function addUser(){
                     '<input class="btn-danger" type="button" onclick="deleteRow(1)" value="X"/>' +
                 '</td>' +
                 '</tr>';
-        var add = document.getElementsByClassName('addUser').;
+        var add = document.getElementsByClassName('addUser');
         
 }
 //var index;

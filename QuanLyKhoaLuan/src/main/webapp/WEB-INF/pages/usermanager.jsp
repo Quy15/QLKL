@@ -81,11 +81,7 @@
                                 </c:forEach>
                             </td>
                             <td style="border: 1px solid; border-collapse: collapse">
-                                <c:forEach items="${role}" var="r">
-                                    <c:if test="${r.id == u.roleId.id}">
-                                        ${r.name}
-                                    </c:if>
-                                </c:forEach>
+                                ${u.userRole}
                             </td>
                             <td style="border: 1px solid; border-collapse: collapse;">
                                 <c:url value="/usermanager/${u.id}" var="api"/>

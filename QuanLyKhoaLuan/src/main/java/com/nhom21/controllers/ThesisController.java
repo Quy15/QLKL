@@ -62,7 +62,7 @@ public class ThesisController {
     public String addThesis(Model model, @ModelAttribute(value = "thesis") @Valid Thesis t, BindingResult rs) throws ParseException {
         if (!rs.hasErrors()) {
             if (this.thesis.addOrUpdateThesis(t) == true) {
-                return "thesisParticipant";
+                return "redirect:/thesisParticipant";
             }
         }
         return "thesisManager";

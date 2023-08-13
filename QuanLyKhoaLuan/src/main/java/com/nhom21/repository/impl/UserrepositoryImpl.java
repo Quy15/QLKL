@@ -100,8 +100,8 @@ public class UserrepositoryImpl implements UserRepository {
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
-            return false;
         }
+         return false;
     }
 
     @Override

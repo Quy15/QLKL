@@ -6,9 +6,9 @@ package com.nhom21.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.nhom21.pojo.Role;
+
 import com.nhom21.pojo.User;
-import com.nhom21.repository.RoleRepository;
+
 import com.nhom21.repository.UserRepository;
 import com.nhom21.service.UserService;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         }
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(u.getRoleId().getName()));
+        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
     }
