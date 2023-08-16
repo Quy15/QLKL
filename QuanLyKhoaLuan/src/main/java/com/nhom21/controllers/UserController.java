@@ -9,7 +9,6 @@ import com.nhom21.service.UserService;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -26,19 +24,19 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author WIN10
  */
 @Controller
-@PropertySource("classpath:config.properties")
+//@PropertySource("classpath:config.properties")
 public class UserController {
     @Autowired
-    private UserService user;
+    private UserService userDetailService;
     @Autowired
     private Environment env;
     
     @GetMapping("/usermanager")
     @Transactional
     public String userManager(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("user", this.user.getUser(params));
+        model.addAttribute("user", this.userDetailService.getUser(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
-        int count = this.user.countUser();
+        int count = this.userDetailService.countUser();
         model.addAttribute("count", Math.ceil(count * 1.0 / pageSize));
         return "usermanager";
     }
@@ -52,8 +50,8 @@ public class UserController {
     @PostMapping("/addUser")
     public String register(@ModelAttribute(value = "user1")@Valid User u , BindingResult rs){
         if(!rs.hasErrors()){
-            if (this.user.register(u) == true)
-                return "redirect:/login";
+            if (this.userDetailService.register(u) == true)
+                return "redirect:/usermanager";
         }
         return "addUser";
     }

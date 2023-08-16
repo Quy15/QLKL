@@ -49,7 +49,7 @@
 
                 <div class="form-outline mb-3">
                     <form:input type="file" accept="image/png,jpg" id="form3Example4" class="form-control form-control-lg"
-                                name="avatar" path="avatar"/>
+                                name="avatar" path="file"/>
                     <label class="form-label" for="form3Example4">Avatar</label>
                 </div>   
 

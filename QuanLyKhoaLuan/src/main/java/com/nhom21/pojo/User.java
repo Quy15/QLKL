@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -85,21 +86,28 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "email")
     private String email;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<InstructorThesis> instructorThesisSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<ThesisParticipant> thesisParticipantSet;
     @JoinColumn(name = "major_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Major majorId;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Role roleId;
     
     @Transient
     private MultipartFile file;
+    
+    
 
     public User() {
     }

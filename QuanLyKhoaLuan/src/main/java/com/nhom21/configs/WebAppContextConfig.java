@@ -6,9 +6,12 @@ package com.nhom21.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nhom21.fomatter.MajorFormatter;
+import com.nhom21.fomatter.RoleFormatter;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -38,8 +42,8 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource("classpath:config.properties")
 public class WebAppContextConfig implements WebMvcConfigurer {
 
-    @Autowired
-    Environment env;
+//    @Autowired
+//    private Environment env;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -66,14 +70,17 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloud = new Cloudinary(ObjectUtils.asMap("cloud_name", this.env.getProperty("cloudinary.cloud_name"),
-                "api_key", this.env.getProperty("cloudinary.api_key"),
-                "api_secret", this.env.getProperty("cloudinary.api_secret"),
-                "secure", true));
-        return cloud;
-    }
+//    @Bean
+//    public Cloudinary cloudinary() {
+//        Cloudinary cloudinary
+//                = new Cloudinary(ObjectUtils.asMap(
+//                        "cloud_name", "dt3oasocf",
+//                        "api_key", "898347928579756",
+//                        "api_secret", "NIsp6r_RHAC9a8hUa02dDMUp4rc",
+//                        "secure", true));
+//        return cloudinary;
+//  
+//    }
 
     @Bean
     public MessageSource messageSource() {
@@ -99,6 +106,12 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new MajorFormatter());
+        registry.addFormatter(new RoleFormatter());
     }
     
     

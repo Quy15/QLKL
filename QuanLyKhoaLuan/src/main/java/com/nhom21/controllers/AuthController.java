@@ -32,5 +32,12 @@ public class AuthController {
         return "login";
     }
     
-    
+//    @PostMapping("/register")
+//    public String register(@ModelAttribute(value = "user") User u , BindingResult rs){
+//        if(!rs.hasErrors()){
+//            if (this.user.register(u) == true)
+//                return "redirect:/login";
+//        }
+//        return "register";
+//    }
 }
