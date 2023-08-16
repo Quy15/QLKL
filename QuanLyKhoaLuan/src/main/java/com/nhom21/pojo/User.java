@@ -41,9 +41,10 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
-    
+
     /**
      * @return the file
      */
@@ -58,6 +59,11 @@ public class User implements Serializable {
         this.file = file;
     }
     
+    public static final String ADMIN = "Admin";
+    public static final String GVU = "Giáo vụ";
+    public static final String GV = "Giáo viên";
+    public static final String SV = "Sinh viên";
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,6 +91,9 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "email")
     private String email;
+    @Size(max = 10)
+    @Column(name = "user_role")
+    private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -94,13 +103,9 @@ public class User implements Serializable {
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Major majorId;
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Role roleId;
-    
     @Transient
     private MultipartFile file;
-
+    
     public User() {
     }
 
@@ -172,6 +177,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     @XmlTransient
     public Set<UserDefenseCommittee> getUserDefenseCommitteeSet() {
         return userDefenseCommitteeSet;
@@ -205,14 +218,6 @@ public class User implements Serializable {
 
     public void setMajorId(Major majorId) {
         this.majorId = majorId;
-    }
-
-    public Role getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
     }
 
     @Override

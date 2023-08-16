@@ -35,6 +35,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Thống kê</a>
                 </li>
+
             </ul>
             <ul class="navbar-nav ml-auto menu" >
 
@@ -48,7 +49,6 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
-                            
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
                         <li class="nav-item">

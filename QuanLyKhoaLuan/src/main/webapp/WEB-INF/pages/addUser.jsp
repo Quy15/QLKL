@@ -48,8 +48,8 @@
                 </div>
 
                 <div class="form-outline mb-3">
-                    <form:input type="file" accept="image/png,jpg" id="form3Example4" class="form-control form-control-lg"
-                                name="avatar" path="avatar"/>
+                    <form:input type="file" accept="image/png" id="form3Example4" class="form-control form-control-lg"
+                                name="avatar" path="file"/>
                     <label class="form-label" for="form3Example4">Avatar</label>
                 </div>   
 
@@ -61,26 +61,20 @@
 
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                        <select class="form-select" id="major" name="major" path="majorId">
+                        <form:select class="form-select" id="major" name="major" path="majorId">
                             <c:forEach items="${major}" var="m">
                                 <option value="${m.id}">
                                     ${m.name}
                                 </option>
                             </c:forEach>
-                        </select>
+                        </form:select>
                         <label class="form-label" for="form3Example3c">Ngành học</label>
                     </div>
                 </div>
 
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                        <select class="form-select" id="role" name="role" path="roleId">
-                            <c:forEach items="${role}" var="r">
-                                <option value="${r.id}">
-                                    ${r.name}
-                                </option>
-                            </c:forEach>
-                        </select>
+                        <form:input type="text" class="form-select" id="role" name="role" path="userRole"/>
                         <label class="form-label" for="form3Example3c">Vai trò</label>
                     </div>
                 </div>

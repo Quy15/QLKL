@@ -7,7 +7,10 @@ package com.nhom21.controllers;
 import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.service.ThesisInstructorService;
 import java.text.ParseException;
+import java.util.Map;
 import javax.validation.Valid;
+
+import com.nhom21.service.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +28,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class InstructorThesisController {
     @Autowired
     private ThesisInstructorService thesisI;
+
+    @Autowired
+    private ThesisService thesisService;
     
     @GetMapping("/instructorThesis")
-    public String listI(Model model) {
+    public String listI(Model model, Map<String,String> params) {
         model.addAttribute("instructorThesis", new InstructorThesis());
+        model.addAttribute("t", this.thesisService.getThesis(params));
         return "instructorThesis";
     }
 
@@ -42,7 +49,7 @@ public class InstructorThesisController {
         return "instructorThesis";
     }
     
-     @GetMapping("/addThesisI/{id}")
+    @GetMapping("/addThesisI/{id}")
     public String updateThesisI(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("thesisI", this.thesisI.getIDI(id));
         return "addThesisI";
