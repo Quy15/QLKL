@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -94,10 +95,13 @@ public class User implements Serializable {
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<InstructorThesis> instructorThesisSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<ThesisParticipant> thesisParticipantSet;
     @JoinColumn(name = "major_id", referencedColumnName = "id")

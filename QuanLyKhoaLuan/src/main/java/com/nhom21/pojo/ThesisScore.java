@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -55,6 +56,7 @@ public class ThesisScore implements Serializable {
     @JoinColumn(name = "user_defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserDefenseCommittee userDefenseCommitteeId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisScoreId")
     private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
 

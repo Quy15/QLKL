@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <c:url value="/usermanager" var="action" />
 <section class="container">
     <h1 class="text-center text-info mt-1">DANH SÁCH NGƯỜI DÙNG</h1>
@@ -41,7 +42,7 @@
             <c:forEach items="${user}" var="u">
                 <tr >
                     <c:choose>
-                        <c:when test="${u.username == 'admin'}">
+                        <c:when test="${u.userRole == 'ROLE_ADMIN' || u.userRole == 'ROLE_SV'}">
                             <td hidden style="border: 1px solid; border-collapse: collapse;">${u.id}</td>
                             <td hidden style="border: 1px solid; border-collapse: collapse;">${u.firstName} ${u.lastName}</td>
                             <td hidden style="border: 1px solid; border-collapse: collapse;">${u.username}</td>
@@ -64,7 +65,7 @@
                             <td hidden style="display: flex; justify-content: space-around;border-collapse: collapse;">
                                 <c:url value="/usermanager/${u.id}" var="api"/>
                                 <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
-                                <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteThesis('${api}')">Xóa</button>
+                                <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteUser('${api}')">Xóa</button>
                             </td>
                         </c:when>
                         <c:otherwise>
@@ -84,9 +85,11 @@
                                 ${u.userRole}
                             </td>
                             <td style="border: 1px solid; border-collapse: collapse;">
-                                <c:url value="/addUser/${u.id}" var="api"/>
+                                <c:url value="/usermanager/${u.id}" var="api"/>
                                 <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
-                                <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteUser('${api}')">Xóa</button>
+                                <se:authorize access="hasRole('ROLE_ADMIN')">
+                                    <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteUser('${api}')">Xóa</button>
+                                </se:authorize>
                             </td>
                         </c:otherwise>
                     </c:choose>
