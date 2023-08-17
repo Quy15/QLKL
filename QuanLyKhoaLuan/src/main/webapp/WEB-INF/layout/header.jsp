@@ -11,48 +11,64 @@
 <c:url value="/thesisManager" var="thesis"/>
 <c:url value="/usermanager" var="user"/>
 <c:url value="/dclist" var="defense"/>
+<c:url value="/inforuser" var="infor"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">ThesisManager</a>
+        <a class="navbar-brand" href="${action}">ThesisManager</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${action}">Trang chủ</a>
-                </li>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
-                <li class="nav-item">
-                    <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${user}">Quản lý người dùng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${defense}">Hội đồng khóa luận</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Thống kê</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${user}">Quản lý người dùng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${defense}">Hội đồng khóa luận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Thống kê</a>
+                    </li>
+                </se:authorize>
+
+                <se:authorize access="hasRole('ROLE_SV')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Xem điểm</a>
+                    </li>
+                </se:authorize>
+                <se:authorize access="hasRole('ROLE_GV')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Chấm điểm</a>
+                    </li>
                 </se:authorize>
             </ul>
             <ul class="navbar-nav ml-auto menu" >
-
+                <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
                 <li style="position: absolute; right: 220px">
                     <form class="d-flex" action="${action}">
                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
                         <button class="btn btn-primary" type="submit">Tìm</button>
                     </form>
                 </li>
-
+                </se:authorize>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item">
+                        <li class="nav-item" style="position: relative; right: 105px; display: flex; flex-direction: row">
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/logout"/>">Đăng xuất</a>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="<c:url value="/logout"/>">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="${infor}">Thông tin người dùng</a></li>
+                                    <li><a class="dropdown-item" href="${infor}">Thay đổi mật khẩu</a></li>
+                                </ul>
+                            </div>
                         </li>
                     </c:when>
                     <c:otherwise>

@@ -27,8 +27,7 @@ public class AuthController {
     private UserService user;
     
     @GetMapping("/login")
-    public String login(Model model){
-        model.addAttribute("user", this.user.getListUser());
+    public String login(){
         return "login";
     }
     
