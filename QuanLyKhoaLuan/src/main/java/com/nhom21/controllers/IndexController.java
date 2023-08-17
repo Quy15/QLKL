@@ -4,12 +4,15 @@
  */
 package com.nhom21.controllers;
 
+import com.nhom21.pojo.DefenseCommittee;
 import com.nhom21.service.DefenseCommitteeRoleService;
+import com.nhom21.service.DefenseCommitteeService;
 import com.nhom21.service.MajorService;
 
 import com.nhom21.service.ThesisInstructorService;
 import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
+import com.nhom21.service.UserDefenseCommitteeService;
 import com.nhom21.service.UserService;
 import java.util.Map;
 import javax.persistence.Query;
@@ -60,6 +63,12 @@ public class IndexController {
     
     @Autowired
     private DefenseCommitteeRoleService drole;
+    
+    @Autowired
+    private DefenseCommitteeService defense;
+    
+    @Autowired
+    private UserDefenseCommitteeService udc;
 
     @RequestMapping("/")
     @Transactional
@@ -79,6 +88,8 @@ public class IndexController {
         model.addAttribute("thesisI", this.thesisI.getInstructor());   
         model.addAttribute("major", this.major.getMajor());
         model.addAttribute("drole", this.drole.getRole());
+        model.addAttribute("dc", this.defense.getList());
+        model.addAttribute("udc", this.udc.getList());
     }
 
 }

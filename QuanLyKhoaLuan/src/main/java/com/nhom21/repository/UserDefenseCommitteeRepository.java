@@ -5,11 +5,13 @@
 package com.nhom21.repository;
 
 import com.nhom21.pojo.UserDefenseCommittee;
+import java.util.List;
 
 /**
  *
  * @author WIN10
  */
 public interface UserDefenseCommitteeRepository {
+    List<UserDefenseCommittee> getList();
     boolean addUserCommit(UserDefenseCommittee ud);
 }

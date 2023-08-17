@@ -14,12 +14,12 @@
             <c:url value="/thesisParticipant" var="action"/>
 
             <%--@elvariable id="thesisP" type="antlr"--%>
-            <form:form action="${action}" method="post" enctype="multipart/form-data" modelAttribute="thesisP">
+            <form:form action="${action}" method="post" enctype="multipart/form-data" modelAttribute="thesisParti">
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
                         <form:select class="form-select" id="thesisP" name="thesisP" path="userId">
                             <c:forEach items="${user}" var="u">
-                                    <c:if test="${u.userRole == 'Sinh viên'}">
+                                    <c:if test="${u.userRole == 'ROLE_SV'}">
                                         <option value="${u.id}">
                                             ${u.firstName} ${u.lastName}
                                         </option>

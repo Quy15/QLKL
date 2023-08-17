@@ -49,5 +49,13 @@ public class DefenseCommitteeRepositoryImpl implements DefenseCommitteeRepositor
         
         return q.getResultList();
     }
+
+    @Override
+    public int countDefense() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT COUNT(*) From DefenseCommittee");
+
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
     
 }

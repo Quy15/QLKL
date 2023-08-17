@@ -32,13 +32,13 @@ public class ThesisParticipantController {
     
     @GetMapping("/thesisParticipant")
     public String listP(Model model, Map<String,String> params) {
-        model.addAttribute("thesisP", new ThesisParticipant());
+        model.addAttribute("thesisParti", new ThesisParticipant());
         model.addAttribute("the", this.thesis.getThesis(params));
         return "thesisParticipant";
     }
 
     @PostMapping("/thesisParticipant")
-    public String addThesisP(@ModelAttribute(value = "thesisP")@Valid ThesisParticipant tp, BindingResult rs) throws ParseException {
+    public String addThesisP(@ModelAttribute(value = "thesisParti")@Valid ThesisParticipant tp, BindingResult rs) throws ParseException {
         if (!rs.hasErrors()) {
             if (this.thesisP.addOrUpdateThesisParticipants(tp) == true) {
                 return "redirect:/instructorThesis";

@@ -6,6 +6,7 @@ package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.repository.UserDefenseCommitteeRepository;
+import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -39,6 +40,13 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<UserDefenseCommittee> getList() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From UserDefenseCommittee");
+        return q.getResultList();
     }
     
 }

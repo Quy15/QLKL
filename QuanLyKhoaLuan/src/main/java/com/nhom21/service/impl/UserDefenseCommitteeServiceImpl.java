@@ -7,6 +7,7 @@ package com.nhom21.service.impl;
 import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.repository.UserDefenseCommitteeRepository;
 import com.nhom21.service.UserDefenseCommitteeService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,16 @@ public class UserDefenseCommitteeServiceImpl implements UserDefenseCommitteeServ
     
     @Override
     public boolean addUserCommit(UserDefenseCommittee ud) {
+        String idU = String.valueOf(ud.getUserId());
+        String idDR = String.valueOf(ud.getDefenseCommitteeRoleId());
+        long userId = Long.parseLong(idU);
+        long defenseCommitteeRoleId = Long.parseLong(idDR);
         return this.udc.addUserCommit(ud);
+    }
+
+    @Override
+    public List<UserDefenseCommittee> getList() {
+        return this.udc.getList();
     }
     
 }

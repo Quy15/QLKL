@@ -10,7 +10,7 @@
 <c:url value="/" var="action"/>
 <c:url value="/thesisManager" var="thesis"/>
 <c:url value="/usermanager" var="user"/>
-<c:url value="/thesisdefense" var="defense"/>
+<c:url value="/dclist" var="defense"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">ThesisManager</a>
@@ -22,7 +22,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${action}">Trang chủ</a>
                 </li>
-
+                <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
                 <li class="nav-item">
                     <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
                 </li>
@@ -30,12 +30,12 @@
                     <a class="nav-link" href="${user}">Quản lý người dùng</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${defense}">Lập hội đồng</a>
+                    <a class="nav-link" href="${defense}">Hội đồng khóa luận</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Thống kê</a>
                 </li>
-
+                </se:authorize>
             </ul>
             <ul class="navbar-nav ml-auto menu" >
 
