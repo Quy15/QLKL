@@ -28,14 +28,13 @@ public class UserDefenseController {
     @GetMapping("/defenseuser")
     public String addUD(Model model){
         model.addAttribute("userdefensecommittee", new UserDefenseCommittee());
-        model.addAttribute("list", this.defense.getList());
         return "defenseuser";
     }
     
     @PostMapping("/defenseuser")
-    public String add(@ModelAttribute(value = "userdefensecommittee") UserDefenseCommittee ud){
+    public String addUD(@ModelAttribute(value = "userdefensecommittee") UserDefenseCommittee ud){
         if (this.userD.addUserCommit(ud) == true)
-            return "redirect:/";
+            return "redirect:/dclist";
         return "defenseuser";
     }
 }

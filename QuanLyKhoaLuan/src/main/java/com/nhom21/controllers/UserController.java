@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,8 +54,14 @@ public class UserController {
     public String register(@ModelAttribute(value = "user1")@Valid User u , BindingResult rs){
         if(!rs.hasErrors()){
             if (this.user.register(u) == true)
-                return "redirect:/login";
+                return "redirect:/usermanager";
         }
+        return "addUser";
+    }
+    
+    @GetMapping("/addUser/{id}")
+    public String updateThesis(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("user1", this.user.getUserById(id));
         return "addUser";
     }
 }

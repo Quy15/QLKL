@@ -21,7 +21,9 @@
                 </c:forEach>
         </ul>
     </c:if>
-
+    
+    
+    
     <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
             <tr>
@@ -31,7 +33,6 @@
                 <th style="border: 1px solid; border-collapse: collapse;">Trạng thái</th>
                 <th style="border: 1px solid; border-collapse: collapse;">Sinh viên tham gia</th>
                 <th style="border: 1px solid; border-collapse: collapse;">GVHD</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -58,11 +59,6 @@
                                     </c:if>
                                 </c:forEach>
                             </c:forEach>
-                    </td>
-                    <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
-                        <c:url value="/thesisManager/${t.id}" var="api"/>
-                        <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
-                        <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteThesis('${api}')">Xóa</button>
                     </td>
                 </tr>
             </c:forEach>

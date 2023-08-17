@@ -18,7 +18,7 @@
                         <form:select class="form-select" id="thesisI" name="thesisI" path="userId">
                             <c:forEach items="${user}" var="u">
 
-                                    <c:if test="${u.userRole == 'Giáo viên'}">
+                                    <c:if test="${u.userRole == 'ROLE_GV'}">
                                         <option value="${u.id}">
                                             ${u.firstName} ${u.lastName}
                                         </option>

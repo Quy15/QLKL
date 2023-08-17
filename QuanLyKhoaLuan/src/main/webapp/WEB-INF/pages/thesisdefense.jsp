@@ -9,8 +9,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <h2 class=" text-info text-center">Hội đồng bảo vệ khóa luận</h2>
 <!--If you want your form elements to appear side by side, use .row and .col:-->
-
-<form:form method="post" enctype="multipart/form-data" action="/thesisdefense" modelAttribute="defenseCommittee">
+<c:url value="/thesisdefense" var="action"/>
+<form:form method="post" enctype="multipart/form-data" action="${action}" modelAttribute="defenseCommittee">
     <form:input type="text" class="form-control" path="name" id="name" placeholder="Tên hội đồng" name="name"/>
     <label class="form-label" for="form3Example1c">Tên hội đồng</label>
     <br/>

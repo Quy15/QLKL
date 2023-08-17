@@ -13,6 +13,7 @@
 
             <c:url value="/addUser" var="action"/>
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user1">
+                <form:hidden path="id" />
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                     <p class="lead fw-normal mb-0 me-3">Đăng ký tài khoản</p>
                 </div>
@@ -51,6 +52,9 @@
                     <form:input type="file" accept="image/png" id="form3Example4" class="form-control form-control-lg"
                                 name="avatar" path="file"/>
                     <label class="form-label" for="form3Example4">Avatar</label>
+                    <c:if test="${user1.avatar != null}">
+                        <img src="${user1.avatar}" width="120" />
+                    </c:if>
                 </div>   
 
                 <div class="form-outline mb-3">
@@ -74,15 +78,38 @@
 
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                        <form:input type="text" class="form-select" id="role" name="role" path="userRole"/>
+                        <c:choose>
+                            <c:when test="${user1.userRole != null}">
+                                <form:select class="form-select" id="role" name="role" path="userRole">
+                                    <option value="${user1.userRole}" selected="selected">
+                                        ${user1.userRole}
+                                    </option>
+                                </form:select>
+                            </c:when>
+                            <c:otherwise>
+                                <form:select class="form-select" id="role" name="role" path="userRole">
+                                    <option value="${user1.userRole}">
+                                        ROLE_GVU
+                                    </option>
+                                    <option value="${user1.userRole}">
+                                        ROLE_GV
+                                    </option>
+                                    <option value="${user1.userRole}">
+                                        ROLE_SV
+                                    </option>
+                                </form:select>
+                            </c:otherwise>
+                        </c:choose>
                         <label class="form-label" for="form3Example3c">Vai trò</label>
                     </div>
                 </div>
 
                 <div class="text-center text-lg-start mt-4 pt-2">
-                    <button type="submit" class="btn btn-primary btn-lg"
-                            style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                        Xác nhận
+                    <button type="submit" class="btn btn-primary btn-success" style="width: 100%">
+                        <c:choose>
+                            <c:when test="${user1.id != null}">Cập nhật người dùng</button></c:when>
+                        <c:otherwise>Thêm</c:otherwise>
+                    </c:choose>
                     </button>
                 </div>
             </form:form>

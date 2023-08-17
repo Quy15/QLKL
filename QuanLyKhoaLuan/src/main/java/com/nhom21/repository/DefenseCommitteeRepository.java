@@ -14,4 +14,5 @@ import java.util.List;
 public interface DefenseCommitteeRepository {
     List<DefenseCommittee> getList();
     boolean addDefense(DefenseCommittee d);
+    int countDefense();
 }
