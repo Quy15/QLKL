@@ -30,8 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserApi {
     @Autowired
     private UserService user;
-     @Autowired
+    
+    @Autowired
     private Environment env;
+    
     
     @GetMapping("/api/usermanager/")
     public ResponseEntity<List<User>> getListUser(Model model, @RequestParam Map<String, String> params){

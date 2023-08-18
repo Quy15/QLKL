@@ -77,11 +77,15 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/dclist.jsp" />
     </definition>
-    
-    <definition name="inforuser" extends="baseLayout">
+    <definition name="infouser" extends="baseLayout">
         <put-attribute name="title" value="Thông tin người dùng" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/inforuser.jsp" />
+                       value="/WEB-INF/pages/infouser.jsp" />
+    </definition>
+    <definition name="changepassword" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/changepassword.jsp" />
     </definition>
 </tiles-definitions>
 

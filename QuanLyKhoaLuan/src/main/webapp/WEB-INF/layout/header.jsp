@@ -11,15 +11,19 @@
 <c:url value="/thesisManager" var="thesis"/>
 <c:url value="/usermanager" var="user"/>
 <c:url value="/dclist" var="defense"/>
-<c:url value="/inforuser" var="infor"/>
+<c:url value="/infouser" var="info"/>
+<c:url value="/changepassword" var="change"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="${action}">ThesisManager</a>
+        <a class="navbar-brand" href="#">ThesisManager</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="${action}">Trang chủ</a>
+                </li>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
                     <li class="nav-item">
                         <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
@@ -48,28 +52,29 @@
             </ul>
             <ul class="navbar-nav ml-auto menu" >
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
-                <li style="position: absolute; right: 220px">
-                    <form class="d-flex" action="${action}">
-                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
-                        <button class="btn btn-primary" type="submit">Tìm</button>
-                    </form>
-                </li>
+                    <li style="position: absolute; right: 220px">
+                        <form class="d-flex" action="${action}">
+                            <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+                            <button class="btn btn-primary" type="submit">Tìm</button>
+                        </form>
+                    </li>
                 </se:authorize>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item" style="position: relative; right: 105px; display: flex; flex-direction: row">
+                        <li class="nav-item" style="position: relative; right: 105px;">
+                            
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-caret-down"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="<c:url value="/logout"/>">Đăng xuất</a></li>
-                                    <li><a class="dropdown-item" href="${infor}">Thông tin người dùng</a></li>
-                                    <li><a class="dropdown-item" href="${infor}">Thay đổi mật khẩu</a></li>
-                                </ul>
-                            </div>
                         </li>
+                        <div class="dropdown" style="position: relative; right: 105px;">
+                            <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="<c:url value="/logout"/>">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="${info}">Thông tin người dùng</a></li>
+                                <li><a class="dropdown-item" href="${change}">Thay đổi mật khẩu</a></li>
+                            </ul>
+                        </div>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">

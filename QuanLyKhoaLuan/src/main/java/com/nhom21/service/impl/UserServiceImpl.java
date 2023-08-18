@@ -95,4 +95,14 @@ public class UserServiceImpl implements UserService {
     public User getUserById(int id) {
         return this.userRepo.getUserById(id);
     }
+
+    @Override
+    public User findUserByUserName(String username) {
+        return this.userRepo.findUserByUserName(username);
+    }
+
+    @Override
+    public void saveUser(User u) {
+        this.userRepo.saveUser(u);
+    }
 }

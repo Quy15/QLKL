@@ -1,6 +1,6 @@
 <%-- 
     Document   : infouser
-    Created on : Aug 17, 2023, 2:31:21 PM
+    Created on : Aug 17, 2023, 7:00:17 PM
     Author     : WIN10
 --%>
 
@@ -38,6 +38,15 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
+                                        <p class="mb-0">ID</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0">${info.id}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
                                         <p class="mb-0">Họ tên</p>
                                     </div>
                                     <div class="col-sm-9">
@@ -54,7 +63,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                
+
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <p class="mb-0">Khoa</p>
@@ -70,7 +79,7 @@
                                 <hr/>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <a href="" class="btn btn-info">Đổi mật khẩu</a>
+                                        <a href="<c:url value="/infouser/${info.id}"/>" class="btn btn-info">Đổi mật khẩu</a>
                                     </div>                                   
                                 </div>
                             </div>
