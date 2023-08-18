@@ -44,7 +44,7 @@ public class DefenseCommitteeRole implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @JsonIgnore
+     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommitteeRoleId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
 

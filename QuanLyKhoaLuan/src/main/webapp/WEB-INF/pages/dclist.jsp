@@ -47,7 +47,7 @@
                         <c:forEach items="${user}" var="u">
                             <c:forEach items="${drole}" var="dr">
                                 <c:forEach items="${udefense}" var="ud">
-                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id}">
+                                    <c:if test="${u.id == ud.userId && dr.id == ud.id}">
                                         ${u.firstName} ${u.lastName}
                                     </c:if>
                                 </c:forEach>

@@ -56,7 +56,7 @@ public class ThesisScore implements Serializable {
     @JoinColumn(name = "user_defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserDefenseCommittee userDefenseCommitteeId;
-    @JsonIgnore
+     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisScoreId")
     private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
 

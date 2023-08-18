@@ -43,7 +43,8 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
             "/defenseuser",
             "/addThesis",
             "/dclist",
-            "/inforuser"
+            "/infouser",
+            "/changepassword"
         };
     }
     

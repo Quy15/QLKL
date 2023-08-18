@@ -59,7 +59,7 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
     public static final String ADMIN = "Admin";
     public static final String GVU = "Giáo vụ";
     public static final String GV = "Giáo viên";
@@ -104,12 +104,13 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<ThesisParticipant> thesisParticipantSet;
+
     @JoinColumn(name = "major_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Major majorId;
     @Transient
     private MultipartFile file;
-    
+
     public User() {
     }
 
@@ -248,5 +249,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.User[ id=" + id + " ]";
     }
-    
+
 }

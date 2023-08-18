@@ -13,11 +13,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  *
  * @author WIN10
  */
-public interface UserService extends UserDetailsService{
+public interface UserService extends UserDetailsService {
+
     List<User> getUser(Map<String, String> params);
+
     List<User> getListUser();
+
     public boolean register(User u);
+
     boolean deleteUser(int id);
+
     User getUserById(int id);
+
+    User findUserByUserName(String username);
+
     int countUser();
+    void saveUser(User u);
 }

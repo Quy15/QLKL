@@ -18,7 +18,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -43,27 +51,15 @@ public class ThesisApi {
         return new ResponseEntity<>(thesiss, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/api/thesisManager/{id}/", produces = "application/json")
+    @GetMapping("/api/thesisManager/{id}/")
     public ResponseEntity<Thesis> getThesisById(@PathVariable("id") int id) {
         Thesis t = this.thesisSer.getThesisById(id);
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         if (t == null) {
-            return new ResponseEntity<>(t, httpHeaders ,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(t, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(t, httpHeaders ,HttpStatus.OK);
+        return new ResponseEntity<>(t, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/api/thesisManager/{id}/", produces = "application/json")
-    public ResponseEntity<Thesis> updateThesis(@PathVariable("id") int id) {
-        Thesis t = this.thesisSer.getThesisById(id);
-        final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        if (t == null) {
-            return new ResponseEntity<>(t, httpHeaders ,HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(t, httpHeaders ,HttpStatus.OK);
-    }
     @PostMapping(value = "/api/addThesis/", produces = "application/json")
     public ResponseEntity addThesis(@RequestBody Thesis t) {
         final HttpHeaders httpHeaders = new HttpHeaders();
