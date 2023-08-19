@@ -47,7 +47,7 @@ public class Major implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
-     @JsonIgnore
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "majorId")
     private Set<User> userSet;
 
@@ -112,5 +112,5 @@ public class Major implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.Major[ id=" + id + " ]";
     }
-    
+
 }

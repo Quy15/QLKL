@@ -8,6 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <c:url value="/" var="action" />
+
 <se:authorize access="hasAnyRole('ROLE_SV', 'ROLE_GV')">
     <h1 class="text-center text-info">Xin chào ${pageContext.request.userPrincipal.name} đến với hệ thống</h1>
     <img src="https://res.cloudinary.com/dt3oasocf/image/upload/v1691420822/logo_pikxic.png"
@@ -29,9 +30,9 @@
                 </c:forEach>
         </ul>
     </c:if>
-
-
-
+    
+    
+    
     <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
             <tr>
@@ -51,22 +52,22 @@
                     <td style="border: 1px solid; border-collapse: collapse;">${t.date}</td>
                     <td style="border: 1px solid; border-collapse: collapse;">${t.status}</td>
                     <td style="border: 1px solid; border-collapse: collapse">
-                        <c:forEach items="${user}" var="u">
-                            <c:forEach items="${thesisP}" var="p">
-                                <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">                                       
-                                    ${u.firstName} ${u.lastName}
-                                </c:if>
+                            <c:forEach items="${user}" var="u">
+                                <c:forEach items="${thesisP}" var="p">
+                                    <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">                                       
+                                            ${u.firstName} ${u.lastName}
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
-                        </c:forEach>
                     </td>
                     <td style="border: 1px solid; border-collapse: collapse">
-                        <c:forEach items="${user}" var="u">
-                            <c:forEach items="${thesisI}" var="i">
-                                <c:if test="${u.id == i.userId.id && t.id == i.thesisId.id}">
-                                    ${u.firstName} ${u.lastName}
-                                </c:if>
+                            <c:forEach items="${user}" var="u">
+                                <c:forEach items="${thesisI}" var="i">
+                                    <c:if test="${u.id == i.userId.id && t.id == i.thesisId.id}">
+                                            ${u.firstName} ${u.lastName}
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
-                        </c:forEach>
                     </td>
                 </tr>
             </c:forEach>
@@ -75,4 +76,3 @@
 </section>
 <script src="<c:url value="/js/main.js"/>"></script>
 </se:authorize>
-

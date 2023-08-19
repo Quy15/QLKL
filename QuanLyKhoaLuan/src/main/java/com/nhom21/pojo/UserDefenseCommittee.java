@@ -126,5 +126,5 @@ public class UserDefenseCommittee implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.UserDefenseCommittee[ id=" + id + " ]";
     }
-    
+
 }

@@ -62,7 +62,7 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item" style="position: relative; right: 105px;">
-                            
+
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
                         <div class="dropdown" style="position: relative; right: 105px;">
