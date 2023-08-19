@@ -44,7 +44,7 @@ public class Criteria implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-     @JsonIgnore
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "criteriaId")
     private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
 
@@ -104,5 +104,5 @@ public class Criteria implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.Criteria[ id=" + id + " ]";
     }
-    
+
 }

@@ -44,7 +44,7 @@ public class DefenseCommittee implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-     @JsonIgnore
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommitteeId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
 
@@ -104,5 +104,5 @@ public class DefenseCommittee implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.DefenseCommittee[ id=" + id + " ]";
     }
-    
+
 }
