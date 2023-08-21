@@ -22,4 +22,6 @@ public interface UserService extends UserDetailsService{
     int countUser();
     public boolean saveUser(User u);
     public User findUserByUserName(String user);
+    User getUserByUn(String username);
+    boolean authUser(String username, String password);
 }
