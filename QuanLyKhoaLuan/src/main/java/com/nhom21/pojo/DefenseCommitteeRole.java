@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,6 +44,7 @@ public class DefenseCommitteeRole implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defenseCommitteeRoleId")
     private Set<UserDefenseCommittee> userDefenseCommitteeSet;
 
@@ -102,5 +104,5 @@ public class DefenseCommitteeRole implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.DefenseCommitteeRole[ id=" + id + " ]";
     }
-    
+
 }

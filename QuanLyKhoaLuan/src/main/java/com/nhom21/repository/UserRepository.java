@@ -15,8 +15,10 @@ import java.util.Map;
 public interface UserRepository {
     List<User> getUser(Map<String, String> params);
     List<User> getListUser();
+    boolean saveUser(User u);
     User getUserByUserName(String username);
     User getUserById(int id);
+    User findUserByUserName(String user);
     public boolean register(User u);
     int countUser();
     boolean deleteUser(int id);

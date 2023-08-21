@@ -63,7 +63,7 @@ public class UserrepositoryImpl implements UserRepository {
             if (kw != null && !kw.isEmpty()) {
                 predicates.add(b.like(root.get("firstName"), String.format("%%%s%%", kw)));
             }
-            
+
             String kw2 = params.get("kw2");
             if (kw2 != null && !kw2.isEmpty()) {
                 predicates.add(b.like(root.get("lastName"), String.format("%%%s%%", kw2)));
@@ -100,8 +100,8 @@ public class UserrepositoryImpl implements UserRepository {
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class UserrepositoryImpl implements UserRepository {
     public List<User> getListUser() {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("FROM User");
-        
+
         return q.getResultList();
     }
 
@@ -137,6 +137,27 @@ public class UserrepositoryImpl implements UserRepository {
     public User getUserById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(User.class, id);
+    }
+
+    @Override
+    public boolean saveUser(User u) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            if (u.getId() != null)
+                s.update(u);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public User findUserByUserName(String user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From User Where username=:u");
+        q.setParameter("u", user);
+        return (User)q.getSingleResult();
     }
 
 }

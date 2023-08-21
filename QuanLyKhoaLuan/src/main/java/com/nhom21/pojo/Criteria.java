@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,6 +44,7 @@ public class Criteria implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "criteriaId")
     private Set<CriteriaHasThesisScore> criteriaHasThesisScoreSet;
 
@@ -102,5 +104,5 @@ public class Criteria implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.Criteria[ id=" + id + " ]";
     }
-    
+
 }

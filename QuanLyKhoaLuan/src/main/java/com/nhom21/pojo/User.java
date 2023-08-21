@@ -42,9 +42,10 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
-    
+
     /**
      * @return the file
      */
@@ -58,7 +59,12 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
+    public static final String ADMIN = "Admin";
+    public static final String GVU = "Giáo vụ";
+    public static final String GV = "Giáo viên";
+    public static final String SV = "Sinh viên";
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,11 +105,6 @@ public class User implements Serializable {
     @JsonIgnore
     @ManyToOne(optional = false)
     private Major majorId;
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    @JsonIgnore
-    @ManyToOne(optional = false)
-    private Role roleId;
-    
     @Transient
     private MultipartFile file;
     
@@ -180,6 +181,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     @XmlTransient
     public Set<UserDefenseCommittee> getUserDefenseCommitteeSet() {
         return userDefenseCommitteeSet;
@@ -215,14 +224,6 @@ public class User implements Serializable {
         this.majorId = majorId;
     }
 
-    public Role getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -247,5 +248,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.nhom21.pojo.User[ id=" + id + " ]";
     }
-    
+
 }

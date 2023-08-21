@@ -8,8 +8,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url value="/defenseuser" var="d"/>
-<form:form method="post" enctype="multipart/form-data" action="d" modelAttribute="userdefensecommittee">
+<c:url value="/defenseuser" var="de"/>
+<form:form method="post" enctype="multipart/form-data" action="${de}" modelAttribute="userdefensecommittee">
     <h3 class="text-center">Thành viên khóa luận</h3>
     <input type="button" id="btnAdd" class="btn btn-primary" onclick="addUser()" value="+"/>
 
@@ -28,18 +28,22 @@
                 <td style="border: 1px solid; border-collapse: collapse;">
                     <form:select class="form-select" path="userId">
                         <c:forEach items="${user}" var="u">
-                            <c:forEach items="${role}" var="r">
-                                <c:if test="${r.id == u.roleId.id && r.id == 'Giáo viên'}">
-                                    <form:option value="${u.id}">
-                                        ${u.firstName} ${u.lastName}
-                                    </form:option>
-                                </c:if>
-                            </c:forEach>
+                            <c:if test="${u.userRole == 'ROLE_GV'}">
+                                <form:option value="${u.id}">
+                                    ${u.firstName} ${u.lastName}
+                                </form:option>
+                            </c:if>
                         </c:forEach>
                     </form:select>
                 </td>
                 <td style="border: 1px solid; border-collapse: collapse">
-
+                    <form:select class="form-select" path="defenseCommitteeRoleId">
+                        <c:forEach items="${drole}" var="dr">
+                            <form:option value="${dr.id}">
+                                ${dr.name}
+                            </form:option>
+                        </c:forEach>
+                    </form:select>
                 </td>
                 <td>
                     <input class="btn-danger" type="button" onclick="deleteRow(1)" value="X"/>
@@ -63,7 +67,7 @@
                 <td style="border: 1px solid; border-collapse: collapse;">1</td>
                 <td style="border: 1px solid; border-collapse: collapse;">
                     <form:select class="form-select" path="defenseCommitteeId">
-                        <c:forEach items="${defense}" var="d">
+                        <c:forEach items="${dc}" var="d">
                             <form:option value="${d.id}">
                                 ${d.name}
                             </form:option>
@@ -79,3 +83,6 @@
 
     <button class="btn btn-success" style="font-size: 12.5px">Xác nhận</button>
 </form:form>
+<script>
+    
+</script>

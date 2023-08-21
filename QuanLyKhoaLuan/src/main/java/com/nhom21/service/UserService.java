@@ -20,4 +20,6 @@ public interface UserService extends UserDetailsService{
     boolean deleteUser(int id);
     User getUserById(int id);
     int countUser();
+    public boolean saveUser(User u);
+    public User findUserByUserName(String user);
 }

@@ -6,8 +6,8 @@ package com.nhom21.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.nhom21.fomatter.MajorFormatter;
-import com.nhom21.fomatter.RoleFormatter;
+import com.nhom21.fomatter.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +68,19 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("UTF-8");
         return resolver;
+    }
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new DefenseRoleFormatter());
+        registry.addFormatter(new MajorFormatter());
+        registry.addFormatter(new ThesisInstructorFormatter());
+        registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new ThesisParticipantsFomatter());
+        registry.addFormatter(new ThesisFormatter());
+        registry.addFormatter(new ThesisParticipantsUserFormatter());
+        registry.addFormatter(new DefenseCommitteeFormatter());
+        registry.addFormatter(new UserDefenseFormatter());
     }
 
 //    @Bean

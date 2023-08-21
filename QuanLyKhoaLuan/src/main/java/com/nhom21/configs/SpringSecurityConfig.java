@@ -32,8 +32,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.nhom21.controllers", "com.nhom21.repository", "com.nhom21.service"})
 @PropertySource("classpath:config.properties")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-                                                                                                                                                                                                                                                                    @Autowired
+
+    @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private Environment env;
     
@@ -67,11 +69,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedPage("/login?accessDenied");
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/**/add")
-//                .access("hasRole('ROLE_ADMIN')");
-//        .antMatchers("/**/pay")
-//                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+        http.authorizeRequests().antMatchers("/login", "/logout").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/thesisManager")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/usermanager")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/addUser")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/thesisdefense")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/defenseuser")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/instructorThesis")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
+                .antMatchers("/thesisParticipant")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')");
+        http.authorizeRequests().antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')");
         http.csrf().disable();
     }
 

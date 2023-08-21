@@ -81,14 +81,10 @@
                                 </c:forEach>
                             </td>
                             <td style="border: 1px solid; border-collapse: collapse">
-                                <c:forEach items="${role}" var="r">
-                                    <c:if test="${r.id == u.roleId.id}">
-                                        ${r.name}
-                                    </c:if>
-                                </c:forEach>
+                                ${u.userRole}
                             </td>
                             <td style="border: 1px solid; border-collapse: collapse;">
-                                <c:url value="/usermanager/${u.id}" var="api"/>
+                                <c:url value="/addUser/${u.id}" var="api"/>
                                 <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
                                 <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteUser('${api}')">Xóa</button>
                             </td>
