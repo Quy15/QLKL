@@ -105,4 +105,14 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserName(String user) {
         return this.userRepo.findUserByUserName(user);
     }
+
+    @Override
+    public User getUserByUn(String username) {
+        return this.userRepo.getUserByUsername(username);
+    }
+    
+     @Override
+    public boolean authUser(String username, String password) {
+        return this.userRepo.authUser(username, password);
+    }
 }
