@@ -4,8 +4,15 @@
  */
 package com.nhom21.controllers;
 
+import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.pojo.User;
+import com.nhom21.service.ThesisInstructorService;
+import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
+import com.nhom21.service.UserService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -38,6 +45,12 @@ public class ThesisApi {
 
     @Autowired
     private ThesisService thesisSer;
+    @Autowired
+    private ThesisInstructorService iservice;
+    @Autowired
+    private ThesisParticipantsService pservice;
+    @Autowired
+    private UserService userSevice;
 
     @Autowired
     private Environment env;
@@ -74,5 +87,47 @@ public class ThesisApi {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         this.thesisSer.deleteThesis(id);
+    }
+    
+    @PostMapping("/api/savepaticipant")
+    public ResponseEntity<Map<String,String>> addParticipant(@RequestBody Map<String,String> req){
+        int id1 = Integer.parseInt(req.get("id1"));
+        int id2 = Integer.parseInt(req.get("id2"));
+        int thesisid = Integer.parseInt(req.get("thesisid"));
+        User u1 = userSevice.getUserById(id1);
+        User u2 = userSevice.getUserById(id2);
+        Thesis t = thesisSer.getThesisById(thesisid);
+        
+        ThesisParticipant p1 = new ThesisParticipant(null,t,u1);
+        ThesisParticipant p2 = new ThesisParticipant(null,t,u2);
+        Map res = new HashMap();
+        if(pservice.addOrUpdateThesisParticipants(p1) && pservice.addOrUpdateThesisParticipants(p2)){
+            res.put("status","true");
+            return new ResponseEntity<>(res,HttpStatus.OK);
+        }
+            
+        res.put("status","fail");
+        return new ResponseEntity<>(res,HttpStatus.OK);
+    }
+    
+    @PostMapping("/api/saveinstructor")
+    public ResponseEntity<Map<String,String>> addInstructor(@RequestBody Map<String,String> req){
+        int id1 = Integer.parseInt(req.get("id1"));
+        int id2 = Integer.parseInt(req.get("id2"));
+        int thesisid = Integer.parseInt(req.get("thesisid"));
+        User u1 = userSevice.getUserById(id1);
+        User u2 = userSevice.getUserById(id2);
+        Thesis t = thesisSer.getThesisById(thesisid);
+        
+        InstructorThesis i1 = new InstructorThesis(null,t,u1);
+        InstructorThesis i2 = new InstructorThesis(null,t,u2);
+        Map res = new HashMap();
+        if(iservice.addOrUpdateThesisInstructor(i1) && iservice.addOrUpdateThesisInstructor(i2)){
+            res.put("status","true");
+            return new ResponseEntity<>(res,HttpStatus.OK);
+        }
+            
+        res.put("status","fail");
+        return new ResponseEntity<>(res,HttpStatus.OK);
     }
 }

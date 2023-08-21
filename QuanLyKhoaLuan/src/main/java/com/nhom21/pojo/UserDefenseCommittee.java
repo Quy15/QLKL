@@ -56,6 +56,13 @@ public class UserDefenseCommittee implements Serializable {
 
     public UserDefenseCommittee() {
     }
+    
+    public UserDefenseCommittee(Integer id, DefenseCommittee dc, DefenseCommitteeRole dr, User u) {
+        this.id = id;
+        this.defenseCommitteeId = dc;
+        this.defenseCommitteeRoleId = dr;
+        this.userId = u;
+    }
 
     public UserDefenseCommittee(Integer id) {
         this.id = id;

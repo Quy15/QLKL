@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface DefenseCommitteeRoleService {
     List<DefenseCommitteeRole> getRole();
+    DefenseCommitteeRole getById(int id);
 }

@@ -57,5 +57,11 @@ public class DefenseCommitteeRepositoryImpl implements DefenseCommitteeRepositor
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
+
+    @Override
+    public DefenseCommittee getById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(DefenseCommittee.class, id);
+    }
     
 }

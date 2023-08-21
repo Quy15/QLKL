@@ -29,7 +29,6 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
     public List<ThesisParticipant> getParti() {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("From ThesisParticipant");
-        
         return q.getResultList();
     }
 

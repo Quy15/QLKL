@@ -22,10 +22,6 @@ public class UserDefenseCommitteeServiceImpl implements UserDefenseCommitteeServ
     
     @Override
     public boolean addUserCommit(UserDefenseCommittee ud) {
-        String idU = String.valueOf(ud.getUserId());
-        String idDR = String.valueOf(ud.getDefenseCommitteeRoleId());
-        long userId = Long.parseLong(idU);
-        long defenseCommitteeRoleId = Long.parseLong(idDR);
         return this.udc.addUserCommit(ud);
     }
 

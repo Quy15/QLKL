@@ -28,9 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
                     </li>
+                    <se:authorize access="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">
                         <a class="nav-link" href="${user}">Quản lý người dùng</a>
                     </li>
+                    </se:authorize>
                     <li class="nav-item">
                         <a class="nav-link" href="${defense}">Hội đồng khóa luận</a>
                     </li>

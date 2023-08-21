@@ -25,4 +25,9 @@ public class DefenseCommitteeRoleServiceImpl implements DefenseCommitteeRoleServ
         return this.drole.getRole();
     }
 
+    @Override
+    public DefenseCommitteeRole getById(int id) {
+        return this.drole.getById(id);
+    }
+
 }

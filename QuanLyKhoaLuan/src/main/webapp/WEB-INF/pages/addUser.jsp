@@ -66,40 +66,30 @@
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
                         <form:select class="form-select" id="major" name="major" path="majorId">
-                            <c:forEach items="${major}" var="m">
-                                <option value="${m.id}">
-                                    ${m.name}
-                                </option>
+                            <c:forEach items="${major}" var="m" >
+                                <c:choose>
+                                    <c:when test="${m.id == user1.majorId.id}">                        
+                                        <option value="${m.id}" selected="selected">
+                                            ${m.name}
+                                        </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${m.id}">
+                                            ${m.name}
+                                        </option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </form:select>
+
                         <label class="form-label" for="form3Example3c">Ngành học</label>
                     </div>
                 </div>
 
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                        <c:choose>
-                            <c:when test="${user1.userRole != null}">
-                                <form:select class="form-select" id="role" name="role" path="userRole">
-                                    <option value="${user1.userRole}" selected="selected">
-                                        ${user1.userRole}
-                                    </option>
-                                </form:select>
-                            </c:when>
-                            <c:otherwise>
-                                <form:select class="form-select" id="role" name="role" path="userRole">
-                                    <option value="${user1.userRole}">
-                                        ROLE_GVU
-                                    </option>
-                                    <option value="${user1.userRole}">
-                                        ROLE_GV
-                                    </option>
-                                    <option value="${user1.userRole}">
-                                        ROLE_SV
-                                    </option>
-                                </form:select>
-                            </c:otherwise>
-                        </c:choose>
+                        <form:input type="text" id="form3Example3" class="form-control form-control-lg"
+                                    placeholder="Nhập vai trò ROLE_GV, ROLE_GVU, ROLE_SV" name="role" path="userRole"/>
                         <label class="form-label" for="form3Example3c">Vai trò</label>
                     </div>
                 </div>

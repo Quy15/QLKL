@@ -15,4 +15,5 @@ public interface DefenseCommitteeRepository {
     List<DefenseCommittee> getList();
     boolean addDefense(DefenseCommittee d);
     int countDefense();
+    DefenseCommittee getById(int id);
 }

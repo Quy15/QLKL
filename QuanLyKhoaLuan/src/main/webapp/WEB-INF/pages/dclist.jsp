@@ -42,12 +42,22 @@
                 <tr>
                     <td style="border: 1px solid; border-collapse: collapse;">${dl.id}</td>
                     <td style="border: 1px solid; border-collapse: collapse;">${dl.name}</td>
-
                     <td style="border: 1px solid; border-collapse: collapse;">
                         <c:forEach items="${user}" var="u">
                             <c:forEach items="${drole}" var="dr">
                                 <c:forEach items="${udefense}" var="ud">
-                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id}">
+                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id && dr.name == 'Chủ tịch' && dl.id == ud.defenseCommitteeId.id}">
+                                        ${u.firstName} ${u.lastName}
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:forEach>
+                    </td>
+                    <td style="border: 1px solid; border-collapse: collapse;">
+                        <c:forEach items="${user}" var="u">
+                            <c:forEach items="${drole}" var="dr">
+                                <c:forEach items="${udefense}" var="ud">
+                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id && dr.name == 'Thư ký' && dl.id == ud.defenseCommitteeId.id}">
                                         ${u.firstName} ${u.lastName}
                                     </c:if>
                                 </c:forEach>
@@ -55,18 +65,27 @@
                         </c:forEach>
                     </td>
 
-
                     <td style="border: 1px solid; border-collapse: collapse;">
-
+                        <c:forEach items="${user}" var="u">
+                            <c:forEach items="${drole}" var="dr">
+                                <c:forEach items="${udefense}" var="ud">
+                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id && dr.name == 'Phản biện' && dl.id == ud.defenseCommitteeId.id}">
+                                        ${u.firstName} ${u.lastName}
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:forEach>
                     </td>
-
-
-                    <td style="border: 1px solid; border-collapse: collapse;">
-                        ${u.firstName} ${u.lastName}
-                    </td>
-
                     <td style="border: 1px solid; border-collapse: collapse">
-
+                        <c:forEach items="${user}" var="u">
+                            <c:forEach items="${drole}" var="dr">
+                                <c:forEach items="${udefense}" var="ud">
+                                    <c:if test="${u.id == ud.userId.id && dr.id == ud.defenseCommitteeRoleId.id && dr.name == 'Thành viên' && dl.id == ud.defenseCommitteeId.id}">
+                                        ${u.firstName} ${u.lastName}
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:forEach>
                     </td>
                 </tr>
             </c:forEach>

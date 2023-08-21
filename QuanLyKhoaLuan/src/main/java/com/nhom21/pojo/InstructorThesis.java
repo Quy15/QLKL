@@ -45,7 +45,13 @@ public class InstructorThesis implements Serializable {
 
     public InstructorThesis() {
     }
-
+    
+    public InstructorThesis(Integer id, Thesis s, User u) {
+        this.id = id;
+        this.thesisId = s;
+        this.userId = u;
+    }
+    
     public InstructorThesis(Integer id) {
         this.id = id;
     }

@@ -32,5 +32,11 @@ public class DefenseCommitteeRoleRepositoryImpl implements DefenseCommitteeRoleR
         
         return q.getResultList();
     }
+
+    @Override
+    public DefenseCommitteeRole getById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(DefenseCommitteeRole.class, id);
+    }
     
 }
