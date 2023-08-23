@@ -40,6 +40,7 @@ const Login = () => {
         "payload": data
       });
     } catch (ex) {
+        window.alert("Đăng nhập thất bại")
         console.error(ex)
       }
     }
