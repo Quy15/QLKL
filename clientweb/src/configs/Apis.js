@@ -6,6 +6,7 @@ const SERVER = "http://localhost:8080";
 export const endpoints = {
     "users" : `${SERVER_CONTEXT}api/users/`,
     "login" : `${SERVER_CONTEXT}api/login/`,
+    "change-password" : `${SERVER_CONTEXT}api/change-password/`,
     "current-user" : `${SERVER_CONTEXT}api/current-user/`,
 }
 

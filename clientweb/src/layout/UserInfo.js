@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   MDBCol,
   MDBContainer,
@@ -8,11 +8,19 @@ import {
   MDBCardBody,
   MDBCardImage,
 } from 'mdb-react-ui-kit';
-import { Button, Col, Form } from 'react-bootstrap';
+import {  Button, Col, Form } from 'react-bootstrap';
+import { MyUserContext } from '../App';
+import Apis, { endpoints } from '../configs/Apis';
+
 
 const UserInfo = () => {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  
   const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
-
+  const [user] = useContext(MyUserContext);
+  console.info(user)
   const handleToggleForm = () => {
     setShowChangePasswordForm(!showChangePasswordForm);
   };
@@ -21,9 +29,36 @@ const UserInfo = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Thực hiện logic xử lý khi nút "Submit" được nhấn
-    // Sau đó, ẩn form bằng cách đặt trạng thái showChangePasswordForm thành false
-    setShowChangePasswordForm(false);
+    if (!oldPassword || !newPassword || !confirmNewPassword) {
+      window.alert("Vui lòng điền đủ thông tin mật khẩu !!")
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      window.alert("Mật khẩu nhập lần hai không chính xác !!")
+      return;
+    }
+    
+    const process = async () => {
+        try {
+            let res = await Apis.post(endpoints['change-password'],{
+              "username": user.username,
+              "oldPassword": oldPassword,
+              "newPassword": newPassword
+          });
+          if (res.status === 200) {
+            // window.alert(res.data)
+            setShowChangePasswordForm(false);
+          }
+          window.alert(res.data)
+        } catch (error) {
+          if (error.response && error.response.status === 401) {
+            window.alert('Mật khẩu bạn nhập bị sai !!');
+          } else {
+            window.alert('Có lỗi xảy ra khi gọi API.');
+          }
+        }
+      }
+      process();
   };
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -40,7 +75,7 @@ const UserInfo = () => {
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                  src={user.avatar}
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
@@ -55,19 +90,19 @@ const UserInfo = () => {
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>First Name</MDBCardText>
+                    <MDBCardText>Họ</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Johnatan</MDBCardText>
+                    <MDBCardText className="text-muted">{user.firstName}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Last Name</MDBCardText>
+                    <MDBCardText>Tên</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted"> Smith</MDBCardText>
+                    <MDBCardText className="text-muted"> {user.lastName}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -76,45 +111,19 @@ const UserInfo = () => {
                     <MDBCardText>Email</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                    <MDBCardText className="text-muted">{user.email}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>User</MDBCardText>
+                    <MDBCardText>Tài khoản</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                    <MDBCardText className="text-muted">{user.username}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Password</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Nghành</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Vai trò</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
+               
               </MDBCardBody>
               <div>
                 {showChangePasswordForm && (
@@ -127,15 +136,15 @@ const UserInfo = () => {
                         <MDBCardText></MDBCardText>
                         <MDBCardText></MDBCardText>
                       </MDBCol>
-                      <MDBRow >
+                      <MDBRow>
                         <Col sm="12">
-                          <Form.Control type="password" placeholder="Mật khẩu cũ" />
+                          <Form.Control type="password" placeholder="Mật khẩu cũ" onChange={e => setOldPassword(e.target.value)} />
                         </Col>
                         <Col sm="12" style={{marginTop: 10}}>
-                          <Form.Control type="password" placeholder="Mật khẩu mới" />
+                          <Form.Control type="password" placeholder="Mật khẩu mới" onChange={e => setNewPassword(e.target.value)}/>
                         </Col>
                         <Col sm="12" style={{marginTop: 10}}>
-                          <Form.Control type="password" placeholder="Nhập lại mật khẩu mới" />
+                          <Form.Control type="password" placeholder="Nhập lại mật khẩu mới"  onChange={e => setConfirmNewPassword(e.target.value)}/>
                         </Col>
                       </MDBRow>
                     </MDBCardBody>

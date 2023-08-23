@@ -67,17 +67,17 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.formLogin()
-//                .usernameParameter("username")
-//                .passwordParameter("password");
-//
-//        http.formLogin().defaultSuccessUrl("/")
-//                .failureUrl("/login?error");
-//
-//        http.logout().logoutSuccessUrl("/login");
-//
-//        http.exceptionHandling()
-//                .accessDeniedPage("/login?accessDenied");
+        http.formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password");
+
+        http.formLogin().defaultSuccessUrl("/")
+                .failureUrl("/login?error");
+
+        http.logout().logoutSuccessUrl("/login");
+
+        http.exceptionHandling()
+                .accessDeniedPage("/login?accessDenied");
 
 //        http.authorizeRequests().antMatchers("/").permitAll()
 //            .antMatchers("/api/**")
@@ -88,6 +88,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests().antMatchers("/api/login/").permitAll();
         http.authorizeRequests().antMatchers("/api/users/").permitAll();
+        http.authorizeRequests().antMatchers("/api/change-password/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')")
