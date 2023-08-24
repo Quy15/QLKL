@@ -26,43 +26,54 @@ function deleteUser(path) {
     }
 }
 
+function save(){
+    var sv1 = document.getElementById("sv1").value;
+    var sv2 = document.getElementById("sv2").value;
+    var thesisID = document.getElementById("thesisid").value;
+    console.log(sv1 + sv2 + thesisID);
+    
+    fetch("/QuanLyKhoaLuan/api/savepaticipant",{
+        method:"post",
+        body:JSON.stringify({
+            "id1" : sv1+"",
+            "id2":sv2+"",
+            "thesisid" :thesisID+""
+        }),
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    }).then((res) => res.json()).then((data) =>{
+         if(data["status"] == "true"){
+                location.replace("/QuanLyKhoaLuan/instructorThesis")
+            }
+    });
+    
 
-//var index;
-//$(document).ready(function(){
-//    $("#btnAdd").click(function(){
-//        var x = document.getElementById("defenseuser").rows.length-1;
-//        window.index = x + 1;
-//        
-//        row = '<tr id = "' + index + '"/>';
-//        row += '<td style="border: 1px solid; border-collapse: collapse;" class="ordinal">' + index + '</td>';
-//        
-//        row += '<td style="border: 1px solid; border-collapse: collapse;">' +
-//                    '<form:select class="form-select" id="user" name="user" path="id">' +
-//                    '<c:forEach items="${user}" var="u">' +
-//                        '<c:forEach items="${role}" var="r">'+
-//                            '<c:if test="${r.id == u.roleId.id}">' +
-//                                '<option value="${u.id}">${u.firstName} ${u.lastName}</option>' +
-//                            '</c:if>'+
-//                        '</c:forEach>' +
-//                    '</c:forEach>' +
-//                    '</form:select>' +
-//                '</td>' +
-//                '<td>' +
-//                    '<input class="btn-danger" type="button" onclick="deleteRow(1)" value="X"/>' +
-//                '</td>' +
-//                '</tr>';
-//        
-//        row += '<td style="border: 1px solid; border-collapse: collapse;">' +
-//                    '<select class="form-select" id="user" name="user">' +
-//                        '<c:forEach items="${role}" var="r">'+  
-//                                '<option value="${r.id}">${r.name}</option>' +
-//                        '</c:forEach>' +
-//                    '</select>' +
-//                '</td>' +
-//                '<td>' +
-//                    '<input class="btn-danger" type="button" onclick="deleteRow(1)" value="X"/>' +
-//                '</td>' +
-//                '</tr>';
-//        $('.addUser').append(row);
-//    })
-//})
+}
+
+function saveI(){
+    var gv1 = document.getElementById("gv1").value;
+    var gv2 = document.getElementById("gv2").value;
+    var thesisID = document.getElementById("thesisid2").value;
+    console.log(gv1 + gv2 + thesisID);
+    
+    fetch("/QuanLyKhoaLuan/api/saveinstructor",{
+        method:"post",
+        body:JSON.stringify({
+            "id1" :gv1+"",
+            "id2":gv2+"",
+            "thesisid" :thesisID+""
+        }),
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    }).then((res) => res.json()).then((data) =>{
+         if(data["status"] == "true"){
+                location.replace("/QuanLyKhoaLuan/thesisManager")
+            }
+    });
+    
+
+}
+
+

@@ -4,16 +4,13 @@
  */
 package com.nhom21.repository;
 
-import com.nhom21.pojo.UserDefenseCommittee;
-import java.util.ArrayList;
+import com.nhom21.pojo.Criteria;
 import java.util.List;
 
 /**
  *
  * @author WIN10
  */
-public interface UserDefenseCommitteeRepository {
-    List<UserDefenseCommittee> getList();
-    boolean addUserCommit(UserDefenseCommittee ud);
-    boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
+public interface CriteriaRepository {
+    List<Criteria> getCri();
 }

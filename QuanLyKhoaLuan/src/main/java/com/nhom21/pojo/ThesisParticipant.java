@@ -43,7 +43,14 @@ public class ThesisParticipant implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
 
+    
     public ThesisParticipant() {
+    }
+    
+    public ThesisParticipant(Integer id,Thesis s ,User u) {
+        this.id = id;
+        this.thesisId = s;
+        this.userId = u;
     }
 
     public ThesisParticipant(Integer id) {

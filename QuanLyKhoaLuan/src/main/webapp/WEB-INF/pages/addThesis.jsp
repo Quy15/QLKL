@@ -27,7 +27,7 @@
                 <div class="d-flex flex-row align-items-center mb-4">
 
                     <div class="form-outline flex-fill mb-0">
-                        <form:input type="text" class="form-control" path="date" id="date" placeholder="Ngày thực hiện" name="date"/>
+                        <form:input type="date" class="form-control" path="date" id="date" placeholder="Ngày thực hiện" name="date"/>
                         <label class="form-label" for="form3Example1c">Ngày thực hiện</label>
                     </div>
                 </div>
@@ -51,24 +51,4 @@
         </div>
     </div>
 </div>
-<!--<script>
-    let form = document.getElementById("sample-form");
-    form.addEventListener('submit', handleSubmit);
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        let formData = new FormData(form);
-        let data = Object.fromEntries(formData);
-        let jsonData = JSON.stringify(data);
-
-        fetch("http://localhost:8080/QuanLyKhoaLuan/addThesis", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/json'
-            },
-            body: jsonData
-        }).then(res => res.json())
-                .then(result => console.log(result.data))
-                .catch(err => console.log(err));
-    }
-</script>           -->

@@ -4,7 +4,7 @@
  */
 package com.nhom21.repository;
 
-import com.nhom21.pojo.UserDefenseCommittee;
+import com.nhom21.pojo.ThesisScore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +12,8 @@ import java.util.List;
  *
  * @author WIN10
  */
-public interface UserDefenseCommitteeRepository {
-    List<UserDefenseCommittee> getList();
-    boolean addUserCommit(UserDefenseCommittee ud);
-    boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
+public interface ThesisScoreRepository {
+    List<ThesisScore> getThesisScore();
+    boolean addOrUpdateThesisScore(ThesisScore ts);
+    boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
 }

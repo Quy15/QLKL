@@ -4,8 +4,9 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.ThesisParticipant;
-import com.nhom21.repository.ThesisParticipantsRepository;
+import com.nhom21.pojo.ThesisScore;
+import com.nhom21.repository.ThesisScoreRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
@@ -21,25 +22,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
+public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
-    @Override
-    public List<ThesisParticipant> getParti() {
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From ThesisParticipant");
-        return q.getResultList();
-    }
 
     @Override
-    public boolean addOrUpdateThesisParticipants(ThesisParticipant tp) {
+    public boolean addOrUpdateThesisScore(ThesisScore ts) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            if (tp.getId() == null) {
-                s.save(tp);
+            if (ts.getId() == null) {
+                s.save(ts);
             } else {
-                s.update(tp);
+                s.update(ts);
             }
 
             return true;
@@ -50,9 +45,28 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
     }
 
     @Override
-    public ThesisParticipant getIDP(int id) {
+    public boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts) {
         Session s = this.factory.getObject().getCurrentSession();
-        return s.get(ThesisParticipant.class, id);
+        try {
+            for (int i = 0; i < ts.size(); i++) {
+                if (ts.get(i).getId() == null) {
+                    s.save(ts.get(i));
+                } else {
+                    s.update(ts.get(i));
+                }
+            }
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
-    
+
+    @Override
+    public List<ThesisScore> getThesisScore() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisScore");
+        return q.getResultList();
+    }
+
 }

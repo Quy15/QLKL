@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -40,6 +41,7 @@ public class ThesisParticipantController {
     @PostMapping("/thesisParticipant")
     public String addThesisP(@ModelAttribute(value = "thesisParti")@Valid ThesisParticipant tp, BindingResult rs) throws ParseException {
         if (!rs.hasErrors()) {
+          
             if (this.thesisP.addOrUpdateThesisParticipants(tp) == true) {
                 return "redirect:/instructorThesis";
             }

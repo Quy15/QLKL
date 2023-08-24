@@ -5,6 +5,7 @@
 package com.nhom21.service;
 
 import com.nhom21.pojo.UserDefenseCommittee;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ import java.util.List;
 public interface UserDefenseCommitteeService {
     boolean addUserCommit(UserDefenseCommittee ud);
     List<UserDefenseCommittee> getList();
+    public boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
 }

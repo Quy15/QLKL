@@ -6,6 +6,7 @@ package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.repository.UserDefenseCommitteeRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
@@ -21,10 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeRepository{
-     @Autowired
+public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeRepository {
+
+    @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public boolean addUserCommit(UserDefenseCommittee ud) {
         Session s = this.factory.getObject().getCurrentSession();
@@ -48,5 +50,23 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
         Query q = s.createQuery("From UserDefenseCommittee");
         return q.getResultList();
     }
-    
+
+    @Override
+    public boolean addUserCommit(ArrayList<UserDefenseCommittee> ud) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            for (int i = 0; i < ud.size(); i++) {
+                if (ud.get(i).getId() == null) {
+                    s.save(ud.get(i));
+                } else {
+                    s.update(ud.get(i));
+                }
+            }
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }

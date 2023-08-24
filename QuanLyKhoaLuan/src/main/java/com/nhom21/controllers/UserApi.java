@@ -4,6 +4,17 @@
  */
 package com.nhom21.controllers;
 
+import com.nhom21.pojo.Thesis;
+import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.pojo.User;
+import com.nhom21.service.ThesisParticipantsService;
+import com.nhom21.service.ThesisService;
+import com.nhom21.service.UserService;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.nhom21.components.JwtService;
 import com.nhom21.pojo.ChangePassword;
 import com.nhom21.pojo.User;
@@ -57,12 +68,13 @@ public class UserApi {
         return new ResponseEntity<>("SUCCESSFUL", HttpStatus.OK);
     }
     
-    @DeleteMapping("/usermanager/{id}")
+    
+    @DeleteMapping("/addUser/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete (@PathVariable("id") int id){
         this.user.deleteUser(id);
     }
-    
+
     @GetMapping(path = "/api/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public ResponseEntity<User> details(Principal user) {
@@ -96,4 +108,5 @@ public class UserApi {
 
         return new ResponseEntity<>("Đổi mật khẩu thành công", HttpStatus.OK);
     }
+
 }

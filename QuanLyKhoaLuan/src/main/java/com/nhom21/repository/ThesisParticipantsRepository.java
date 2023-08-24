@@ -6,11 +6,13 @@ package com.nhom21.repository;
 
 import com.nhom21.pojo.ThesisParticipant;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author WIN10
  */
+
 public interface ThesisParticipantsRepository {
     List<ThesisParticipant> getParti();
     boolean addOrUpdateThesisParticipants(ThesisParticipant tp);

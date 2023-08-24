@@ -34,5 +34,10 @@ public class DefenseCommitteeServiceImpl implements DefenseCommitteeService{
     public int countDefense() {
         return this.defense.countDefense();
     }
+
+    @Override
+    public DefenseCommittee getById(int id) {
+        return this.defense.getById(id);
+    }
     
 }

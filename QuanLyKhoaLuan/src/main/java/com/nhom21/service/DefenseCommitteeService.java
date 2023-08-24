@@ -15,4 +15,5 @@ public interface DefenseCommitteeService {
     boolean addDefense(DefenseCommittee d);
     List<DefenseCommittee> getList();
     int countDefense();
+    public DefenseCommittee getById(int id);
 }
