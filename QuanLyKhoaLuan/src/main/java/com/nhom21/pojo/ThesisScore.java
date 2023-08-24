@@ -62,6 +62,14 @@ public class ThesisScore implements Serializable {
 
     public ThesisScore() {
     }
+    
+    public ThesisScore(Integer id, String name, String score, Thesis t, UserDefenseCommittee u) {
+        this.id = id;
+        this.name = name;
+        this.score = score;
+        this.thesisId = t;
+        this.userDefenseCommitteeId = u;
+    }
 
     public ThesisScore(Integer id) {
         this.id = id;

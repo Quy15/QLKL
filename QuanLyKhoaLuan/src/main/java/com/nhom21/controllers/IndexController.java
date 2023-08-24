@@ -5,12 +5,14 @@
 package com.nhom21.controllers;
 
 import com.nhom21.pojo.DefenseCommittee;
+import com.nhom21.service.CriteriaService;
 import com.nhom21.service.DefenseCommitteeRoleService;
 import com.nhom21.service.DefenseCommitteeService;
 import com.nhom21.service.MajorService;
 
 import com.nhom21.service.ThesisInstructorService;
 import com.nhom21.service.ThesisParticipantsService;
+import com.nhom21.service.ThesisScoreService;
 import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserDefenseCommitteeService;
 import com.nhom21.service.UserService;
@@ -69,6 +71,12 @@ public class IndexController {
     
     @Autowired
     private UserDefenseCommitteeService udc;
+    
+    @Autowired
+    private ThesisScoreService tscore;
+    
+    @Autowired
+    private CriteriaService cser;
 
     @RequestMapping("/")
     @Transactional
@@ -90,6 +98,8 @@ public class IndexController {
         model.addAttribute("drole", this.drole.getRole());
         model.addAttribute("dc", this.defense.getList());
         model.addAttribute("udc", this.udc.getList());
+        model.addAttribute("thesisscore", this.tscore.getThesisScore());
+        model.addAttribute("criteria", this.cser.getCri());
     }
 
 }

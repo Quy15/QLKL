@@ -4,8 +4,8 @@
  */
 package com.nhom21.repository.impl;
 
-import com.nhom21.pojo.UserDefenseCommittee;
-import com.nhom21.repository.UserDefenseCommitteeRepository;
+import com.nhom21.pojo.ThesisScore;
+import com.nhom21.repository.ThesisScoreRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -22,19 +22,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeRepository {
+public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
 
     @Override
-    public boolean addUserCommit(UserDefenseCommittee ud) {
+    public boolean addOrUpdateThesisScore(ThesisScore ts) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            if (ud.getId() == null) {
-                s.save(ud);
+            if (ts.getId() == null) {
+                s.save(ts);
             } else {
-                s.update(ud);
+                s.update(ts);
             }
 
             return true;
@@ -45,21 +45,14 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
     }
 
     @Override
-    public List<UserDefenseCommittee> getList() {
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From UserDefenseCommittee");
-        return q.getResultList();
-    }
-
-    @Override
-    public boolean addUserCommit(ArrayList<UserDefenseCommittee> ud) {
+    public boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            for (int i = 0; i < ud.size(); i++) {
-                if (ud.get(i).getId() == null) {
-                    s.save(ud.get(i));
+            for (int i = 0; i < ts.size(); i++) {
+                if (ts.get(i).getId() == null) {
+                    s.save(ts.get(i));
                 } else {
-                    s.update(ud.get(i));
+                    s.update(ts.get(i));
                 }
             }
             return true;
@@ -67,6 +60,13 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<ThesisScore> getThesisScore() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisScore");
+        return q.getResultList();
     }
 
 }

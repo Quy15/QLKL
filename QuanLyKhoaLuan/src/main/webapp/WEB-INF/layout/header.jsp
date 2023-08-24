@@ -13,6 +13,7 @@
 <c:url value="/dclist" var="defense"/>
 <c:url value="/infouser" var="info"/>
 <c:url value="/changepassword" var="change"/>
+<c:url value="/score" var="s"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">ThesisManager</a>
@@ -48,7 +49,7 @@
                 </se:authorize>
                 <se:authorize access="hasRole('ROLE_GV')">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Chấm điểm</a>
+                        <a class="nav-link" href="${s}">Chấm điểm</a>
                     </li>
                 </se:authorize>
             </ul>
