@@ -7,24 +7,35 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Container } from "react-bootstrap";
 import Login from "./layout/Login";
 import UserInfo from "./layout/UserInfo";
+import DefenseCommittee from "./layout/DefenseCommittee";
+import Main from "./layout/Main";
+import { createContext, useReducer } from "react";
+import MyUserReducers from "./reducers/MyUserReducers";
+import cookie from "react-cookies";
 
+export const MyUserContext = createContext();
 const App = () =>{
+  const [user, dispatch] = useReducer(MyUserReducers, cookie.load("user") || null);
   const footerStyle = {
     marginBottom: 20,
-    position: 'relative',display: 'flex', flexDirection: 'column', minHeight: '65vh'
+    display: 'flex', flexDirection: 'column', minHeight: '65vh'
   };
   return(
-      <BrowserRouter>
-        <Header/>
-         <Container style={footerStyle}>
-          <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/Login" element={<Login/>}/>
-              <Route path="/UserInfo" element={<UserInfo/>}/>
-            </Routes>
-          </Container>
-        <Footer/>
-      </BrowserRouter>
+    <MyUserContext.Provider value={[user, dispatch]}>
+        <BrowserRouter>
+          <Header/>
+          <Container style={footerStyle}>
+            <Routes>
+                <Route path="/" element={<Main/>}/>
+                <Route path="/Login" element={<Login/>}/>
+                <Route path="/UserInfo" element={<UserInfo/>}/>
+                <Route path="/DefenseCommittee" element={<DefenseCommittee/>}/>
+                <Route path="/Home" element={<Home/>}/>
+              </Routes>
+            </Container>
+          <Footer style={{flexShrink: 0}}/>
+        </BrowserRouter>
+      </MyUserContext.Provider>
 
   )
 }

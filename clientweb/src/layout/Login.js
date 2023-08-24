@@ -1,38 +1,78 @@
 import '../../src/App.css';
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import {
   MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
-  MDBInput,
   MDBIcon,
   MDBRow,
   MDBCol,
 }
 from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Apis, { authApi, endpoints } from "../configs/Apis";
+import cookie from "react-cookies";
+import { MyUserContext } from '../App';
+import { Navigate } from 'react-router';
 
 const Login = () => {
-  return (
+  const [user, dispatch] = useContext(MyUserContext);
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const login = (evt) => {
+    evt.preventDefault();
+
+    const process = async () => {
+    try {
+        let res = await Apis.post(endpoints['login'],{
+        "username": username,
+        "password": password
+      });
+      cookie.save("token", res.data);
+
+      let {data} = await authApi().get(endpoints['current-user']);
+      cookie.save("user", data);
+
+      dispatch({
+        "type": "login",
+        "payload": data
+      });
+    } catch (ex) {
+        window.alert("Đăng nhập thất bại")
+        console.error(ex)
+      }
+    }
+    process();
+  }
+  if (user !== null)
+    return <Navigate/>
+  return <>
     <MDBContainer fluid className='my-5'>
 
       <MDBRow className='g-0 align-items-center'>
         <MDBCol col='6'>
 
           <MDBCard className='my-5 cascading-right' style={{background: 'hsla(0, 0%, 100%, 0.55)',  backdropFilter: 'blur(30px)'}}>
-            <MDBCardBody className='p-5 shadow-5 text-center'>
+            <MDBCardBody className='p-5 shadow-5'>
 
-              <h2 className="fw-bold mb-5">Đăng nhập</h2>
-            
-              <div>
-                <MDBInput wrapperClass="mb-4" id="form3" type="text" placeholder="Tài khoản"/>
-                <MDBInput wrapperClass="mb-4" id="form4" type="password" placeholder="Mật khẩu"/>
-               </div>
-
-              <Button as={Link} to="#" className='w-100 mb-4' size='md' >Đăng nhập</Button>
-
+              <h2 className="fw-bold mb-5  text-center">Đăng nhập</h2>
+              <Form onSubmit={login}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Tài khoản</Form.Label>
+                  <Form.Control wrapperClass="mb-4" id="form3" type="text"
+                  value={username} onChange={e => setUsername(e.target.value)}/>
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Mật khẩu</Form.Label>
+                  <Form.Control wrapperClass="mb-4" id="form4" type="password"
+                  value={password} onChange={e => setPassword(e.target.value)}/>
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                  <Button type="submit" className='w-100 mb-4' size='md'>Đăng nhập</Button>
+                </Form.Group>
+              </Form>
               <div className="text-center">
 
                 <p>or sign up with:</p>
@@ -54,7 +94,7 @@ const Login = () => {
                 </MDBBtn>
 
               </div>
-
+            
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -67,7 +107,7 @@ const Login = () => {
       </MDBRow>
 
     </MDBContainer>
-  );
+    </>;
 }
 
 export default Login;

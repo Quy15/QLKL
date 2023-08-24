@@ -105,6 +105,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<ThesisParticipant> thesisParticipantSet;
     @JoinColumn(name = "major_id", referencedColumnName = "id")
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Major majorId;
     @Transient
