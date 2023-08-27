@@ -106,7 +106,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
-
+    
     @Override
     public Validator getValidator() {
         return validator();

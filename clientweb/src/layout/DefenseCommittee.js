@@ -20,7 +20,7 @@ const DefenseCommittee = () => {
         setModalOpen(false);
     };
     return <>
-        <h1>List hội đồng bảo vệ luận án</h1>
+        <h1>Chấm điểm</h1>
         <MDBContainer className="py-4">
         <Button onClick={openModal} stylevariant="primary">Thêm mới</Button>
         <hr></hr>

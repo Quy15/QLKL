@@ -6,6 +6,7 @@ package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.repository.UserDefenseCommitteeRepository;
+import com.nhom21.service.EmailService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -26,6 +27,7 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
 
     @Autowired
     private LocalSessionFactoryBean factory;
+
 
     @Override
     public boolean addUserCommit(UserDefenseCommittee ud) {
@@ -58,6 +60,7 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
             for (int i = 0; i < ud.size(); i++) {
                 if (ud.get(i).getId() == null) {
                     s.save(ud.get(i));
+                    
                 } else {
                     s.update(ud.get(i));
                 }
