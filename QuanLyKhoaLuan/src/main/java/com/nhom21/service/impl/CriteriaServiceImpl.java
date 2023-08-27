@@ -24,5 +24,10 @@ public class CriteriaServiceImpl implements CriteriaService{
     public List<Criteria> getCri() {
         return this.crepo.getCri();
     }
+
+    @Override
+    public Criteria getById(int id) {
+        return this.crepo.getById(id);
+    }
     
 }

@@ -5,7 +5,6 @@
 package com.nhom21.controllers;
 
 import com.nhom21.pojo.User;
-import com.nhom21.service.AuthService;
 import com.nhom21.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,6 +6,7 @@ package com.nhom21.controllers;
 
 import com.lowagie.text.DocumentException;
 import com.nhom21.pojo.DefenseCommittee;
+import com.nhom21.service.CriteriaHasThesisScoreService;
 import com.nhom21.service.CriteriaService;
 import com.nhom21.service.DefenseCommitteeRoleService;
 import com.nhom21.service.DefenseCommitteeService;
@@ -86,6 +87,9 @@ public class IndexController {
     private CriteriaService cser;
     
     @Autowired
+    private CriteriaHasThesisScoreService csser;
+    
+    @Autowired
     private PDFService pdfService;
     @RequestMapping("/")
     @Transactional
@@ -109,6 +113,7 @@ public class IndexController {
         model.addAttribute("udc", this.udc.getList());
         model.addAttribute("thesisscore", this.tscore.getThesisScore());
         model.addAttribute("criteria", this.cser.getCri());
+        model.addAttribute("criscore", this.csser.getCriScore());
     }
 
     @GetMapping("/admin/pdf")

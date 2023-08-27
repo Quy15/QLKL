@@ -45,7 +45,13 @@ public class CriteriaHasThesisScore implements Serializable {
 
     public CriteriaHasThesisScore() {
     }
-
+    
+    public CriteriaHasThesisScore(Integer id, Criteria cri, ThesisScore ts) {
+        this.id = id;
+        this.criteriaId = cri;
+        this.thesisScoreId = ts;
+    }
+    
     public CriteriaHasThesisScore(Integer id) {
         this.id = id;
     }

@@ -112,8 +112,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public JavaMailSenderImpl configureJavaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setUsername("nguyenphuvang3007@gmail.com");
-        javaMailSender.setPassword("zcgikrkjwjbvicww");
+        javaMailSender.setUsername("wildrifttest1504@gmail.com");
+        javaMailSender.setPassword("150420Quy");
         javaMailSender.setPort(587);
         javaMailSender.setDefaultEncoding("UTF-8");
         Properties mailProp = new Properties();

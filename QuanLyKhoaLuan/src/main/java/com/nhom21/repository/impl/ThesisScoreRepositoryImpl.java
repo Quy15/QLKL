@@ -69,4 +69,10 @@ public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
         return q.getResultList();
     }
 
+    @Override
+    public ThesisScore findThesisScoreById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(ThesisScore.class, id);
+    }
+
 }

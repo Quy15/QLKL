@@ -35,5 +35,10 @@ public class ThesisScoreServiceImpl implements ThesisScoreService{
     public List<ThesisScore> getThesisScore() {
         return this.tsrepo.getThesisScore();
     }
+
+    @Override
+    public ThesisScore findThesisScoreById(int id) {
+        return this.tsrepo.findThesisScoreById(id);
+    }
     
 }
