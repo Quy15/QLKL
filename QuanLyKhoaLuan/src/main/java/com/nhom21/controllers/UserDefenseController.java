@@ -12,6 +12,7 @@ import com.nhom21.pojo.User;
 import com.nhom21.pojo.UserDefenseCommittee;
 import com.nhom21.service.DefenseCommitteeRoleService;
 import com.nhom21.service.DefenseCommitteeService;
+import com.nhom21.service.EmailService;
 import com.nhom21.service.ThesisScoreService;
 import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserDefenseCommitteeService;
@@ -43,6 +44,8 @@ public class UserDefenseController {
     private ThesisScoreService tsser;
     @Autowired
     private ThesisService tser;
+    @Autowired
+    private EmailService emailService;
     
     @GetMapping("/defenseuser")
     public String addUD(Model model){
@@ -112,6 +115,7 @@ public class UserDefenseController {
         ArrayList<UserDefenseCommittee> ud = new ArrayList<>();
         for(int i = 0; i < userId.length;i ++){
             ud.add(new UserDefenseCommittee(null, defensec, derole.get(i), u.get(i)));
+            emailService.sendMail(u.get(i).getLastName(), u.get(i).getEmail(), defensec.getName());
         }
         
         ArrayList<ThesisScore> thesisscore = new ArrayList<>();

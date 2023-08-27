@@ -7,6 +7,7 @@ package com.nhom21.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -104,5 +106,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
+    }
+    
+     @Bean
+    public JavaMailSenderImpl configureJavaMailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setUsername("nguyenphuvang3007@gmail.com");
+        javaMailSender.setPassword("zcgikrkjwjbvicww");
+        javaMailSender.setPort(587);
+        javaMailSender.setDefaultEncoding("UTF-8");
+        Properties mailProp = new Properties();
+        mailProp.put("mail.smtp.starttls.enable", true);
+        mailProp.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        javaMailSender.setJavaMailProperties(mailProp);
+        return javaMailSender;
     }
 }

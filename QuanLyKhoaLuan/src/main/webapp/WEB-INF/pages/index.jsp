@@ -32,7 +32,7 @@
     </c:if>
     
     
-    
+    <a href="/QuanLyKhoaLuan/admin/pdf" class="btn btn-info mb-3">In PDF</a>
     <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
             <tr>

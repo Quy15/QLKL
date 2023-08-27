@@ -4,11 +4,13 @@
  */
 package com.nhom21.controllers;
 
+import com.lowagie.text.DocumentException;
 import com.nhom21.pojo.DefenseCommittee;
 import com.nhom21.service.CriteriaService;
 import com.nhom21.service.DefenseCommitteeRoleService;
 import com.nhom21.service.DefenseCommitteeService;
 import com.nhom21.service.MajorService;
+import com.nhom21.service.PDFService;
 
 import com.nhom21.service.ThesisInstructorService;
 import com.nhom21.service.ThesisParticipantsService;
@@ -16,8 +18,13 @@ import com.nhom21.service.ThesisScoreService;
 import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserDefenseCommitteeService;
 import com.nhom21.service.UserService;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -59,25 +66,27 @@ public class IndexController {
 
     @Autowired
     private ThesisInstructorService thesisI;
-    
+
     @Autowired
     private MajorService major;
-    
+
     @Autowired
     private DefenseCommitteeRoleService drole;
-    
+
     @Autowired
     private DefenseCommitteeService defense;
-    
+
     @Autowired
     private UserDefenseCommitteeService udc;
-    
+
     @Autowired
     private ThesisScoreService tscore;
-    
+
     @Autowired
     private CriteriaService cser;
-
+    
+    @Autowired
+    private PDFService pdfService;
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String, String> params) {
@@ -93,7 +102,7 @@ public class IndexController {
         model.addAttribute("thesis", this.thesis.getThesis(params));
         model.addAttribute("thesisP", this.thesisP.getParti());
         model.addAttribute("user", this.user.getListUser());
-        model.addAttribute("thesisI", this.thesisI.getInstructor());   
+        model.addAttribute("thesisI", this.thesisI.getInstructor());
         model.addAttribute("major", this.major.getMajor());
         model.addAttribute("drole", this.drole.getRole());
         model.addAttribute("dc", this.defense.getList());
@@ -102,4 +111,16 @@ public class IndexController {
         model.addAttribute("criteria", this.cser.getCri());
     }
 
+    @GetMapping("/admin/pdf")
+    public void generatePDF(HttpServletResponse response) throws IOException, DocumentException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename*=UTF-8''" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        response.addHeader("Content-Type", "application/pdf; charset=UTF-8");
+        pdfService.export(response);
+    }
 }
