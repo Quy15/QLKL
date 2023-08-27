@@ -4,7 +4,7 @@
  */
 package com.nhom21.service;
 
-import com.nhom21.pojo.ThesisScore;
+import com.nhom21.pojo.CriteriaHasThesisScore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +12,7 @@ import java.util.List;
  *
  * @author WIN10
  */
-public interface ThesisScoreService {
-    public boolean addOrUpdateThesisScore(ThesisScore ts);
-    boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
-    public List<ThesisScore> getThesisScore();
-    public ThesisScore findThesisScoreById(int id);
+public interface CriteriaHasThesisScoreService {
+    public boolean saveCriScore(ArrayList<CriteriaHasThesisScore> cs);
+    public List<CriteriaHasThesisScore> getCriScore();
 }

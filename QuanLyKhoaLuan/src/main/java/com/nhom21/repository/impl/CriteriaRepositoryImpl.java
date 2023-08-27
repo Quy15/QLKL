@@ -31,5 +31,11 @@ public class CriteriaRepositoryImpl implements CriteriaRepository{
         Query q = s.createQuery("From Criteria");
         return q.getResultList();
     }
+
+    @Override
+    public Criteria getById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(Criteria.class, id);
+    }
     
 }

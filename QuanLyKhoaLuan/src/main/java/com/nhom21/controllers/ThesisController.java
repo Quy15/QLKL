@@ -86,7 +86,7 @@ public class ThesisController {
 
     @GetMapping("/addThesis/{id}")
     public String updateThesis(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("thesiss ", this.thesis.getThesisById(id));
+        model.addAttribute("thesiss", this.thesis.getThesisById(id));
         
         return "addThesis";
     }
