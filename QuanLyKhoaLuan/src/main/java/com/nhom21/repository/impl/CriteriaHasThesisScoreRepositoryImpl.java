@@ -20,8 +20,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
- * @author WIN10
- */
+
 @Repository
 @Transactional
 public class CriteriaHasThesisScoreRepositoryImpl implements CriteriaHasThesisScoreRepository {

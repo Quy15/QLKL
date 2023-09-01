@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
- * @author Admin
- */
 public interface CriteriaHasThesisScoreRepository {
     List<CriteriaHasThesisScore> getListCriteriaHasThesisScore();
     List<CriteriaHasThesisScore> getListCriteriaHasThesisScoreByThesisScoreId(int ThesisScoreId);
