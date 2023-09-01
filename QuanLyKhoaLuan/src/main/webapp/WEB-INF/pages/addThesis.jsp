@@ -35,11 +35,11 @@
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
                         <form:select class="form-select" path="status" id="status" placeholder="Trạng thái" name="status">
-                            <option value="Đang thực hiện">Sắp thực hiện</option>
+                            <option value="Sắp thực hiện">Sắp thực hiện</option>
                             <option value="Đang thực hiện">Đang thực hiện</option>
                             <option value="Đã thực hiện">Đã thực hiện</option>
                             </form:select>
-                        <%--<form:errors path="status" element="div" cssClass="text-danger"/>--%>
+                        <form:errors path="status" element="div" cssClass="text-danger"/>
                         <label class="form-label" for="form3Example3c">Trạng thái</label>
                     </div>
                 </div>

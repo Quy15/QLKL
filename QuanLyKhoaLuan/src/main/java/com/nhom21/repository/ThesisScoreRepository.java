@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ThesisScoreRepository {
     List<ThesisScore> getThesisScore();
+    List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId);
     boolean addOrUpdateThesisScore(ThesisScore ts);
     boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
 }

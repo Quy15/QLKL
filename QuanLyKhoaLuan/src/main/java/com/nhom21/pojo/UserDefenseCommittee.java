@@ -43,12 +43,15 @@ public class UserDefenseCommittee implements Serializable {
     private Integer id;
     @JoinColumn(name = "defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+//    @JsonIgnore
     private DefenseCommittee defenseCommitteeId;
     @JoinColumn(name = "defense_committee_role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private DefenseCommitteeRole defenseCommitteeRoleId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User userId;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userDefenseCommitteeId")

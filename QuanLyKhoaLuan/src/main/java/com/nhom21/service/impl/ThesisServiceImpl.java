@@ -52,5 +52,5 @@ public class ThesisServiceImpl implements ThesisService {
     public boolean deleteThesis(int id) {
         return this.thesisRepository.deleteThesis(id);
     }
-
+   
 }

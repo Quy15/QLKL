@@ -16,4 +16,5 @@ public interface ThesisScoreService {
     public boolean addOrUpdateThesisScore(ThesisScore ts);
     boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
     public List<ThesisScore> getThesisScore();
+    public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId);
 }

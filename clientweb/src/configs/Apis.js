@@ -8,6 +8,9 @@ export const endpoints = {
     "login" : `${SERVER_CONTEXT}api/login/`,
     "change-password" : `${SERVER_CONTEXT}api/change-password/`,
     "current-user" : `${SERVER_CONTEXT}api/current-user/`,
+    "userDefense" : `${SERVER_CONTEXT}api/userDefense/`,
+    "thesiscores" : `${SERVER_CONTEXT}api/thesiscores/`,
+    "criteria-thesis-score" : `${SERVER_CONTEXT}api/criteria-thesis-score/`,
 }
 
 export const authApi = () => {
