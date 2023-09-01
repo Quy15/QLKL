@@ -4,10 +4,9 @@ import Footer from "./layout/Footer";
 import Home from "./component/Home";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Container } from "react-bootstrap";
 import Login from "./layout/Login";
 import UserInfo from "./layout/UserInfo";
-import DefenseCommittee from "./layout/DefenseCommittee";
+import ThesisScore from "./layout/ThesisScore";
 import Main from "./layout/Main";
 import { createContext, useReducer } from "react";
 import MyUserReducers from "./reducers/MyUserReducers";
@@ -24,15 +23,15 @@ const App = () =>{
     <MyUserContext.Provider value={[user, dispatch]}>
         <BrowserRouter>
           <Header/>
-          <Container style={footerStyle}>
+          <div style={footerStyle}>
             <Routes>
                 <Route path="/" element={<Main/>}/>
                 <Route path="/Login" element={<Login/>}/>
                 <Route path="/UserInfo" element={<UserInfo/>}/>
-                <Route path="/DefenseCommittee" element={<DefenseCommittee/>}/>
+                <Route path="/ThesisScore" element={<ThesisScore/>}/>
                 <Route path="/Home" element={<Home/>}/>
               </Routes>
-            </Container>
+              </div>
           <Footer style={{flexShrink: 0}}/>
         </BrowserRouter>
       </MyUserContext.Provider>

@@ -70,9 +70,16 @@ public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
     }
 
     @Override
+    public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisScore Where userDefenseCommitteeId.id=:UserDefenseId AND thesisId.status !='Đã thực hiện'");
+         q.setParameter("UserDefenseId", UserDefenseId);
+        return q.getResultList();
+
     public ThesisScore findThesisScoreById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(ThesisScore.class, id);
+
     }
 
 }

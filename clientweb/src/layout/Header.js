@@ -9,11 +9,11 @@ const Header = () => {
       "type": "logout"
     })
   }
-  const headerStyle = {
-    marginBottom: 20,
-  };
+  // const headerStyle = {
+  //   marginBottom: 20,
+  // };
     return <>
-        <Navbar expand="lg" className="bg-body-tertiary" style={headerStyle}>
+        <Navbar expand="lg" className="bg-body-tertiary">
           <Container>
             <Navbar.Brand as={Link} to="/">Nhóm 21</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,9 +22,9 @@ const Header = () => {
                 {user ?(
                 <>
                     <Nav.Link as={Link} to="/Home">Trang chủ</Nav.Link>
-                    <Nav.Link href="#link">Thành lập hội đồng</Nav.Link>
+                    <Nav.Link as={Link} to="/ThesisScore">Chấm điểm</Nav.Link>
                     <NavDropdown title="Thiết lập" id="basic-nav-dropdown">
-                      <NavDropdown.Item as={Link} to="/DefenseCommittee">Hội đồng bảo vệ luận án</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/ThesisScore">Chấm điểm</NavDropdown.Item>
                       <NavDropdown.Item as={Link} to="#">Vai trò thành viên hội đồng</NavDropdown.Item>
                       <NavDropdown.Item as={Link} to="#">Khóa luận</NavDropdown.Item>
                       <NavDropdown.Divider />

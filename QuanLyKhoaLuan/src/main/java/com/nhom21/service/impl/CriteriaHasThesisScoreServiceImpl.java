@@ -6,6 +6,9 @@ package com.nhom21.service.impl;
 
 import com.nhom21.pojo.CriteriaHasThesisScore;
 import com.nhom21.repository.CriteriaHasThesisScoreRepository;
+
+import com.nhom21.repository.ThesisScoreRepository;
+import com.nhom21.service.CriteriaHasThesisScoreService;
 import com.nhom21.service.CriteriaHasThesisScoreService;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +17,23 @@ import org.springframework.stereotype.Service;
 
 /**
  *
+
  * @author WIN10
+
  */
 @Service
 public class CriteriaHasThesisScoreServiceImpl implements CriteriaHasThesisScoreService{
     @Autowired
+    private CriteriaHasThesisScoreRepository chtsrepo;
+    @Override
+    public List<CriteriaHasThesisScore> getCriteriaHasThesisScore() {
+        return this.chtsrepo.getListCriteriaHasThesisScore();
+    }
+
+    @Override
+    public List<CriteriaHasThesisScore> getListCriteriaHasThesisScoreByThesisScoreId(int ThesisScoreId) {
+        return this.chtsrepo.getListCriteriaHasThesisScoreByThesisScoreId(ThesisScoreId);
+
     private CriteriaHasThesisScoreRepository csrepo;
     
     
@@ -30,6 +45,7 @@ public class CriteriaHasThesisScoreServiceImpl implements CriteriaHasThesisScore
     @Override
     public List<CriteriaHasThesisScore> getCriScore() {
         return this.csrepo.getCriScore();
+
     }
     
 }
