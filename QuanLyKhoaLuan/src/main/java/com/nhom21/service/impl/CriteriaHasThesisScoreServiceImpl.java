@@ -24,18 +24,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CriteriaHasThesisScoreServiceImpl implements CriteriaHasThesisScoreService{
     @Autowired
-    private CriteriaHasThesisScoreRepository chtsrepo;
+    private CriteriaHasThesisScoreRepository csrepo;
     @Override
     public List<CriteriaHasThesisScore> getCriteriaHasThesisScore() {
-        return this.chtsrepo.getListCriteriaHasThesisScore();
+        return this.csrepo.getListCriteriaHasThesisScore();
     }
 
     @Override
     public List<CriteriaHasThesisScore> getListCriteriaHasThesisScoreByThesisScoreId(int ThesisScoreId) {
-        return this.chtsrepo.getListCriteriaHasThesisScoreByThesisScoreId(ThesisScoreId);
-
-    private CriteriaHasThesisScoreRepository csrepo;
-    
+        return this.csrepo.getListCriteriaHasThesisScoreByThesisScoreId(ThesisScoreId);
+    }
     
     @Override
     public boolean saveCriScore(ArrayList<CriteriaHasThesisScore> cs) {
@@ -45,7 +43,6 @@ public class CriteriaHasThesisScoreServiceImpl implements CriteriaHasThesisScore
     @Override
     public List<CriteriaHasThesisScore> getCriScore() {
         return this.csrepo.getCriScore();
-
     }
     
 }
