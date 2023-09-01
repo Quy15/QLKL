@@ -14,6 +14,8 @@
 <c:url value="/infouser" var="info"/>
 <c:url value="/changepassword" var="change"/>
 <c:url value="/score" var="s"/>
+<c:url value="/stat" var="stat"/>
+<c:url value="/setcriteria" var="cri"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">ThesisManager</a>
@@ -30,15 +32,18 @@
                         <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
                     </li>
                     <se:authorize access="hasRole('ROLE_ADMIN')">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${user}">Quản lý người dùng</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${user}">Quản lý người dùng</a>
+                        </li>
                     </se:authorize>
                     <li class="nav-item">
                         <a class="nav-link" href="${defense}">Hội đồng khóa luận</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Thống kê</a>
+                        <a class="nav-link" href="${stat}">Thống kê</a>
+                    </li
+                    <li class="nav-item">
+                        <a class="nav-link" href="${cri}">Thiết lập tiêu chí</a>
                     </li>
                 </se:authorize>
 
@@ -54,21 +59,12 @@
                 </se:authorize>
             </ul>
             <ul class="navbar-nav ml-auto menu" >
-                <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
-                    <li style="position: absolute; right: 220px">
-                        <form class="d-flex" action="${action}">
-                            <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
-                            <button class="btn btn-primary" type="submit">Tìm</button>
-                        </form>
-                    </li>
-                </se:authorize>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item" style="position: relative; right: 105px;">
-
+                        <li class="nav-item" style="position: relative; right: 280px;">
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
-                        <div class="dropdown" style="position: relative; right: 105px;">
+                        <div class="dropdown" style="position: relative; right: 270px;">
                             <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-caret-down"></i>
                             </a>
@@ -85,6 +81,14 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
+                <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
+                    <li style="position: absolute; right: 15px">
+                        <form class="d-flex" action="${action}">
+                            <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
+                            <button class="btn btn-primary" type="submit">Tìm</button>
+                        </form>
+                    </li>
+                </se:authorize>
             </ul>
         </div>
     </div>

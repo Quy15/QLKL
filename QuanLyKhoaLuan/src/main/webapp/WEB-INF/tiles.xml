@@ -92,6 +92,18 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/score.jsp" />
     </definition>
+    
+    <definition name="stat" extends="baseLayout">
+        <put-attribute name="title" value="Thống kê" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/stat.jsp" />
+    </definition>
+    
+    <definition name="setcriteria" extends="baseLayout">
+        <put-attribute name="title" value="Thiết lập tiêu chí" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/setcriteria.jsp" />
+    </definition>
 </tiles-definitions>
 
 

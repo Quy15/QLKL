@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface CriteriaRepository {
     List<Criteria> getCri();
+    Criteria getById(int id);
 }

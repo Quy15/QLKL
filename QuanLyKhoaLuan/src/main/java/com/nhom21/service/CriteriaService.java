@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface CriteriaService {
     public List<Criteria> getCri();
+    public Criteria getById(int id);
 }
