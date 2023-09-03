@@ -52,9 +52,11 @@ public class ThesisScore implements Serializable {
     private String score;
     @JoinColumn(name = "thesis_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+//    @JsonIgnore
     private Thesis thesisId;
     @JoinColumn(name = "user_defense_committee_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private UserDefenseCommittee userDefenseCommitteeId;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "thesisScoreId")

@@ -7,6 +7,7 @@ package com.nhom21.repository;
 import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
 import com.nhom21.pojo.ThesisParticipant;
+import com.nhom21.pojo.ThesisScore;
 import java.util.List;
 import java.util.Map;
 

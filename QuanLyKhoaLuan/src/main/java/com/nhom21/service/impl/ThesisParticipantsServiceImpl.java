@@ -39,6 +39,11 @@ public class ThesisParticipantsServiceImpl implements ThesisParticipantsService{
     @Override
     public boolean addOrUpdateThesisParticipants(ArrayList<ThesisParticipant> tp) {
         return this.thesispRepo.addOrUpdateThesisParticipants(tp);
+      
+    @Override
+    public List<ThesisParticipant> getThesisIdByUser(int userId) {
+        return this.thesispRepo.getThesisIdByUser(userId);
+
     }
     
 }

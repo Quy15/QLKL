@@ -5,6 +5,10 @@
 package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.CriteriaHasThesisScore;
+import com.nhom21.pojo.ThesisScore;
+import com.nhom21.repository.CriteriaHasThesisScoreRepository;
+import java.util.List;
+import javax.persistence.Query;
 import com.nhom21.repository.CriteriaHasThesisScoreRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +20,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author WIN10
- */
+
 @Repository
 @Transactional
 public class CriteriaHasThesisScoreRepositoryImpl implements CriteriaHasThesisScoreRepository {
@@ -49,5 +50,21 @@ public class CriteriaHasThesisScoreRepositoryImpl implements CriteriaHasThesisSc
         Query q = s.createQuery("From CriteriaHasThesisScore");
         return q.getResultList();
     }
+    
+    @Override
+    public List<CriteriaHasThesisScore> getListCriteriaHasThesisScore() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From CriteriaHasThesisScore");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<CriteriaHasThesisScore> getListCriteriaHasThesisScoreByThesisScoreId(int ThesisScoreId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From CriteriaHasThesisScore WHERE thesisScoreId.id=:id ");
+        q.setParameter("id", ThesisScoreId);
+        return q.getResultList();
+    }
+
 
 }

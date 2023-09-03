@@ -70,9 +70,28 @@ public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
     }
 
     @Override
+    public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisScore Where userDefenseCommitteeId.id=:UserDefenseId AND thesisId.status !='Đã thực hiện'");
+         q.setParameter("UserDefenseId", UserDefenseId);
+        return q.getResultList();
+    }
+    @Override
     public ThesisScore findThesisScoreById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(ThesisScore.class, id);
+    }
+
+    @Override
+    public Double getAverageScoreByThesisId(int thesisId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT AVG(CAST(score AS double)) FROM ThesisScore WHERE thesisId.id = :thesisId");
+        q.setParameter("thesisId", thesisId);
+        Double result = (Double) q.getSingleResult();
+         if (result == null) {
+            return 0.0; // Hoặc giá trị mặc định nếu không có kết quả
+        }
+        return result;
     }
 
 }

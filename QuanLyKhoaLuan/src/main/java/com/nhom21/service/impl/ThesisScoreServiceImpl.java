@@ -37,8 +37,18 @@ public class ThesisScoreServiceImpl implements ThesisScoreService{
     }
 
     @Override
+    public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId) {
+        return this.tsrepo.getThesisScoreByUserDefenseId(UserDefenseId);
+    }
+
     public ThesisScore findThesisScoreById(int id) {
         return this.tsrepo.findThesisScoreById(id);
     }
+
+    @Override
+    public Double getAverageScoreByThesisId(int thesisId) {
+        return this.tsrepo.getAverageScoreByThesisId(thesisId);
+    }
     
+
 }
