@@ -34,5 +34,10 @@ public class ThesisParticipantsServiceImpl implements ThesisParticipantsService{
     public ThesisParticipant getIDP(int id) {
         return this.thesispRepo.getIDP(id);
     }
+
+    @Override
+    public List<ThesisParticipant> getThesisIdByUser(int userId) {
+        return this.thesispRepo.getThesisIdByUser(userId);
+    }
     
 }

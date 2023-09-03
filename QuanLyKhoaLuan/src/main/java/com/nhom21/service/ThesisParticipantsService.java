@@ -18,4 +18,5 @@ public interface ThesisParticipantsService {
     boolean addOrUpdateThesisParticipants(ThesisParticipant tp);
 
     ThesisParticipant getIDP(int id);
+    List<ThesisParticipant> getThesisIdByUser(int userId);
 }

@@ -3,42 +3,50 @@ import { Alert, Button, Container, Form, ListGroup, Modal, Table } from "react-b
 import Apis, { endpoints } from "../configs/Apis";
 import { MyUserContext } from "../App";
 import MySpinner from "./MySpinner";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ThesisScore = () => {
+  const [thesisScore, setThesisScore] = useState('');
   const [defenseCommittee, setDefenseCommitee] = useState(null);
   const [user] = useContext(MyUserContext);
 
   const [selectedDefenseCommitteeId, setSelectedDefenseCommitteeId] = useState(null);
   const [selectedDefenseCommitteeDetails, setSelectedDefenseCommitteeDetails] = useState([]);
+  const [selectedThesisScoreId, setSelectedThesisScoreId] = useState(null);
 
   const [clickedDetailId, setClickedDetailId] = useState(null);
-  const [clickedScoreId, setClickedScoreId] = useState(null);
+  // const [clickedScoreId, setClickedScoreId] = useState(null);
 
   const [criteriaByThesisScore, setCriteriaByThesisScore] = useState(null);
-  const [detailIds, setDetailIds] = useState([]);
+  // const [detailIds, setDetailIds] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const detailIdArray = [];
 
-  const [value, setValue] = useState('');
-  const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-
-    if (inputValue < 0 || inputValue > 10) {
-      setError('Giá trị phải nằm trong khoảng từ 0 đến 10.');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (thesisScore >= 0 && thesisScore <= 10) {
+      const process = async () => {
+        try {
+          let res = await Apis.post(endpoints['cham-diem'], {
+            "thesisScoreId": selectedThesisScoreId, 
+            "score": thesisScore
+          });
+          if (res.status === 200) {
+            toast.success(res.data + ". Vui lòng nhấn vào Chi tiết để làm mới làm điểm vừa nhập", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+            });
+            setShowModal(false);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      process();
     } else {
-      setError('');
-    }
-  };
-
-  const handleSubmitScore = (e) => {
-    e.preventDefault();
-    if (error) {
-      alert('Vui lòng nhập giá trị hợp lệ.');
-    } else {
-      alert('Giá trị đã được gửi.');
+      toast.error("Điểm phải nằm trong khoảng từ 0 đến 10");
     }
   };
 
@@ -70,7 +78,7 @@ const ThesisScore = () => {
       setShowModal(true);
       // setSelectedDefenseCommitteeId(id);
       setCriteriaByThesisScore(res.data);
-      console.info(res.data);
+      // console.info(res.data);
     } catch (ex) {
       console.error(ex);
     }
@@ -88,28 +96,6 @@ const ThesisScore = () => {
     return map;
   }, [selectedDefenseCommitteeDetails]);
 
-  // console.info(thesisIdMap)
-  // console.info(detailIds)
-  // useEffect(() => {
-  //   const detailIdArray = detailIds.map(detail => detail.id);
-
-  //   const fetchDataForDetail  = async (detailId) => {
-  //     try {
-  //       const response = await Apis.get(`${endpoints['criteria-thesis-score']}${detailId}`); 
-  //       return response.data;
-  //     } catch (error) {
-  //       console.error(error);
-  //       return null;
-  //     }
-  //   };
-
-  //   Promise.all(detailIdArray.map(detailId => fetchDataForDetail(detailId)))
-  //   .then(dataArray => {
-  //     const validDataArray = dataArray.filter(data => data !== null);
-  //     setCriteriaByThesisScore(validDataArray);
-  //   });
-  // },[detailIds]);
-  // console.info(criteriaByThesisScore)
   if (defenseCommittee === null)
     return <>
       <Container>
@@ -136,27 +122,40 @@ const ThesisScore = () => {
       </ListGroup>
       {selectedDefenseCommitteeId && (
         <Container>
+          <h1 className="mt-5 text-center">Chấm điểm</h1>
           {Array.from(thesisIdMap).map(([thesisId, details]) => (
-            
             <div key={thesisId}>
-              <h1 className="mt-5 text-center">Chấm điểm</h1>
               <h3>Khóa luận: {details[0].thesisId.name}</h3>
               <ListGroup>
-                {details.map(detail => {
+                {details.map((detail, index) => {
                   detailIdArray.push(detail.id);
-
+                  const order = index + 1;
                   return (
-                    <ListGroup.Item key={detail.id} className="d-flex justify-content-between align-items-center">
-                      <h3>{detail.id}</h3>
-                      <Button onClick={() => { handleScoreClick(detail.id) }}>Chấm điểm</Button>
-                    </ListGroup.Item>
+                    <Table striped bordered hover key={detail.id}>
+                      <thead>
+                        <tr>
+                          <th className="text-center">Tiêu chí</th>
+                          <th className="text-center">Điểm</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="text-center">{order}</td>
+                          <td className="text-center">{detail.score}</td>
+                          <td className="text-center">
+                            <Button onClick={() => {
+                              handleScoreClick(detail.id);
+                              setSelectedThesisScoreId(detail.id);
+                            }}>Chấm điểm</Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
                   );
                 })}
               </ListGroup>
             </div>
           ))}
-          {/* {setDetailIds((detailIdArray))} */}
-          {/* {console.info(detailIds)} */}
         </Container>
       )}
       {showModal && (
@@ -168,48 +167,34 @@ const ThesisScore = () => {
               </Modal.Header>
 
               <Modal.Body>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Tiêu chí</th>
-                      <th>Điểm</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      {criteriaByThesisScore.map(c => {
-                        return (
-                          <td>{c.criteriaId.name}</td>
-                        );
-                      })}
-                      <td>
-                        <Form onSubmit={handleSubmitScore}>
-                          <Form.Control type="number" value={value}
-                            onChange={handleChange}
-                            isInvalid={!!error}>
-
-                          </Form.Control>
-                          <Form.Control.Feedback type="invalid">
-                            {error}
-                          </Form.Control.Feedback>
-                        </Form>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-                {/* {criteriaByThesisScore.map(c => {
-                  return (
-                    <p>{c.criteriaId.name}</p>
-                  );
-                })} */}
+                <form onSubmit={handleSubmit}>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Tiêu chí</th>
+                        <th>Điểm</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {criteriaByThesisScore.map(c => {
+                          return (<td>{c.criteriaId.name}</td>);
+                        })}
+                        <td>
+                          <Form.Control type="number" onChange={e => setThesisScore(e.target.value)}></Form.Control>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <hr />
+                  <div className="d-flex justify-content-end align-items-center">
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                      Đóng
+                    </Button>
+                    <Button variant="primary" type="submit">Lưu</Button>
+                  </div>
+                </form>
               </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                  Đóng
-                </Button>
-                <Button variant="primary" type="submit">Lưu</Button>
-              </Modal.Footer>
             </Modal.Dialog>
           </div>
         </div>

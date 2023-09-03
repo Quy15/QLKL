@@ -18,5 +18,5 @@ public interface ThesisScoreService {
     public List<ThesisScore> getThesisScore();
     public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId);
     public ThesisScore findThesisScoreById(int id);
-
+    public Double getAverageScoreByThesisId(int thesisId);
 }
