@@ -6,6 +6,7 @@ package com.nhom21.controllers;
 
 import com.lowagie.text.DocumentException;
 import com.nhom21.pojo.DefenseCommittee;
+import com.nhom21.pojo.User;
 import com.nhom21.service.CriteriaHasThesisScoreService;
 import com.nhom21.service.CriteriaService;
 import com.nhom21.service.DefenseCommitteeRoleService;
@@ -20,6 +21,7 @@ import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserDefenseCommitteeService;
 import com.nhom21.service.UserService;
 import java.io.IOException;
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,12 +87,13 @@ public class IndexController {
 
     @Autowired
     private CriteriaService cser;
-    
+
     @Autowired
     private CriteriaHasThesisScoreService csser;
-    
+
     @Autowired
     private PDFService pdfService;
+
     @RequestMapping("/")
     @Transactional
     public String index(Model model, @RequestParam Map<String, String> params) {
@@ -102,7 +105,12 @@ public class IndexController {
     }
 
     @ModelAttribute
-    public void commonAttri(Model model, @RequestParam Map<String, String> params) {
+    public void commonAttri(Model model, @RequestParam Map<String, String> params, Principal p) {
+//        if (p.getName() != null) {
+//            User u = this.user.getUserByUn(p.getName());
+//            String avatar = u.getAvatar();
+//            model.addAttribute("avatar", avatar);
+//        }
         model.addAttribute("thesis", this.thesis.getThesis(params));
         model.addAttribute("thesisP", this.thesisP.getParti());
         model.addAttribute("user", this.user.getListUser());

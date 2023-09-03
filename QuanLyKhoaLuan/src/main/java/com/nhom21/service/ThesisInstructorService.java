@@ -5,6 +5,7 @@
 package com.nhom21.service;
 
 import com.nhom21.pojo.InstructorThesis;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,6 @@ public interface ThesisInstructorService {
     List<InstructorThesis> getInstructor();
 
     boolean addOrUpdateThesisInstructor(InstructorThesis ti);
-
+    boolean addOrUpdateThesisInstructor(ArrayList<InstructorThesis> ti);
     InstructorThesis getIDI(int id);
 }

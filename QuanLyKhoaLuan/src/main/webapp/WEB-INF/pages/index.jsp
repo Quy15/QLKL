@@ -55,7 +55,7 @@
                             <c:forEach items="${user}" var="u">
                                 <c:forEach items="${thesisP}" var="p">
                                     <c:if test="${u.id == p.userId.id && t.id == p.thesisId.id}">                                       
-                                            ${u.firstName} ${u.lastName}
+                                        ${u.firstName} ${u.lastName}     
                                     </c:if>
                                 </c:forEach>
                             </c:forEach>

@@ -6,27 +6,67 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="myPieChart" style="width:400; height:300"/>
+<c:url value="/stat" var="s"/>
+
 <script>
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        // Define the chart to be drawn.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Element');
-        data.addColumn('number', 'Percentage');
-        data.addRows([
-            ['Nitrogen', 0.78],
-            ['Oxygen', 0.21],
-            ['Other', 0.01]
-        ]);
+    
+    var dataChart = [];
+    <c:forEach items="${stats}" var="st">
+    dataChart.push({y: ${st[1]}, label: "${st[0]}"});
+    </c:forEach>
+    var dataChart2 = [];
+    <c:forEach items="${scorestats}" var="score">
+    dataChart2.push({y: ${score[1]}, label: "${score[0]}"});
+    </c:forEach>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Thống kê tần suất thực hiện khóa luận từng ngành"
+            },
+            data: [{
+                    type: "pie",
+                    startAngle: 25,
+                    toolTipContent: "<b>{label}</b>: {y}Khóa luận",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}lần",
+                    dataPoints: dataChart
+                }]
+        });
+        chart.render();
         
-       var options = {'title':'How Much Pizza I Ate Last Night',
-                     'width':400,
-                     'height':300};
-                 
-        // Instantiate and draw the chart.
-        var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
-        chart.draw(data, options);
-    }
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Thống kê điểm trung bình khóa luận theo năm"
+            },
+            axisY: {
+                title: "Tổng số"
+            },
+            data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendText: "Điểm",
+                    dataPoints: dataChart2
+                }]
+        });
+        chart2.render();
+    };
 </script>
+<div id="chartContainer" style="height: 400px; width: 100%" class="mt-4"></div>
+<form action="${s}" enctype="multipart/form-data">
+    <input name="year" placeholder="Nhập..." id="search"/>
+    <button type="submit" class="btn btn-info">Tìm</button>
+</form>
+
+<div id="chartContainer2" style="height: 400px; width: 100%" class="mt-4"></div>
+
+
+
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>

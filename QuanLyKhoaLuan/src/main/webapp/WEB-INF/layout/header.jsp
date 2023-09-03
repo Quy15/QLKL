@@ -24,9 +24,6 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${action}">Trang chủ</a>
-                </li>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
                     <li class="nav-item">
                         <a class="nav-link" href="${thesis}">Quản lý khóa luận</a>
@@ -62,6 +59,8 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item" style="position: relative; right: 280px;">
+                            <img src="${avatar}" width="40" class="rounded-circle"
+                                 alt=""/>
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
                         <div class="dropdown" style="position: relative; right: 270px;">

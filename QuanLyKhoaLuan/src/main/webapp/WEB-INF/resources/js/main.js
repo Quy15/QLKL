@@ -32,7 +32,7 @@ function save(){
     var thesisID = document.getElementById("thesisid").value;
     console.log(sv1 + sv2 + thesisID);
     
-    fetch("/QuanLyKhoaLuan/api/savepaticipant",{
+    fetch("/QuanLyKhoaLuan/api/thesisParticipant",{
         method:"post",
         body:JSON.stringify({
             "id1" : sv1+"",

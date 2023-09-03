@@ -89,7 +89,7 @@ public class ThesisApi {
         this.thesisSer.deleteThesis(id);
     }
     
-    @PostMapping("/api/savepaticipant")
+    @PostMapping("/api/thesisParticipant")
     public ResponseEntity<Map<String,String>> addParticipant(@RequestBody Map<String,String> req){
         int id1 = Integer.parseInt(req.get("id1"));
         int id2 = Integer.parseInt(req.get("id2"));

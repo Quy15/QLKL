@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.nhom21.repository.ThesisInstructorRepository;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,6 +35,11 @@ public class ThesisInstructorServiceImpl implements ThesisInstructorService{
     @Override
     public InstructorThesis getIDI(int id) {
         return this.thesisI.getIDI(id);
+    }
+
+    @Override
+    public boolean addOrUpdateThesisInstructor(ArrayList<InstructorThesis> ti) {
+        return this.thesisI.addOrUpdateThesisInstructor(ti);
     }
     
     

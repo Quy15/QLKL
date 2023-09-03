@@ -6,6 +6,7 @@ package com.nhom21.repository.impl;
 
 import com.nhom21.pojo.ThesisParticipant;
 import com.nhom21.repository.ThesisParticipantsRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
@@ -21,10 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
+public class ThesisParticipantsImpl implements ThesisParticipantsRepository {
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public List<ThesisParticipant> getParti() {
         Session s = this.factory.getObject().getCurrentSession();
@@ -56,6 +58,24 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
     }
 
     @Override
+    public boolean addOrUpdateThesisParticipants(ArrayList<ThesisParticipant> tp) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            for (int i = 0; i < tp.size(); i++) {
+                if (tp.get(i).getId() == null) {
+                    s.save(tp.get(i));
+                } else {
+                    s.update(tp.get(i));
+                }
+            }
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
     public List<ThesisParticipant> getThesisIdByUser(int userId) {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("From ThesisParticipant Where userId.id =:userId");
@@ -63,4 +83,5 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository{
         return q.getResultList();
     }
     
+
 }
