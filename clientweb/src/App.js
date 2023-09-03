@@ -11,6 +11,9 @@ import Main from "./layout/Main";
 import { createContext, useReducer } from "react";
 import MyUserReducers from "./reducers/MyUserReducers";
 import cookie from "react-cookies";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ViewScore from "./layout/ViewScore";
 
 export const MyUserContext = createContext();
 const App = () =>{
@@ -30,9 +33,11 @@ const App = () =>{
                 <Route path="/UserInfo" element={<UserInfo/>}/>
                 <Route path="/ThesisScore" element={<ThesisScore/>}/>
                 <Route path="/Home" element={<Home/>}/>
+                <Route path="/ViewScore" element={<ViewScore/>}/>
               </Routes>
               </div>
           <Footer style={{flexShrink: 0}}/>
+          <ToastContainer />
         </BrowserRouter>
       </MyUserContext.Provider>
 

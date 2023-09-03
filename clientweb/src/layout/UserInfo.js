@@ -11,7 +11,8 @@ import {
 import {  Button, Col, Container, Form } from 'react-bootstrap';
 import { MyUserContext } from '../App';
 import Apis, { endpoints } from '../configs/Apis';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserInfo = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -30,11 +31,11 @@ const UserInfo = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!oldPassword || !newPassword || !confirmNewPassword) {
-      window.alert("Vui lòng điền đủ thông tin mật khẩu !!")
+      toast.warning("Vui lòng điền đủ thông tin mật khẩu !!")
       return;
     }
     if (newPassword !== confirmNewPassword) {
-      window.alert("Mật khẩu nhập lần hai không chính xác !!")
+      toast.warning("Mật khẩu nhập lần hai không chính xác !!")
       return;
     }
     
@@ -46,13 +47,13 @@ const UserInfo = () => {
               "newPassword": newPassword
           });
           if (res.status === 200) {
-            // window.alert(res.data)
+            toast.success(res.data)
             setShowChangePasswordForm(false);
           }
-          window.alert(res.data)
+          // window.alert(res.data)
         } catch (error) {
           if (error.response && error.response.status === 401) {
-            window.alert('Mật khẩu bạn nhập bị sai !!');
+            toast.warning('Mật khẩu bạn nhập bị sai !!')
           } else {
             window.alert('Có lỗi xảy ra khi gọi API.');
           }
@@ -129,7 +130,6 @@ const UserInfo = () => {
                 <div>
                   {showChangePasswordForm && (
                     <form onSubmit={handleSubmit} >
-                      {/* Đây là form đổi mật khẩu */}
                       <hr />
                       <MDBCardBody>
                         <MDBCol sm="12">
