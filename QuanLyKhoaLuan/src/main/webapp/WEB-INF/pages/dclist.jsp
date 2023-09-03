@@ -35,6 +35,7 @@
                 <th style="border: 1px solid; border-collapse: collapse;">Thư ký</th>
                 <th style="border: 1px solid; border-collapse: collapse;">Phản biện</th>
                 <th style="border: 1px solid; border-collapse: collapse;">Các thành viên</th>
+                <th style="border: 1px solid; border-collapse: collapse;"></th>
             </tr>
         </thead>
         <tbody>
@@ -87,6 +88,7 @@
                             </c:forEach>
                         </c:forEach>
                     </td>
+                    <td style="border: 1px solid; border-collapse: collapse"></td>
                 </tr>
             </c:forEach>
         </tbody>

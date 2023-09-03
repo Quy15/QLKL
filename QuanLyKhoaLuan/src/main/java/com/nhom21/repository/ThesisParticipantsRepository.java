@@ -5,6 +5,7 @@
 package com.nhom21.repository;
 
 import com.nhom21.pojo.ThesisParticipant;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,6 @@ import org.springframework.stereotype.Repository;
 public interface ThesisParticipantsRepository {
     List<ThesisParticipant> getParti();
     boolean addOrUpdateThesisParticipants(ThesisParticipant tp);
+    boolean addOrUpdateThesisParticipants(ArrayList<ThesisParticipant> tp);
     ThesisParticipant getIDP(int id);
 }

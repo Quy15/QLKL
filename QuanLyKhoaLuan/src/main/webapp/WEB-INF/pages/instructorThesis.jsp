@@ -12,55 +12,55 @@
         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
             <c:url value="/instructorThesis" var="action"/>
             <%--@elvariable id="instructorThesis" type="antlr"--%>
+            <form method="post" enctype="multipart/form-data" action="${action}">
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                        <select class="form-select" name="gvId">
+                            <c:forEach items="${user}" var="u">
+                                <c:if test="${u.userRole == 'ROLE_GV'}">
+                                    <option value="${u.id}">
+                                        ${u.firstName} ${u.lastName}
+                                    </option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
+                    </div>
+                </div>
 
-            <div class="d-flex flex-row align-items-center mb-4">
-                <div class="form-outline flex-fill mb-0">
-                    <select class="form-select" id="gv1">
-                        <c:forEach items="${user}" var="u">
-                            <c:if test="${u.userRole == 'ROLE_GV'}">
-                                <option value="${u.id}">
-                                    ${u.firstName} ${u.lastName}
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                        <select class="form-select"  name="gvId">
+                            <c:forEach items="${user}" var="u">
+                                <c:if test="${u.userRole == 'ROLE_GV'}">
+                                    <option value="${u.id}">
+                                        ${u.firstName} ${u.lastName}
+                                    </option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                        <select class="form-select" name="thesisid2">
+                            <c:forEach items="${t}" var="t">
+                                <option value="${t.id}">
+                                    ${t.name}
                                 </option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                    <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
+                            </c:forEach>
+                        </select>
+                        <label class="form-label" for="form3Example3c">Khóa luận tham gia</label>
+                    </div>
                 </div>
-            </div>
-
-            <div class="d-flex flex-row align-items-center mb-4">
-                <div class="form-outline flex-fill mb-0">
-                    <select class="form-select"  id="gv2">
-                        <c:forEach items="${user}" var="u">
-                            <c:if test="${u.userRole == 'ROLE_GV'}">
-                                <option value="${u.id}">
-                                    ${u.firstName} ${u.lastName}
-                                </option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                    <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button  class="btn btn-primary btn-success" style="width: 100%">
+                        Xác nhận
+                    </button>
                 </div>
-            </div>
-
-            <div class="d-flex flex-row align-items-center mb-4">
-                <div class="form-outline flex-fill mb-0">
-                    <select class="form-select" id="thesisid2">
-                        <c:forEach items="${t}" var="t">
-                            <option value="${t.id}">
-                                ${t.name}
-                            </option>
-                        </c:forEach>
-                    </select>
-                    <label class="form-label" for="form3Example3c">Khóa luận tham gia</label>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                <button onclick="saveI()" class="btn btn-primary btn-success" style="width: 100%">
-                    Xác nhận
-                </button>
-            </div>
-
+            </form>
         </div>
     </div>
 </div>

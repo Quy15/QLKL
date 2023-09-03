@@ -88,7 +88,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')")
                 .antMatchers("/thesisParticipant")
                 .access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')");
-        http.authorizeRequests().antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')");
+        http.authorizeRequests().antMatchers("/api/thesisParticipant").access("hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')");
         http.csrf().disable();
     }
 
@@ -112,8 +112,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public JavaMailSenderImpl configureJavaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setUsername("wildrifttest1504@gmail.com");
-        javaMailSender.setPassword("150420Quy");
+        javaMailSender.setUsername("hungquy10101996@gmail.com");
+        javaMailSender.setPassword("ammdwsvtjfqisdbs");
         javaMailSender.setPort(587);
         javaMailSender.setDefaultEncoding("UTF-8");
         Properties mailProp = new Properties();

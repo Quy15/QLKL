@@ -41,16 +41,24 @@
             <th style="border: 1px solid; border-collapse: collapse;">Điểm</th>
 
         </tr
-        <c:forEach items="${criteria}" var="c">
-            <tr id="index">
-            <input hidden="hidden" style="border: 1px solid; border-collapse: collapse;" value="${c.id}" name="criteriaId"/>
-            <td style="border: 1px solid; border-collapse: collapse;">
-                ${c.name}
-            </td>
-            <td style="border: 1px solid; border-collapse: collapse" name="score">
-                <input type="text"/>
-            </td>
-            </tr>
+        <c:forEach items="${criteria}" var="cri">
+            <c:forEach items="${criscore}" var="c">
+                <c:forEach items="${thesisscore}" var="thescore">
+                    <c:forEach items="${udc}" var="userde">
+                        <c:if test="${userde.id == thescore.userDefenseCommitteeId.id && userde.userId.id == userid && thescore.id == c.thesisScoreId.id && cri.id == c.criteriaId.id}">
+                            <tr id="index">
+                            <input hidden="hidden" style="border: 1px solid; border-collapse: collapse;" value="${c.id}" name="criteriaId"/>
+                            <td style="border: 1px solid; border-collapse: collapse;">
+                                ${cri.name}
+                            </td>
+                            <td style="border: 1px solid; border-collapse: collapse" name="score">
+                                <input type="text"/>
+                            </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </c:forEach>
+            </c:forEach>
         </c:forEach>
     </table>
 
