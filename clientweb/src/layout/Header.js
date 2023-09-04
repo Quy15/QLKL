@@ -15,7 +15,12 @@ const Header = () => {
   return <>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand as={Link} to="/">Nhóm 21</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <div  style={{width:'50px', height:"50px"}}>
+          <img src="https://res.cloudinary.com/dt3oasocf/image/upload/v1691420822/logo_pikxic.png" class="img-fluid" alt="" 
+          style={{width:'100%', height:"100%"}}/>
+          </div>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
