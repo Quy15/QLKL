@@ -17,10 +17,11 @@ import org.springframework.stereotype.Service;
  * @author WIN10
  */
 @Service
-public class ThesisScoreServiceImpl implements ThesisScoreService{
+public class ThesisScoreServiceImpl implements ThesisScoreService {
+
     @Autowired
     private ThesisScoreRepository tsrepo;
-    
+
     @Override
     public boolean addOrUpdateThesisScore(ThesisScore ts) {
         return this.tsrepo.addOrUpdateThesisScore(ts);
@@ -49,6 +50,15 @@ public class ThesisScoreServiceImpl implements ThesisScoreService{
     public Double getAverageScoreByThesisId(int thesisId) {
         return this.tsrepo.getAverageScoreByThesisId(thesisId);
     }
-    
+
+    @Override
+    public List<Integer> getUserDenfenseIDByThesisIdInThesisScore(int ThesisId) {
+        return this.tsrepo.getUserDenfenseIDByThesisIdInThesisScore(ThesisId);
+    }
+
+    @Override
+    public Double getAverageScoreByThesisIdAndUserDefenseId(int thesisId, int userDefenseId) {
+        return this.tsrepo.getAverageScoreByThesisIdAndUserDefenseId(thesisId, userDefenseId);
+    }
 
 }

@@ -17,6 +17,8 @@ public interface ThesisScoreService {
     boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
     public List<ThesisScore> getThesisScore();
     public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId);
+    public List<Integer> getUserDenfenseIDByThesisIdInThesisScore(int ThesisId);
+    public Double getAverageScoreByThesisIdAndUserDefenseId(int thesisId, int userDefenseId);
     public ThesisScore findThesisScoreById(int id);
     public Double getAverageScoreByThesisId(int thesisId);
 }
