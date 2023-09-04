@@ -9,6 +9,26 @@
 <%@taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:url value="/" var="action" />
+<section id="hero" class="d-flex align-items-center">
+
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+                <h1>Quản Lý Khóa Luận Tốt Nghiệp</h1>
+                <h2></h2>
+                <div class="d-flex justify-content-center justify-content-lg-start">
+                    <a href="<c:url value="/login"/>" class="btn btn-info">Đăng Nhập</a>
+                </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://res.cloudinary.com/dt3oasocf/image/upload/v1691420822/logo_pikxic.png" class="img-fluid mb-5"
+                     style="" width="100%"
+                     alt=""/>
+                </div>
+            </div>
+            </div>
+
+ </section>
 
 <se:authorize access="hasAnyRole('ROLE_SV', 'ROLE_GV')">
     <h1 class="text-center text-info">Xin chào ${pageContext.request.userPrincipal.name} đến với hệ thống</h1>
