@@ -9,7 +9,7 @@
 <c:url value="/stat" var="s"/>
 
 <script>
-    
+
     var dataChart = [];
     <c:forEach items="${stats}" var="st">
     dataChart.push({y: ${st[1]}, label: "${st[0]}"});
@@ -39,7 +39,7 @@
                 }]
         });
         chart.render();
-        
+
         var chart2 = new CanvasJS.Chart("chartContainer2", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -59,6 +59,7 @@
         chart2.render();
     };
 </script>
+<!--Thống kê-->
 <div id="chartContainer" style="height: 400px; width: 100%" class="mt-4"></div>
 <form action="${s}" enctype="multipart/form-data">
     <input name="year" placeholder="Nhập..." id="search"/>

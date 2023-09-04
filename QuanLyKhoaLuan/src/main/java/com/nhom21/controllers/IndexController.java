@@ -6,6 +6,9 @@ package com.nhom21.controllers;
 
 import com.lowagie.text.DocumentException;
 import com.nhom21.pojo.DefenseCommittee;
+import com.nhom21.pojo.DiemTrungBinh;
+import com.nhom21.pojo.PDFInfor;
+import com.nhom21.pojo.Thesis;
 import com.nhom21.pojo.User;
 import com.nhom21.service.CriteriaHasThesisScoreService;
 import com.nhom21.service.CriteriaService;
@@ -24,7 +27,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletResponse;
@@ -125,7 +130,28 @@ public class IndexController {
     }
 
     @GetMapping("/admin/pdf")
-    public void generatePDF(HttpServletResponse response) throws IOException, DocumentException {
+    public void generatePDF(HttpServletResponse response, @RequestParam("thesisId") int thesisId)
+            throws IOException, DocumentException {
+        List<Integer> userDefenseIdInThesis = this.tscore.getUserDenfenseIDByThesisIdInThesisScore(thesisId);
+        List<PDFInfor> pdfInfor = new ArrayList<>();
+
+        for(int i = 0; i < userDefenseIdInThesis.size(); i++){
+            int userDefenseId = userDefenseIdInThesis.get(i);
+            Thesis thesis = this.thesis.getThesisById(thesisId);
+            String thesisName = thesis.getName();
+            User userDefense = this.user.getUserById(userDefenseId);
+            Double score = this.tscore.getAverageScoreByThesisIdAndUserDefenseId(thesisId, userDefenseId);
+            
+            PDFInfor temp = new PDFInfor();
+            temp.setAvgScore(score);
+            temp.setThesisId(thesisId);
+            temp.setUserDefenseId(userDefenseId);
+            temp.setUserDefenseFirstName(userDefense != null ? userDefense.getFirstName() : null);
+            temp.setUserDefenseLastName(userDefense != null ? userDefense.getLastName() : null);
+            temp.setThesisName(thesisName);
+            pdfInfor.add(temp);
+        }
+        
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -134,6 +160,6 @@ public class IndexController {
         String headerValue = "attachment; filename*=UTF-8''" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
         response.addHeader("Content-Type", "application/pdf; charset=UTF-8");
-        pdfService.export(response);
+        pdfService.export(response, pdfInfor);
     }
 }

@@ -66,7 +66,7 @@ public class ThesisController {
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
         return "thesisManager";
     }
-
+    
     @GetMapping("/addThesis")
     @Transactional
     public String list(Model model) {
@@ -91,5 +91,5 @@ public class ThesisController {
         return "addThesis";
     }
 
-
+    
 }

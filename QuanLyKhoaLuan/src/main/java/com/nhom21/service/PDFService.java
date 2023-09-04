@@ -4,10 +4,13 @@
  */
 package com.nhom21.service;
 
+import static com.itextpdf.io.font.FontConstants.TIMES_ROMAN;
 import com.lowagie.text.*;
+import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import com.nhom21.pojo.PDFInfor;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -19,32 +22,31 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PDFService {
-    public void export(HttpServletResponse response) throws IOException, DocumentException {
+    public void export(HttpServletResponse response, List<PDFInfor> pdfInfor) throws IOException, DocumentException {
+//        String fontPath = "src/main/resources/arial-unicode-ms.ttf";
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
-
-
         document.open();
 
-        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        Font fontTitle = FontFactory.getFont(TIMES_ROMAN);
         fontTitle.setSize(18);
 
-        Paragraph paragraph = new Paragraph("PRESCRIPTION", fontTitle);
+        // Lấy thông tin của khóa luận từ đối tượng đầu tiên trong danh sách pdfInfor
+        PDFInfor firstPDFInfor = pdfInfor.get(0);
+
+        Paragraph paragraph = new Paragraph("Báo Cáo", fontTitle);
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 
-        Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+        Font fontParagraph = FontFactory.getFont(TIMES_ROMAN);
         fontParagraph.setSize(12);
 
-//        Paragraph paragraph2 = new Paragraph("Name: " + benhnhan.getHoTen(), fontParagraph);
-//        paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
-//        Paragraph paragraph5 = new Paragraph("Date: " + benhnhan.getNgaySinh(), fontParagraph);
-//        paragraph5.setAlignment(Paragraph.ALIGN_LEFT);
-//        Paragraph paragraph3 = new Paragraph("Phone number: " + benhnhan.getDienThoai(), fontParagraph);
-//        paragraph3.setAlignment(Paragraph.ALIGN_LEFT);
-//        Paragraph paragraph4 = new Paragraph("Diagnostic: " + phieuKhamDTO.getChuanDoan(), fontParagraph);
-//        paragraph4.setAlignment(Paragraph.ALIGN_LEFT);
-
-
+        Paragraph paragraph2 = new Paragraph("Khóa Luận: " + firstPDFInfor.getThesisName(), fontParagraph);
+        paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
+      
+        Paragraph paragraph3 = new Paragraph("Ban Lãnh Đạo ", fontParagraph);
+        paragraph3.setAlignment(Paragraph.ALIGN_RIGHT);
+        Paragraph paragraph4 = new Paragraph("(Ký tên, đóng dấu) ", fontParagraph);
+        paragraph4.setAlignment(Paragraph.ALIGN_RIGHT);
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100.0f);
         table.setWidths(new float[]{3.0f, 2.0f, 2.0f});
@@ -52,8 +54,7 @@ public class PDFService {
 
         PdfPCell cell = new PdfPCell();
         cell.setPadding(5);
-
-        cell.setPhrase(new Phrase("Defense Committee", fontParagraph));
+        cell.setPhrase(new Phrase("Thesis", fontParagraph));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Defense Committee User", fontParagraph));
@@ -62,20 +63,19 @@ public class PDFService {
         cell.setPhrase(new Phrase("Score", fontParagraph));
         table.addCell(cell);
 
-
-//         write table row data
-//        for (Object[] obj : list) {
-//            table.addCell(obj[0].toString() + "-" + obj[1].toString());
-//            table.addCell(obj[2].toString());
-//            table.addCell(obj[3].toString());
-//        }
+        // Viết dữ liệu cho bảng
+        for (PDFInfor pdfInfo : pdfInfor) {
+            table.addCell(pdfInfo.getThesisName());
+            table.addCell(pdfInfo.getUserDefenseFirstName() + " " + pdfInfo.getUserDefenseLastName());
+            table.addCell(pdfInfo.getAvgScore().toString());
+        }
 
         document.add(paragraph);
-//        document.add(paragraph3);
-//        document.add(paragraph4);
-//        document.add(paragraph5);
-//        document.add(paragraph2);
+        document.add(paragraph2);
+        
         document.add(table);
+        document.add(paragraph3);
+        document.add(paragraph4);
         document.close();
     }
 }
