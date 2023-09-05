@@ -181,7 +181,7 @@ const ThesisScore = () => {
                           return (<td>{c.criteriaId.name}</td>);
                         })}
                         <td>
-                          <Form.Control type="number" onChange={e => setThesisScore(e.target.value)}></Form.Control>
+                          <Form.Control onChange={e => setThesisScore(e.target.value)}></Form.Control>
                         </td>
                       </tr>
                     </tbody>
