@@ -28,7 +28,7 @@ const ViewScore = () => {
                 <thead>
                     <tr>
                         {/* <th className="text-center">Id</th> */}
-                        <th className="text-center" style={{ width: '950%' }}>Khóa luận</th>
+                        <th className="text-center" style={{ width: '95%' }}>Khóa luận</th>
                         <th className="text-center">Điểm</th>
                     </tr>
                 </thead>
@@ -40,7 +40,7 @@ const ViewScore = () => {
                                 {as.thesisName}
                             </td>
                             <td className="text-center">
-                                {as.diemTB}
+                                {Number(as.diemTB).toFixed(2)}
                             </td>
                         </tr>
                     ))}

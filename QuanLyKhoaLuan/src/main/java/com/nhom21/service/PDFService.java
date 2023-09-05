@@ -34,28 +34,28 @@ public class PDFService {
         // Lấy thông tin của khóa luận từ đối tượng đầu tiên trong danh sách pdfInfor
         PDFInfor firstPDFInfor = pdfInfor.get(0);
 
-        Paragraph paragraph = new Paragraph("Báo Cáo", fontTitle);
+        Paragraph paragraph = new Paragraph("Summary Report", fontTitle);
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 
         Font fontParagraph = FontFactory.getFont(TIMES_ROMAN);
         fontParagraph.setSize(12);
 
-        Paragraph paragraph2 = new Paragraph("Khóa Luận: " + firstPDFInfor.getThesisName(), fontParagraph);
+        Paragraph paragraph2 = new Paragraph("Thesis: " + firstPDFInfor.getThesisName(), fontParagraph);
         paragraph2.setAlignment(Paragraph.ALIGN_LEFT);
       
-        Paragraph paragraph3 = new Paragraph("Ban Lãnh Đạo ", fontParagraph);
+        Paragraph paragraph3 = new Paragraph("Leadership       ", fontParagraph);
         paragraph3.setAlignment(Paragraph.ALIGN_RIGHT);
-        Paragraph paragraph4 = new Paragraph("(Ký tên, đóng dấu) ", fontParagraph);
+        Paragraph paragraph4 = new Paragraph("(Signature, full name) ", fontParagraph);
         paragraph4.setAlignment(Paragraph.ALIGN_RIGHT);
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100.0f);
-        table.setWidths(new float[]{3.0f, 2.0f, 2.0f});
+        table.setWidths(new float[]{2.0f, 2.0f});
         table.setSpacingBefore(10);
 
         PdfPCell cell = new PdfPCell();
         cell.setPadding(5);
-        cell.setPhrase(new Phrase("Thesis", fontParagraph));
-        table.addCell(cell);
+//        cell.setPhrase(new Phrase("", fontParagraph));
+//        table.addCell(cell);
 
         cell.setPhrase(new Phrase("Defense Committee User", fontParagraph));
         table.addCell(cell);
@@ -65,7 +65,7 @@ public class PDFService {
 
         // Viết dữ liệu cho bảng
         for (PDFInfor pdfInfo : pdfInfor) {
-            table.addCell(pdfInfo.getThesisName());
+//            table.addCell(pdfInfo.getThesisName());
             table.addCell(pdfInfo.getUserDefenseFirstName() + " " + pdfInfo.getUserDefenseLastName());
             table.addCell(pdfInfo.getAvgScore().toString());
         }
