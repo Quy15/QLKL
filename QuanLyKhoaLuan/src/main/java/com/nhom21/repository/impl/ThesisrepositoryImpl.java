@@ -68,8 +68,6 @@ public class ThesisrepositoryImpl implements ThesisRepository {
         }
 
         q.orderBy(b.asc(root.get("id")));
-        
-        
 
         Query query = s.createQuery(q);
 
@@ -131,5 +129,21 @@ public class ThesisrepositoryImpl implements ThesisRepository {
         }
     }
 
-    
+    @Override
+    public boolean saveThesis(ArrayList<Thesis> ts) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            for (int i = 0; i < ts.size(); i++) {
+                if (ts.get(i).getId() != null) {
+                    s.update(ts.get(i));
+                }
+            }
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

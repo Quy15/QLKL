@@ -63,7 +63,7 @@
                         </c:forEach>
                     </td>
                     <td style="display: flex; justify-content: space-around;border-collapse: collapse;">
-                        <c:url value="/addThesis/${t.id}" var="api"/>
+                        <c:url value="/editthesis/${t.id}" var="api"/>
                         <a href="${api}" style="font-size: 12.5px" class="btn btn-info">Cập nhật</a>
                         <button class="btn btn-danger" style="font-size: 12.5px" onclick="deleteThesis('${api}')">Xóa</button>
                     </td>

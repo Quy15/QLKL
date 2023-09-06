@@ -28,5 +28,15 @@ public class EmailServiceImpl implements EmailService{
                 + "cho hội đồng " + defenseCommittee);
         javaMailSender.send(newEmail);
     }
+
+    @Override
+    public void sendScore(String username, String email) {
+        SimpleMailMessage newEmail = new SimpleMailMessage();
+        newEmail.setTo(email);
+        newEmail.setSubject("Thông báo khóa luận đã chấm xong! Mời sinh viên vào xem điểm của mình");
+        newEmail.setText("Xin chào " + username + ", khóa luận của bạn đã được chấm xong."
+                + "Hãy vào xem điểm và kiểm tra ");
+        javaMailSender.send(newEmail);
+    }
     
 }

@@ -10,6 +10,7 @@ import com.nhom21.pojo.ThesisParticipant;
 import com.nhom21.repository.ThesisRepository;
 import com.nhom21.service.ThesisService;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -52,5 +53,12 @@ public class ThesisServiceImpl implements ThesisService {
     public boolean deleteThesis(int id) {
         return this.thesisRepository.deleteThesis(id);
     }
-   
+
+
+    @Override
+    public boolean saveThesis(ArrayList<Thesis> ts) {
+        return this.thesisRepository.saveThesis(ts);
+    }
+
+
 }

@@ -8,10 +8,12 @@ import com.nhom21.pojo.InstructorThesis;
 import com.nhom21.pojo.Thesis;
 import com.nhom21.pojo.ThesisParticipant;
 import com.nhom21.pojo.User;
+import com.nhom21.service.EmailService;
 import com.nhom21.service.ThesisInstructorService;
 import com.nhom21.service.ThesisParticipantsService;
 import com.nhom21.service.ThesisService;
 import com.nhom21.service.UserService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +53,11 @@ public class ThesisApi {
     private ThesisParticipantsService pservice;
     @Autowired
     private UserService userSevice;
-
+    @Autowired
+    private EmailService email;
+    @Autowired
+    private UserService user;
+    
     @Autowired
     private Environment env;
 
@@ -83,11 +89,12 @@ public class ThesisApi {
         return new ResponseEntity(httpHeaders, HttpStatus.CONFLICT);
     }
 
-    @DeleteMapping("/addThesis/{id}")
+    @DeleteMapping("/editthesis/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         this.thesisSer.deleteThesis(id);
     }
+ 
     
     @PostMapping("/api/thesisParticipant")
     public ResponseEntity<Map<String,String>> addParticipant(@RequestBody Map<String,String> req){

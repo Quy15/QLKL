@@ -104,6 +104,21 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/setcriteria.jsp" />
     </definition>
+    <definition name="lockdefense" extends="baseLayout">
+        <put-attribute name="title" value="Khóa hội đồng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/lockdefense.jsp" />
+    </definition>
+    <definition name="editthesis" extends="baseLayout">
+        <put-attribute name="title" value="Cập nhật khóa luận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/editthesis.jsp" />
+    </definition>
+    <definition name="sendmail" extends="baseLayout">
+        <put-attribute name="title" value="Gửi mail" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/sendmail.jsp" />
+    </definition>
 </tiles-definitions>
 
 

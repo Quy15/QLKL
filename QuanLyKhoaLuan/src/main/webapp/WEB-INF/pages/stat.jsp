@@ -40,6 +40,7 @@
         });
         chart.render();
 
+
         var chart2 = new CanvasJS.Chart("chartContainer2", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -57,16 +58,22 @@
                 }]
         });
         chart2.render();
+
     };
+
 </script>
+
+
+
 <!--Thống kê-->
+
 <div id="chartContainer" style="height: 400px; width: 100%" class="mt-4"></div>
 <form action="${s}" enctype="multipart/form-data">
-    <input name="year" placeholder="Nhập..." id="search"/>
+    <input name="year" placeholder="Nhập năm cần tìm..." id="search"/>
     <button type="submit" class="btn btn-info">Tìm</button>
 </form>
 
-<div id="chartContainer2" style="height: 400px; width: 100%" class="mt-4"></div>
+<div id="chartContainer2" style="height: 400px; width: 100%;" class="mt-4"></div>
 
 
 
