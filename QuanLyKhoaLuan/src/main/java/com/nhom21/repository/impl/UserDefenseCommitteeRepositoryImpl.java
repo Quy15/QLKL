@@ -72,4 +72,10 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
         }
     }
 
+    @Override
+    public UserDefenseCommittee findByDefenseId(int id) {
+        Session s = this.factory.getObject().getCurrentSession();  
+        return s.get(UserDefenseCommittee.class, id);
+    }
+
 }

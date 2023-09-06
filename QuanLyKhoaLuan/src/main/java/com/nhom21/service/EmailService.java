@@ -10,4 +10,5 @@ package com.nhom21.service;
  */
 public interface EmailService {
    void sendMail(String username, String email, String thesis_id);
+   void sendScore(String username, String email);
 }

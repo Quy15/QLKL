@@ -83,12 +83,28 @@ public class ThesisController {
         }
         return "addThesis";
     }
-
-    @GetMapping("/addThesis/{id}")
+    
+    @GetMapping("/editthesis")
+    public String edit(Model model){
+        model.addAttribute("the", new Thesis());
+        return "editthesis";
+    }
+    
+    @PostMapping("/editthesis")
+    public String editThe(@ModelAttribute(value = "the")@Valid Thesis t, BindingResult rs)throws ParseException{
+        if (!rs.hasErrors()) {
+            if (this.thesis.addOrUpdateThesis(t) == true) {
+                return "redirect:/thesisManager";
+            }
+        }
+        return "editthesis";
+    }
+    
+    @GetMapping("/editthesis/{id}")
     public String updateThesis(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("thesiss", this.thesis.getThesisById(id));
+        model.addAttribute("the", this.thesis.getThesisById(id));
         
-        return "addThesis";
+        return "editthesis";
     }
 
 

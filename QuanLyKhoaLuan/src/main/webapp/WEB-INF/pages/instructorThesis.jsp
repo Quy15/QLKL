@@ -12,36 +12,27 @@
         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
             <c:url value="/instructorThesis" var="action"/>
             <%--@elvariable id="instructorThesis" type="antlr"--%>
+            <input type="button" id="addI" class="btn btn-primary" onclick="addI()" value="+"/>
             <form method="post" enctype="multipart/form-data" action="${action}">
-                <div class="d-flex flex-row align-items-center mb-4">
-                    <div class="form-outline flex-fill mb-0">
-                        <select class="form-select" name="gvId">
-                            <c:forEach items="${user}" var="u">
-                                <c:if test="${u.userRole == 'ROLE_GV'}">
-                                    <option value="${u.id}">
-                                        ${u.firstName} ${u.lastName}
-                                    </option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-row align-items-center mb-4">
-                    <div class="form-outline flex-fill mb-0">
-                        <select class="form-select"  name="gvId">
-                            <c:forEach items="${user}" var="u">
-                                <c:if test="${u.userRole == 'ROLE_GV'}">
-                                    <option value="${u.id}">
-                                        ${u.firstName} ${u.lastName}
-                                    </option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <label class="form-label" for="form3Example3c">Giáo viên hướng dẫn</label>
-                    </div>
-                </div>
+                <table class="table table-hover addUser" style="font-size: 12.5px;" id="thesisi">
+                    <tr>
+                        <th>Tên giáo viên hướng dẫn</th>
+                        <th></th>
+                    </tr>
+                    <tr id="index">
+                        <td>
+                            <select class="form-select" name="gvId">
+                                <c:forEach items="${user}" var="u">
+                                    <c:if test="${u.userRole == 'ROLE_GV'}">
+                                        <option value="${u.id}">
+                                            ${u.firstName} ${u.lastName}
+                                        </option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
 
                 <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
@@ -64,4 +55,40 @@
         </div>
     </div>
 </div>
-<script src="<c:url value="/js/main.js"/>"></script>
+<script>
+    function addI() {
+        var x = document.getElementById("thesisi").rows.length;
+        var index = x - 1;
+        console.log(index);
+        let template = `<tr id="index">
+                        <td>
+                            <select class="form-select" name="gvId">
+    <c:forEach items="${user}" var="u">
+        <c:if test="${u.userRole == 'ROLE_GV'}">
+                                        <option value="${u.id}">
+            ${u.firstName} ${u.lastName}
+                                        </option>
+        </c:if>
+    </c:forEach>
+                            </select>
+                        </td>
+                                        <td>
+                <input class="btn-danger" id="deleteI" type="button" onclick="deleteIT(1)" value="X"/>
+            </td>
+
+                    </tr>`;
+        let table = document.getElementById("thesisi");
+        table.innerHTML += template;
+        if (index > 1)
+        {
+            alert("Giáo viên hướng dẫn khóa luận không được quá 2");
+            deleteIT();
+        }
+
+    }
+
+    function deleteIT() {
+        var d = document.getElementById("deleteI");
+        d.closest("tr").remove();
+    }
+</script>

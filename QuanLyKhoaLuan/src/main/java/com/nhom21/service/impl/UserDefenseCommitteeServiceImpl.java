@@ -35,5 +35,10 @@ public class UserDefenseCommitteeServiceImpl implements UserDefenseCommitteeServ
     public boolean addUserCommit(ArrayList<UserDefenseCommittee> ud) {
         return this.udc.addUserCommit(ud);
     }
+
+    @Override
+    public UserDefenseCommittee findByDefenseId(int id) {
+        return this.udc.findByDefenseId(id);
+    }
     
 }

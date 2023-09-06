@@ -40,5 +40,10 @@ public class ThesisScoreServiceImpl implements ThesisScoreService{
     public ThesisScore findThesisScoreById(int id) {
         return this.tsrepo.findThesisScoreById(id);
     }
+
+    @Override
+    public ThesisScore findThesisScoreByDefenseId(int id) {
+        return this.tsrepo.findThesisScoreByDefenseId(id);
+    }
     
 }
