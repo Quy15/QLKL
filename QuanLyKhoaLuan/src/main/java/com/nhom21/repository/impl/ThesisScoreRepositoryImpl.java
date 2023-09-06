@@ -87,7 +87,9 @@ public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
     public ThesisScore findThesisScoreByDefenseId(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(ThesisScore.class, id);
-
+    }
+    
+    @Override
     public Double getAverageScoreByThesisId(int thesisId) {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("SELECT AVG(CAST(score AS double)) FROM ThesisScore WHERE thesisId.id = :thesisId");
