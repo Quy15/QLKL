@@ -4,6 +4,7 @@
  */
 package com.nhom21.repository;
 
+import com.nhom21.pojo.Thesis;
 import com.nhom21.pojo.ThesisParticipant;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,4 +20,5 @@ public interface ThesisParticipantsRepository {
     boolean addOrUpdateThesisParticipants(ThesisParticipant tp);
     boolean addOrUpdateThesisParticipants(ArrayList<ThesisParticipant> tp);
     ThesisParticipant getIDP(int id);
+    List<ThesisParticipant> getThesisIdByUser(int userId);
 }

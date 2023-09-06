@@ -89,11 +89,16 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/login/").permitAll();
         http.authorizeRequests().antMatchers("/api/users/").permitAll();
         http.authorizeRequests().antMatchers("/api/change-password/").permitAll();
+        http.authorizeRequests().antMatchers("/api/userDefense/{id}").permitAll();
+        http.authorizeRequests().antMatchers("/api/thesiscores/{id}").permitAll();
+        http.authorizeRequests().antMatchers("/api/criteria-thesis-score/{id}").permitAll();
+        http.authorizeRequests().antMatchers("/api/thesis-by-user/{id}").permitAll();
+        http.authorizeRequests().antMatchers("/api/cham-diem/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')")
-                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')")
-                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')").and()
+                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')or hasRole('ROLE_SV')")
+                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')or hasRole('ROLE_SV')")
+                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_GV')or hasRole('ROLE_SV')").and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }

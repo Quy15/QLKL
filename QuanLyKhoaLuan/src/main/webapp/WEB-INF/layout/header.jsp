@@ -18,7 +18,7 @@
 <c:url value="/setcriteria" var="cri"/>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">ThesisManager</a>
+        <a class="navbar-brand" href="${action}">ThesisManager</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,13 +59,13 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item" style="position: relative; right: 280px;">
-                            <img src="${avatar}" width="40" class="rounded-circle"
-                                 alt=""/>
+<!--                            <img src="${avatar}" width="40" class="rounded-circle"
+                                 alt=""/>-->
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
                         <div class="dropdown" style="position: relative; right: 270px;">
                             <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-caret-down"></i>
+                                <!--<i class="fa-solid fa-caret-down"></i>-->
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="<c:url value="/logout"/>">Đăng xuất</a></li>

@@ -70,15 +70,58 @@ public class ThesisScoreRepositoryImpl implements ThesisScoreRepository {
     }
 
     @Override
+    public List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisScore Where userDefenseCommitteeId.id=:UserDefenseId AND thesisId.status !='Đã thực hiện'");
+         q.setParameter("UserDefenseId", UserDefenseId);
+        return q.getResultList();
+    }
+    @Override
     public ThesisScore findThesisScoreById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(ThesisScore.class, id);
     }
 
     @Override
+
     public ThesisScore findThesisScoreByDefenseId(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(ThesisScore.class, id);
+
+    public Double getAverageScoreByThesisId(int thesisId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT AVG(CAST(score AS double)) FROM ThesisScore WHERE thesisId.id = :thesisId");
+        q.setParameter("thesisId", thesisId);
+        Double result = (Double) q.getSingleResult();
+         if (result == null) {
+            return 0.0; // Hoặc giá trị mặc định nếu không có kết quả
+        }
+        return result;
+    }
+
+    @Override
+    public List<Integer> getUserDenfenseIDByThesisIdInThesisScore(int ThesisId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT DISTINCT userDefenseCommitteeId.id From ThesisScore Where thesisId.id=:ThesisId");
+         q.setParameter("ThesisId", ThesisId);
+        return q.getResultList();
+    }
+
+    @Override
+    public Double getAverageScoreByThesisIdAndUserDefenseId(int thesisId, int userDefenseId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT AVG(CAST(score AS double)) "
+                + "FROM ThesisScore "
+                + "WHERE thesisId.id = :thesisId "
+                + "AND userDefenseCommitteeId.id = :userDefenseId");
+        q.setParameter("thesisId", thesisId);
+        q.setParameter("userDefenseId", userDefenseId);
+        Double result = (Double) q.getSingleResult();
+         if (result == null) {
+            return 0.0; // Hoặc giá trị mặc định nếu không có kết quả
+        }
+        return result;
+
     }
 
 }

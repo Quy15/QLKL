@@ -16,5 +16,9 @@ public interface UserDefenseCommitteeRepository {
     List<UserDefenseCommittee> getList();
     boolean addUserCommit(UserDefenseCommittee ud);
     boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
+
     UserDefenseCommittee findByDefenseId(int id);
+
+    List<UserDefenseCommittee> getListByUID(int id);
+
 }

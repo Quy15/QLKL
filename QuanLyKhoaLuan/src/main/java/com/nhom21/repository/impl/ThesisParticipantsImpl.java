@@ -75,4 +75,13 @@ public class ThesisParticipantsImpl implements ThesisParticipantsRepository {
         }
     }
 
+
+    public List<ThesisParticipant> getThesisIdByUser(int userId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From ThesisParticipant Where userId.id =:userId");
+        q.setParameter("userId", userId);
+        return q.getResultList();
+    }
+    
+
 }

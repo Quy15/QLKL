@@ -63,6 +63,10 @@
 
 </script>
 
+
+
+<!--Thống kê-->
+
 <div id="chartContainer" style="height: 400px; width: 100%" class="mt-4"></div>
 <form action="${s}" enctype="multipart/form-data">
     <input name="year" placeholder="Nhập năm cần tìm..." id="search"/>

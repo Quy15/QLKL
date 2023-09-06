@@ -5,6 +5,7 @@
 package com.nhom21.repository;
 
 import com.nhom21.pojo.ThesisScore;
+import com.nhom21.pojo.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,10 @@ import java.util.List;
  */
 public interface ThesisScoreRepository {
     List<ThesisScore> getThesisScore();
+    List<ThesisScore> getThesisScoreByUserDefenseId(int UserDefenseId);
+    List<Integer> getUserDenfenseIDByThesisIdInThesisScore(int ThesisId);
+    public Double getAverageScoreByThesisId(int thesisId);
+    public Double getAverageScoreByThesisIdAndUserDefenseId(int thesisId, int userDefenseId);
     boolean addOrUpdateThesisScore(ThesisScore ts);
     boolean addOrUpdateThesisScore(ArrayList<ThesisScore> ts);
     ThesisScore findThesisScoreById(int id);

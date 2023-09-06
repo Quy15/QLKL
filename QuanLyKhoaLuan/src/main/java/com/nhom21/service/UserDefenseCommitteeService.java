@@ -16,5 +16,9 @@ public interface UserDefenseCommitteeService {
     boolean addUserCommit(UserDefenseCommittee ud);
     List<UserDefenseCommittee> getList();
     public boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
+
     public UserDefenseCommittee findByDefenseId(int id);
+
+    List<UserDefenseCommittee> getListByUID(int id);
+
 }

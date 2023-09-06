@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Apis, { endpoints } from "../configs/Apis";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import  MySpinner  from '../layout/MySpinner';
 
 const Home = () => {
@@ -21,6 +21,7 @@ const Home = () => {
     if (user === null)
         return <MySpinner/>;
     return <>
+    <Container>
         <Row>
             {user.map(u => {
                 return <Col xs={12} md={3} className="mt-2 mb-2">
@@ -40,6 +41,7 @@ const Home = () => {
                 </Col>
             })}
         </Row>
+        </Container>
     </>
 }
 

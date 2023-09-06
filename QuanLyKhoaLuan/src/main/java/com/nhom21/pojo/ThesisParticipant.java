@@ -4,6 +4,7 @@
  */
 package com.nhom21.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -38,9 +39,11 @@ public class ThesisParticipant implements Serializable {
     private Integer id;
     @JoinColumn(name = "thesis_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+//    @JsonIgnore
     private Thesis thesisId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User userId;
 
     

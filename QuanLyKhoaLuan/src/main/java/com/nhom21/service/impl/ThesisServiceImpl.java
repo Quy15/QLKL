@@ -54,9 +54,11 @@ public class ThesisServiceImpl implements ThesisService {
         return this.thesisRepository.deleteThesis(id);
     }
 
+
     @Override
     public boolean saveThesis(ArrayList<Thesis> ts) {
         return this.thesisRepository.saveThesis(ts);
     }
+
 
 }

@@ -37,8 +37,14 @@ public class UserDefenseCommitteeServiceImpl implements UserDefenseCommitteeServ
     }
 
     @Override
+
     public UserDefenseCommittee findByDefenseId(int id) {
         return this.udc.findByDefenseId(id);
     }
     
+
+    public List<UserDefenseCommittee> getListByUID(int id) {
+        return this.udc.getListByUID(id);
+    }
+
 }
