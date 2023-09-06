@@ -34,8 +34,17 @@
                         </c:forEach>
                     </c:forEach>
                 </div>
-
-                
+                <div class="form-outline flex-fill mb-0">
+                    <c:forEach items="${user}" var="nd">
+                        <c:forEach items="${thesis}" var="khoaluan">
+                            <c:forEach items="${thesisP}" var="tp">
+                                <c:if test="${tp.userId.id == nd.id && tp.thesisId.id == khoaluan.id && khoaluan.status == 'Đã thực hiện'}">
+                                    <input hidden type="text" name="userId" value="${nd.id}"/>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                    </c:forEach>
+                </div>
 
                 <div class="form-outline flex-fill mb-0">
                     <c:forEach items="${udc}" var="ud">
