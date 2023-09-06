@@ -62,16 +62,16 @@ public class DefenseController {
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
         return "dclist";
     }
-    
+
     @GetMapping("/sendmail")
-    public String send(){
+    public String send() {
         return "sendmail";
     }
-    
+
     @PostMapping("/sendmail")
-    public String sendMail (@RequestParam("userId")String[] userid){
+    public String sendMail(@RequestParam("userId") String[] userid) {
         ArrayList<User> u = new ArrayList<>();
-        for (int i = 0;i < userid.length; i ++){
+        for (int i = 0; i < userid.length; i++) {
             u.add(this.user.getUserById(Integer.parseInt(userid[i])));
         }
         u.forEach(obj -> {
@@ -79,52 +79,61 @@ public class DefenseController {
         });
         return "redirect:/dclist";
     }
-    
+
     @GetMapping("/lockdefense")
-    public String lock(Model model, Map<String,String> params)
-    {
+    public String lock(Model model, Map<String, String> params) {
         model.addAttribute("defense", this.defense.getList());
         model.addAttribute("thesis", this.tser.getThesis(params));
         return "lockdefense";
     }
-    
+
     @PostMapping("/lockdefense/{id}")
-    public String lockDefense(Model model, @RequestParam("defenseId")String id, @RequestParam("thesisid")String[] thesisId,
-                               @RequestParam("userdefenseid")String[] udc, @RequestParam("thesisscoreid")String[] tsid){
+    public String lockDefense(Model model, @RequestParam("defenseId") String id, @RequestParam("thesisid") String[] thesisId,
+            @RequestParam("userdefenseid") String[] udc, @RequestParam("thesisscoreid") String[] tsid, @RequestParam("userId") String[] userid) {
         int defenseid = Integer.parseInt(id);
         DefenseCommittee dc = this.defense.getById(defenseid);
         ArrayList<UserDefenseCommittee> ud = new ArrayList<>();
-        for(int i = 0;i < udc.length;i ++){       
-                ud.add(this.udefense.findByDefenseId(Integer.parseInt(udc[i])));
+        for (int i = 0; i < udc.length; i++) {
+            ud.add(this.udefense.findByDefenseId(Integer.parseInt(udc[i])));
         }
         ArrayList<ThesisScore> ts = new ArrayList<>();
-        for(int i = 0;i < tsid.length;i ++){
+        for (int i = 0; i < tsid.length; i++) {
             ts.add(this.theser.findThesisScoreByDefenseId(Integer.parseInt(tsid[i])));
         }
         ArrayList<Thesis> thesis = new ArrayList<>();
-        for (int i = 0;i < thesisId.length;i ++){
+        for (int i = 0; i < thesisId.length; i++) {
             thesis.add(this.tser.getThesisById(Integer.parseInt(thesisId[i])));
         }
-        
-        for (int i = 0;i < udc.length;i ++){
+
+        for (int i = 0; i < udc.length; i++) {
             if (ud.get(i).getDefenseCommitteeId().getId() == dc.getId()
-                    && ud.get(i).getId() == ts.get(i).getUserDefenseCommitteeId().getId() 
+                    && ud.get(i).getId() == ts.get(i).getUserDefenseCommitteeId().getId()
                     && ts.get(i).getThesisId().getId() == thesis.get(i).getId()
-                    && ts.get(i).getScore() != null)
-            {
+                    && ts.get(i).getScore() != null) {
                 thesis.get(i).setStatus("Đã thực hiện");
             }
         }
-        if (this.tser.saveThesis(thesis) == true)
+
+        ArrayList<User> u = new ArrayList<>();
+        for (int i = 0; i < userid.length; i++) {
+            u.add(this.user.getUserById(Integer.parseInt(userid[i])));
+        }
+        
+        if (this.tser.saveThesis(thesis) == true) {
+            u.forEach(obj -> {
+                this.email.sendScore(obj.getLastName(), obj.getEmail());
+            });
             return "redirect:/dclist";
+        }
         return "lockdefense";
     }
+
     @GetMapping("/lockdefense/{id}")
-    public String updateDefense(Model model, @PathVariable("id") int id){
+    public String updateDefense(Model model, @PathVariable("id") int id) {
         model.addAttribute("defense", this.defense.getById(id));
         return "lockdefense";
     }
-    
+
     @GetMapping("/thesisdefense")
     public String defenseComm(Model model) {
         model.addAttribute("defenseCommittee", new DefenseCommittee());

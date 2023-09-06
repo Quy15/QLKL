@@ -26,19 +26,7 @@
 
     <c:url value="/thesisdefense" var="add"/>
     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mt-3 mb-3">
-        <a href="${add}" class="btn btn-success me-2" style="font-size: 12.5px" >Tạo hội đồng</a>
-        <form action="${action}" method="post" enctype="multipart/form-data">
-            <c:forEach items="${user}" var="nd">
-                <c:forEach items="${thesis}" var="khoaluan">
-                    <c:forEach items="${thesisP}" var="tp">
-                        <c:if test="${tp.userId.id == nd.id && tp.thesisId.id == khoaluan.id && khoaluan.status == 'Đã thực hiện'}">
-                            <input hidden type="text" name="userId" value="${nd.id}"/>
-                        </c:if>
-                    </c:forEach>
-                </c:forEach>
-            </c:forEach>
-            <button type="submit" class="btn btn-success" style="font-size: 12.5px">Gửi mail thông báo điểm</button>
-        </form>
+        <a href="${add}" class="btn btn-success me-2" style="font-size: 12.5px" >Tạo hội đồng</a>      
     </div>
     <table class="table table-hover" style="font-size: 12.5px; border: 1px solid; border-collapse: collapse;">
         <thead>
