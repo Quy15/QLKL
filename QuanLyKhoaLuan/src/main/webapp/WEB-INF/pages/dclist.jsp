@@ -8,7 +8,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url value="/dclist" var="action" />
-<c:url value="/sendmail" var="send"/>
+
+
 <section class="container">
     <h1 class="text-center text-info mt-1">DANH SÁCH HỘI ĐỒNG</h1>
 
@@ -93,6 +94,14 @@
                     <td style="border: 1px solid; border-collapse: collapse">
                         <c:url value="/lockdefense/${dl.id}" var="link"/>
                         <a href="${link}" class="btn btn-danger" style="font-size: 12.5px">Khóa hội đồng</a>
+                    </td>
+                    <td style="border: 1px solid; border-collapse: collapse">
+                        <c:url value="/thesisscore/${dl.id}" var="score"/>
+                        <a href="${score}" class="btn btn-info" style="font-size: 12.5px">Thiết lập khóa luận cần chấm</a>
+                    </td>
+                    <td style="border: 1px solid; border-collapse: collapse">
+                        <c:url value="/setcriteria/${dl.id}" var="cri"/>
+                        <a href="${cri}" class="btn btn-info" style="font-size: 12.5px">Thiết lập tiêu chí</a>
                     </td>
                 </tr>
             </c:forEach>

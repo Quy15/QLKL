@@ -7,6 +7,7 @@ package com.nhom21.repository;
 import com.nhom21.pojo.UserDefenseCommittee;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,7 +17,7 @@ public interface UserDefenseCommitteeRepository {
     List<UserDefenseCommittee> getList();
     boolean addUserCommit(UserDefenseCommittee ud);
     boolean addUserCommit(ArrayList<UserDefenseCommittee> ud);
-
+    List<UserDefenseCommittee> getListById(int id);
     UserDefenseCommittee findByDefenseId(int id);
 
     List<UserDefenseCommittee> getListByUID(int id);

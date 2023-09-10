@@ -71,7 +71,7 @@ public class UserrepositoryImpl implements UserRepository {
             if (kw2 != null && !kw2.isEmpty()) {
                 predicates.add(b.like(root.get("lastName"), String.format("%%%s%%", kw2)));
             }
-            q.where(predicates.toArray(Predicate[]::new));
+                q.where(predicates.toArray(Predicate[]::new));
 
         }
 

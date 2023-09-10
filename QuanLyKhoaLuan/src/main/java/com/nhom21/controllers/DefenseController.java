@@ -60,6 +60,8 @@ public class DefenseController {
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
         int count = this.defense.countDefense();
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
+        model.addAttribute("defenseCommittee", new DefenseCommittee());
+       
         return "dclist";
     }
 
@@ -149,5 +151,4 @@ public class DefenseController {
         }
         return "thesisdefense";
     }
-
 }

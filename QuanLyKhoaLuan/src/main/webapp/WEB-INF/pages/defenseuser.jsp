@@ -68,29 +68,6 @@
             </tr>
         </tbody>
     </table>
-
-    <h3 class="text-center">Khóa luận cần chấm</h3>
-    <input type="button" id="btnAddT" class="btn btn-primary" onclick="displayT()" value="+"/>
-    <table class="table table-hover addThesis" style="font-size: 12.5px; " id="t">
-        <tr>
-            <th style="border: 1px solid; border-collapse: collapse;">Tên khóa luận</th>
-        </tr>
-        <tr>
-            <td style="border: 1px solid; border-collapse: collapse;">
-                <select class="form-select" name="thesisId">
-                    <c:forEach items="${thesis}" var="t">
-                        <option value="${t.id}">
-                            ${t.name}
-                        </option>
-                    </c:forEach>
-                </select>
-            </td>
-            <td style="border: 1px solid; border-collapse: collapse">
-                
-            </td>
-        </tr>
-    </table>
-
     <button type="submit" class="btn btn-success" style="font-size: 12.5px">Xác nhận</button>
 </form>
 <script>
@@ -137,37 +114,5 @@
     function deleteRow() {
         var d = document.getElementById("btn-delete");
         d.closest("tr").remove();
-    }
-    
-    function deleteRow2() {
-        var d = document.getElementById("btn-delete1");
-        d.closest("tr").remove();
-    }
-    function displayT() {
-        var y = document.getElementById("t").rows.length;
-        var i = y - 1;
-
-        let temp = `<tr>
-                <td style="border: 1px solid; border-collapse: collapse;">
-                    <select class="form-select" name="thesisId">
-    <c:forEach items="${thesis}" var="t">
-                            <option value="${t.id}">
-        ${t.name}
-                            </option>
-    </c:forEach>
-                    </select>
-                </td>
-                <td style="border: 1px solid; border-collapse: collapse;">
-                    <input class="btn-danger" id="btn-delete1" type="button" onclick="deleteRow2(1)" value="X"/>
-                </td>
-            </tr>
-            `;
-        let thesis = document.getElementById("t");
-        thesis.innerHTML += temp;
-        if (i > 4)
-        {
-            alert("Khóa luận không được quá 5");
-            deleteRow2();
-        }
     }
 </script>

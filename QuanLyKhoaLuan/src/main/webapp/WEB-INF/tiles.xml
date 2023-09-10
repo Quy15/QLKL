@@ -119,6 +119,11 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/sendmail.jsp" />
     </definition>
+    <definition name="thesisscore" extends="baseLayout">
+        <put-attribute name="title" value="Thiết lập khóa luận cần chấm" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thesisscore.jsp" />
+    </definition>
 </tiles-definitions>
 
 

@@ -51,7 +51,8 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
             "/setcriteria",
             "/lockdefense",
             "/editthesis",
-            "/sendmail"
+            "/sendmail",
+            "/thesisscore"
         };
     }
     

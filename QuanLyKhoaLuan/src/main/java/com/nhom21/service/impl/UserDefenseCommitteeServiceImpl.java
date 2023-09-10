@@ -9,6 +9,7 @@ import com.nhom21.repository.UserDefenseCommitteeRepository;
 import com.nhom21.service.UserDefenseCommitteeService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,14 +38,19 @@ public class UserDefenseCommitteeServiceImpl implements UserDefenseCommitteeServ
     }
 
     @Override
-
     public UserDefenseCommittee findByDefenseId(int id) {
         return this.udc.findByDefenseId(id);
     }
     
-
+    @Override
     public List<UserDefenseCommittee> getListByUID(int id) {
         return this.udc.getListByUID(id);
     }
 
+    @Override
+    public List<UserDefenseCommittee> getListById(int id) {
+        return this.udc.getListById(id);
+    }
+
+ 
 }

@@ -15,7 +15,7 @@
 <c:url value="/changepassword" var="change"/>
 <c:url value="/score" var="s"/>
 <c:url value="/stat" var="stat"/>
-<c:url value="/setcriteria" var="cri"/>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="${action}">ThesisManager</a>
@@ -38,9 +38,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${stat}">Thống kê</a>
-                    </li
-                    <li class="nav-item">
-                        <a class="nav-link" href="${cri}">Thiết lập tiêu chí</a>
                     </li>
                 </se:authorize>
 
@@ -58,12 +55,12 @@
             <ul class="navbar-nav ml-auto menu" >
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item" style="position: relative; right: 280px;">
+                        <li class="nav-item" style="position: relative; right: 100px;">
 <!--                            <img src="${avatar}" width="40" class="rounded-circle"
                                  alt=""/>-->
                             <span style="font-style: bold; color: white">Chào ${pageContext.request.userPrincipal.name}</span>
                         </li>
-                        <div class="dropdown" style="position: relative; right: 270px;">
+                        <div class="dropdown" style="position: relative; right: 95px;">
                             <a class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <!--<i class="fa-solid fa-caret-down"></i>-->
                             </a>
@@ -81,12 +78,12 @@
                     </c:otherwise>
                 </c:choose>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_GVU')">
-                    <li style="position: absolute; right: 15px">
+<!--                    <li style="position: absolute; right: 15px">
                         <form class="d-flex" action="${action}">
                             <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa...">
                             <button class="btn btn-primary" type="submit">Tìm</button>
                         </form>
-                    </li>
+                    </li>-->
                 </se:authorize>
             </ul>
         </div>

@@ -9,7 +9,12 @@ import com.nhom21.repository.UserDefenseCommitteeRepository;
 import com.nhom21.service.EmailService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +91,15 @@ public class UserDefenseCommitteeRepositoryImpl implements UserDefenseCommitteeR
         return q.getResultList();
 
     }
+
+    @Override
+    public List<UserDefenseCommittee> getListById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("From UserDefenseCommittee WHERE defenseCommitteeId.id=:id");
+        q.setParameter("id", id);
+        return q.getResultList();
+    }
+
+ 
 
 }

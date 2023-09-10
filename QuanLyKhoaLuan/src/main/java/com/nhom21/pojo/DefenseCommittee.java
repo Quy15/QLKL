@@ -50,7 +50,12 @@ public class DefenseCommittee implements Serializable {
 
     public DefenseCommittee() {
     }
-
+    
+    public DefenseCommittee(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
     public DefenseCommittee(Integer id) {
         this.id = id;
     }
